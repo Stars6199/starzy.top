@@ -2,5 +2,5 @@
 
 
 
-[Twittter](Twiiter.com/Gemintang)
-[yutup](youtube.com/Hypervitaminosis)
+[Twittter](https://Twitter.com/Gemintang)
+[yutup](https://youtube.com/Hypervitaminosis)

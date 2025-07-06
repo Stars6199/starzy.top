@@ -1,3 +1,7 @@
 # stars6199.github.io
 
-[donate](https://stars6199.github.io/donations)
+
+
+this is my first time to make this kind of stuff
+
+[donate](https://stars6199.github.io/Donations)

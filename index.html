@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .typing-effect {
+            border-right: 2px solid #3498db;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: #3498db;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About <span class="typing-effect" id="typing-name"></span><span class="cursor"></span></h1>
+        
+        <p><span class="typing-effect" id="typing-intro"></span><span class="cursor"></span></p>
+        
+        <div class="social-links">
+            <a href="#" id="github-link">GitHub</a>
+            <a href="#" id="linkedin-link">LinkedIn</a>
+            <a href="#" id="twitter-link">Twitter</a>
+        </div>
+    </div>
+
+    <script>
+        // Data yang akan ditampilkan dengan efek mengetik
+        const data = {
+            name: "John Doe",
+            intro: "Halo! Saya seorang web developer dengan pengalaman 5 tahun dalam membangun aplikasi web modern. Saya berspesialisasi dalam JavaScript, React, dan Node.js. Di waktu luang, saya suka menulis tutorial dan berbagi pengetahuan dengan komunitas developer.",
+            social: {
+                github: "https://github.com/yourusername",
+                linkedin: "https://linkedin.com/in/yourprofile",
+                twitter: "https://twitter.com/yourhandle"
+            }
+        };
+        
+        // Fungsi untuk efek mengetik
+        function typeWriter(element, text, speed, callback) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            
+            typing();
+        }
+        
+        // Set link sosial media
+        document.getElementById('github-link').href = data.social.github;
+        document.getElementById('linkedin-link').href = data.social.linkedin;
+        document.getElementById('twitter-link').href = data.social.twitter;
+        
+        // Mulai animasi mengetik
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ketik nama terlebih dahulu
+            typeWriter(document.getElementById('typing-name'), data.name, 100, function() {
+                // Setelah nama selesai, mulai ketik intro
+                setTimeout(function() {
+                    typeWriter(document.getElementById('typing-intro'), data.intro, 30);
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

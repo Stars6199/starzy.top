@@ -1,1 +1,189 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Our Work | Donation Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .nav-button:hover {
+            background-color: #1e293b;
+            transform: translateY(-2px);
+        }
+        
+        .crypto-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            transition: all 0.3s ease;
+        }
+        
+        .crypto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-gray-900 border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center">
+                    <button class="nav-button px-4 py-2 rounded-lg font-medium transition-all flex items-center bg-slate-800 text-blue-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                        </svg>
+                        Home
+                    </button>
+                </a>
+                <nav class="hidden md:flex space-x-2">
+                    <a href="social.html" class="nav-button px-4 py-2 rounded-lg font-medium transition-all">Social</a>
+                    <a href="art.html" class="nav-button px-4 py-2 rounded-lg font-medium transition-all">Art</a>
+                    <a href="download.html" class="nav-button px-4 py-2 rounded-lg font-medium transition-all">Download</a>
+                    <a href="donate.html" class="nav-button px-4 py-2 rounded-lg font-medium transition-all bg-blue-600 text-white">Donate</a>
+                    <a href="contact.html" class="nav-button px-4 py-2 rounded-lg font-medium transition-all">Contact</a>
+                </nav>
+                <button class="md:hidden bg-slate-800 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <section class="mb-16">
+            <h1 class="text-4xl font-bold mb-6 text-center text-blue-400">Support Our Work</h1>
+            <div class="bg-gray-800 rounded-xl p-8 shadow-xl">
+                <h2 class="text-2xl font-semibold mb-4 text-blue-300">Why should you donate?</h2>
+                <p class="mb-4 text-gray-300">
+                    Your support helps us continue creating amazing content, tools, and resources for our community. 
+                    Every contribution, no matter the size, makes a significant difference in our ability to innovate and grow.
+                </p>
+                <p class="mb-4 text-gray-300">
+                    When you donate, you're not just supporting our work financially - you're becoming part of our journey 
+                    and helping shape what we build next for you and others like you.
+                </p>
+                <p class="text-gray-300">
+                    100% of your donation goes directly toward content creation, server costs, and improving our products 
+                    and services. Thank you for considering supporting our mission!
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-bold mb-8 text-center text-blue-400">Cryptocurrency Donations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Bitcoin -->
+                <div class="crypto-card rounded-xl p-6 shadow-lg border border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/40x40/3b82f6/ffffff?text=BTC" alt="Bitcoin cryptocurrency logo - orange colored" class="mr-3" />
+                        <h3 class="text-xl font-semibold">Bitcoin</h3>
+                    </div>
+                    <div class="qr-code mb-4">
+                        <img src="https://placehold.co/150x150/3b82f6/ffffff?text=BTC+QR" alt="QR code for Bitcoin donation address - scan to send Bitcoin" />
+                    </div>
+                    <div class="bg-gray-700 p-3 rounded-lg overflow-x-auto">
+                        <code class="text-xs text-blue-300 font-mono">bc1qxy2kgdygjrsqtzq2n0yrf2493w83wfjsefsknf</code>
+                    </div>
+                </div>
+
+                <!-- Ethereum -->
+                <div class="crypto-card rounded-xl p-6 shadow-lg border border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/40x40/8b5cf6/ffffff?text=ETH" alt="Ethereum cryptocurrency logo - purple colored" class="mr-3" />
+                        <h3 class="text-xl font-semibold">Ethereum</h3>
+                    </div>
+                    <div class="qr-code mb-4">
+                        <img src="https://placehold.co/150x150/8b5cf6/ffffff?text=ETH+QR" alt="QR code for Ethereum donation address - scan to send Ethereum" />
+                    </div>
+                    <div class="bg-gray-700 p-3 rounded-lg overflow-x-auto">
+                        <code class="text-xs text-blue-300 font-mono">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</code>
+                    </div>
+                </div>
+
+                <!-- Litecoin -->
+                <div class="crypto-card rounded-xl p-6 shadow-lg border border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/40x40/94a3b8/ffffff?text=LTC" alt="Litecoin cryptocurrency logo - silver colored" class="mr-3" />
+                        <h3 class="text-xl font-semibold">Litecoin</h3>
+                    </div>
+                    <div class="qr-code mb-4">
+                        <img src="https://placehold.co/150x150/94a3b8/ffffff?text=LTC+QR" alt="QR code for Litecoin donation address - scan to send Litecoin" />
+                    </div>
+                    <div class="bg-gray-700 p-3 rounded-lg overflow-x-auto">
+                        <code class="text-xs text-blue-300 font-mono">LWi5jZmmq5dB7RJWjw6bsWQyCLPPXvbFti</code>
+                    </div>
+                </div>
+
+                <!-- Solana -->
+                <div class="crypto-card rounded-xl p-6 shadow-lg border border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/40x40/f97316/ffffff?text=SOL" alt="Solana cryptocurrency logo - orange colored" class="mr-3" />
+                        <h3 class="text-xl font-semibold">Solana</h3>
+                    </div>
+                    <div class="qr-code mb-4">
+                        <img src="https://placehold.co/150x150/f97316/ffffff?text=SOL+QR" alt="QR code for Solana donation address - scan to send Solana" />
+                    </div>
+                    <div class="bg-gray-700 p-3 rounded-lg overflow-x-auto">
+                        <code class="text-xs text-blue-300 font-mono">7z5h8HZobG9Au4RSRBkLkknZSLWqLW4KBjyPXWBSn5eY</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800 py-8 mt-16">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            <p>Thank you for your support! Every contribution helps us continue our work.</p>
+            <p class="mt-2">© 2023 Our Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.querySelector('button[class*="md:hidden"]').addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-16');
+            nav.classList.toggle('right-4');
+            nav.classList.toggle('bg-gray-900');
+            nav.classList.toggle('p-4');
+            nav.classList.toggle('rounded-lg');
+            nav.classList.toggle('shadow-xl');
+            nav.classList.toggle('border');
+            nav.classList.toggle('border-gray-800');
+            nav.classList.toggle('space-y-2');
+            nav.classList.toggle('space-x-2');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

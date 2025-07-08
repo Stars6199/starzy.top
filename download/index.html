@@ -215,7 +215,7 @@
 <body>
     <div class="container">
         <header>
-          <button class="home-btn" onclick="navigate('home')">Home</button>
+            <button class="home-btn" onclick="navigate('home')">Home</button>
             
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="navigate('social')">Social</button>
@@ -276,7 +276,7 @@
         <h2 class="section-title">My Skin Collection</h2>
         <div class="skins-grid">
             <div class="skin-card">
-                <img src="https://placehold.co/600x900" alt="Dark fantasy knight skin with glowing blue accents and intricate armor details" class="skin-image" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0529e135-4516-4579-ad45-98ecdc752ff4.png" alt="Dark fantasy knight skin with glowing blue accents and intricate armor details" class="skin-image" />
                 <div class="skin-info">
                     <h3 class="skin-name">Shadow Knight</h3>
                     <p class="skin-creator">Created by: SirSkinsALot</p>
@@ -284,7 +284,7 @@
             </div>
             
             <div class="skin-card">
-                <img src="https://placehold.co/600x900" alt="Cyberpunk-style neon samurai with holographic katana and glowing circuits" class="skin-image" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/74971b18-6747-439b-a0c8-d5a61cc2d135.png" alt="Cyberpunk-style neon samurai with holographic katana and glowing circuits" class="skin-image" />
                 <div class="skin-info">
                     <h3 class="skin-name">Neon Ronin</h3>
                     <p class="skin-creator">Created by: SkinMaster3000</p>
@@ -292,7 +292,7 @@
             </div>
             
             <div class="skin-card">
-                <img src="https://placehold.co/600x900" alt="Steampunk adventurer with brass goggles, mechanical arm, and leather armor" class="skin-image" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e0e242fc-3a9d-41a1-bc5d-f82dea7312b2.png" alt="Steampunk adventurer with brass goggles, mechanical arm, and leather armor" class="skin-image" />
                 <div class="skin-info">
                     <h3 class="skin-name">Steam Explorer</h3>
                     <p class="skin-creator">Created by: GearsNCogs</p>
@@ -303,19 +303,36 @@
 
     <script>
         function navigate(page) {
-            window.location.href = '${page}';
-            // In a real implementation, this would change the window.location
-            // window.location.href = `${page}.html`;
+            switch(page) {
+                case 'home':
+                    window.location.href = '/';
+                    break;
+                case 'social':
+                    window.location.href = '/social';
+                    break;
+                case 'art':
+                    window.location.href = '/art';
+                    break;
+                case 'download':
+                    window.location.href = '/download';
+                    break;
+                case 'donate':
+                    window.location.href = '/donate';
+                    break;
+                case 'contact':
+                    window.location.href = '/contact';
+                    break;
+            }
         }
 
         function downloadFile(filename) {
-            alert(`Downloading ${filename}`);
-            // In a real implementation, this would initiate a file download
-            // window.location.href = `downloads/${filename}`;
+            window.location.href = `downloads/${filename}`;
+            return false;
         }
 
         // Mobile menu functionality
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function(e) {
+            e.preventDefault();
             const navButtons = document.querySelector('.nav-buttons');
             if (navButtons.style.display === 'flex') {
                 navButtons.style.display = 'none';

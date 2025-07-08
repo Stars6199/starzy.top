@@ -1,1 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #bb86fc;
+            --secondary-bg: #1e1e1e;
+            --card-bg: #252525;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--secondary-bg);
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            cursor: pointer;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-btn {
+            background-color: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-btn:hover {
+            background-color: var(--card-bg);
+            color: var(--accent-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .intro-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .intro-section h1 {
+            color: var(--accent-color);
+            margin-top: 0;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .art-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .art-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .art-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+        
+        .art-image:hover {
+            opacity: 0.9;
+        }
+        
+        .art-info {
+            padding: 1rem;
+        }
+        
+        .art-info h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--accent-color);
+        }
+        
+        .art-info p {
+            margin: 0;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--secondary-bg);
+            margin-top: 3rem;
+            border-top: 1px solid #333;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 1rem;
+                flex-wrap: wrap;
+            }
+            
+            .nav-btn {
+                flex-grow: 1;
+                text-align: center;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo" onclick="goToHome()">Home</div>
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="openSocial()">Social</button>
+            <button class="nav-btn" onclick="openArt()">Art</button>
+            <button class="nav-btn" onclick="openDownload()">Download</button>
+            <button class="nav-btn" onclick="openDonate()">Donate</button>
+            <button class="nav-btn" onclick="openContact()">Contact</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="intro-section">
+            <h1>My Art Collection</h1>
+            <p>Welcome to my personal art gallery. This collection represents years of creative exploration across various mediums including digital painting, traditional illustration, and mixed media works. Each piece tells a unique story and reflects different periods of my artistic journey.</p>
+            
+            <p>The collection is organized chronologically from newest to oldest works. You'll find detailed descriptions with each artwork, including the inspiration behind it, techniques used, and any special meaning it holds for me.</p>
+            
+            <p>Below you can browse through all my available works. Click on any image to view it in high resolution. Many of these pieces are available as prints, and some originals are available for purchase. If you have any questions about a particular work or would like to commission a similar piece, please don't hesitate to contact me.</p>
+        </section>
+        
+        <section class="gallery">
+            <!-- Artwork 1 -->
+            <div class="art-card">
+                <img src="https://placehold.co/600x400/333/FFF?text=Abstract+Landscape" alt="Abstract landscape painting with vibrant colors blending into geometric shapes" class="art-image">
+                <div class="art-info">
+                    <h3>Cosmic Harmony</h3>
+                    <p>by Jane Doe</p>
+                </div>
+            </div>
+            
+            <!-- Artwork 2 -->
+            <div class="art-card">
+                <img src="https://placehold.co/600x400/333/FFF?text=Portrait+Painting" alt="Detailed portrait of a woman with dramatic lighting and emotional expression" class="art-image">
+                <div class="art-info">
+                    <h3>Silent Whispers</h3>
+                    <p>by John Smith</p>
+                </div>
+            </div>
+            
+            <!-- Artwork 3 -->
+            <div class="art-card">
+                <img src="https://placehold.co/600x400/333/FFF?text=Digital+Art" alt="Futuristic cyberpunk cityscape with neon lights and flying vehicles" class="art-image">
+                <div class="art-info">
+                    <h3>Neon Dreams</h3>
+                    <p>by Alex Johnson</p>
+                </div>
+            </div>
+            
+            <!-- Artwork 4 -->
+            <div class="art-card">
+                <img src="https://placehold.co/600x400/333/FFF?text=Watercolor" alt="Delicate watercolor painting of wildflowers in a meadow" class="art-image">
+                <div class="art-info">
+                    <h3>Wild Bloom</h3>
+                    <p>by Maria Garcia</p>
+                </div>
+            </div>
+            
+            <!-- Artwork 5 -->
+            <div class="art-card">
+                <img src="https://placehold.co/600x400/333/FFF?text=Surreal+Art" alt="Surreal composition combining organic and mechanical elements" class="art-image">
+                <div class="art-info">
+                    <h3>Metamorphosis</h3>
+                    <p>by David Kim</p>
+                </div>
+            </div>
+            
+            <!-- Artwork 6 -->
+            <div class="art-card">
+                <img src="https://placehold.co/600x400/333/FFF?text=Minimalist+Art" alt="Minimalist black and white composition with clean geometric shapes" class="art-image">
+                <div class="art-info">
+                    <h3>Essence</h3>
+                    <p>by Sarah Chen</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Art Gallery. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function goToHome() {
+            // Add your home page navigation logic here
+            console.log("Navigating to home page");
+            window.location.href = "/";
+        }
+        
+        function openSocial() {
+            console.log("Opening social links");
+            // Replace with your social media links logic
+            // Example: window.open('https://twitter.com/yourprofile');
+            alert("Social media links would open here");
+        }
+        
+        function openArt() {
+            console.log("Opening art gallery");
+            // Could scroll to gallery section or open in new tab
+            alert("Art gallery would open here");
+        }
+        
+        function openDownload() {
+            console.log("Opening download options");
+            alert("Download options would appear here");
+        }
+        
+        function openDonate() {
+            console.log("Opening donation page");
+            // Example: window.open('/donate');
+            alert("Donation page would open here");
+        }
+        
+        function openContact() {
+            console.log("Opening contact form");
+            // Example: window.location.href = '/contact';
+            alert("Contact form would open here");
+        }
+    </script>
+</body>
+</html>
 

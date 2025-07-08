@@ -1,1 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Social Page</title>
+    <style>
+        :root {
+            --primary: #1e1e1e;
+            --secondary: #2d2d2d;
+            --accent: #4169e1;
+            --text: #e0e0e0;
+            --text-secondary: #b0b0b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: var(--secondary);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background-color: var(--secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        th {
+            background-color: rgba(65, 105, 225, 0.1);
+            color: var(--accent);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .download-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: #3355cc;
+        }
+
+        .skin-display {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .skin-preview {
+            width: 150px;
+            height: 300px;
+            background-color: #333;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skin-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .skin-info {
+            flex: 1;
+        }
+
+        .skin-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .skin-creator {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #444;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .skin-display {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1 class="logo" onclick="goHome()">Minecraft Central</h1>
+        <div class="nav-links">
+            <a class="nav-link" onclick="showSection('social')">Social</a>
+            <a class="nav-link" onclick="showSection('art')">Art</a>
+            <a class="nav-link" onclick="showSection('download')">Download</a>
+            <a class="nav-link" onclick="showSection('donate')">Donate</a>
+            <a class="nav-link" onclick="showSection('contact')">Contact</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">Minecraft Event Resources</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Description</th>
+                        <th>World</th>
+                        <th>Resource Pack</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Night of the Dead</td>
+                        <td>Zombie survival event with custom mobs</td>
+                        <td>v1.2.0</td>
+                        <td>32x RP</td>
+                        <td><button class="download-btn" onclick="downloadFile('notd_world.zip')">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Skyblock Championship</td>
+                        <td>Competitive skyblock tournament</td>
+                        <td>v2.5.1</td>
+                        <td>64x RP</td>
+                        <td><button class="download-btn" onclick="downloadFile('skyblock_champ.zip')">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Murder Mystery</td>
+                        <td>Custom murder mystery maps</td>
+                        <td>v3.0.0</td>
+                        <td>-</td>
+                        <td><button class="download-btn" onclick="downloadFile('murder_mystery.zip')">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Parkour Extreme</td>
+                        <td>Three difficulty parkour courses</td>
+                        <td>v1.8.3</td>
+                        <td>16x RP</td>
+                        <td><button class="download-btn" onclick="downloadFile('parkour_extreme.zip')">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Kingdom Wars</td>
+                        <td>Team-based castle defense</td>
+                        <td>v2.1.7</td>
+                        <td>128x RP</td>
+                        <td><button class="download-btn" onclick="downloadFile('kingdom_wars.zip')">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Redstone Challenge</td>
+                        <td>Engineering puzzles</td>
+                        <td>v1.5.2</td>
+                        <td>-</td>
+                        <td><button class="download-btn" onclick="downloadFile('redstone_challenge.zip')">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Adventure Quest</td>
+                        <td>Story-driven RPG</td>
+                        <td>v3.2.9</td>
+                        <td>64x RP</td>
+                        <td><button class="download-btn" onclick="downloadFile('adventure_quest.zip')">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Build Master</td>
+                        <td>Architecture competition</td>
+                        <td>v1.7.1</td>
+                        <td>32x RP</td>
+                        <td><button class="download-btn" onclick="downloadFile('build_master.zip')">Download</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Skin Gallery</h2>
+            <div class="skin-display">
+                <div class="skin-preview">
+                    <img src="https://placehold.co/300x600" alt="A detailed Minecraft character skin featuring armored medieval knight design with royal blue and silver color scheme" class="skin-img">
+                </div>
+                <div class="skin-info">
+                    <h3 class="skin-name">Azure Knight</h3>
+                    <p class="skin-creator">Created by: PixelMaster42</p>
+                    <button class="download-btn" onclick="downloadFile('azure_knight_skin.png')" style="margin-top: 1rem;">Download Skin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2023 Minecraft Central | All rights reserved
+    </div>
+
+    <script>
+        function goHome() {
+            alert("Navigating to home page...");
+            // window.location.href = "/";
+        }
+
+        function showSection(section) {
+            alert(`Showing ${section} section...`);
+            // document.getElementById(section).scrollIntoView();
+        }
+
+        function downloadFile(filename) {
+            alert(`Downloading ${filename}...`);
+            // Simulate download
+            // const link = document.createElement('a');
+            // link.href = `/downloads/${filename}`;
+            // link.download = filename;
+            // link.click();
+        }
+    </script>
+</body>
+</html>
 

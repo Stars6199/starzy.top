@@ -289,24 +289,6 @@
                 github: 'https://github.com',
                 tiktok: 'https://tiktok.com'
             };
-            
-            const username = prompt(`Enter your ${platform} username:`);
-            if (username) {
-                let url = '';
-                switch(platform) {
-                    case 'twitter':
-                        url = `https://x.com/${username}`;
-                        break;
-                    case 'reddit':
-                        url = `https://reddit.com/user/${username.replace('u/', '')}`;
-                        break;
-                    case 'tiktok':
-                        url = `https://tiktok.com/@${username.replace('@', '')}`;
-                        break;
-                    default:
-                        url = `${platforms[platform]}/${
-                            platform === 'discord' ? '' : username
-                        }`;
                 }
                 window.open(url, '_blank');
             }

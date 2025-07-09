@@ -3,175 +3,582 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support Our Work | Donation Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Donate</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
-        }
-        
-        .nav-button {
-            background-color: #1e293b;
-            color: #e2e8f0;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        :root {
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-color: #00ffff;
+            --accent-dark: #008b8b;
+            --card-bg: #1e1e1e;
+            --card-hover: #2a2a2a;
+            --transition-speed: 0.3s;
         }
 
-        .nav-button:hover {
-            background-color: #3b82f6;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--bg-darker);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+        }
+
+        .nav-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-mobile {
+                display: block;
+            }
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .active {
+            color: var(--accent-color);
+        }
+
+        /* Mobile Menu */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background-color: var(--bg-darker);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .close-btn {
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .mobile-nav-link:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            color: var(--accent-color);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .alternative-donate {
+            margin: 2rem 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+        }
+
+        .contact-link:hover {
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .contact-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Crypto Section */
+        .crypto-section {
+            margin: 3rem 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+        }
+
+        .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .crypto-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .crypto-card {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            transition: all 0.3s ease;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        
+
         .crypto-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background-color: var(--card-hover);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.1);
+            border-color: rgba(0, 255, 255, 0.3);
         }
-        
+
+        .crypto-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .crypto-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+        }
+
+        .crypto-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
         .qr-code {
             width: 150px;
             height: 150px;
-            margin: 0 auto;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 5px;
+            background: white;
+        }
+
+        .address-container {
+            width: 100%;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .address-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .address {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: rgba(0, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            word-break: break-all;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .address:hover {
+            background-color: rgba(0, 255, 255, 0.2);
+            color: var(--accent-color);
+        }
+
+        .copy-notification {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-dark);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .address.copied .copy-notification {
+            opacity: 1;
+        }
+
+        /* Coming Soon Section */
+        .coming-soon {
+            margin: 3rem 0;
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            border: 1px dashed rgba(0, 255, 255, 0.3);
+        }
+
+        .coming-soon-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-darker);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-    <header class="bg-gray-900 border-b border-gray-800 p-4 flex justify-between items-center">
-        <button class="nav-button" onclick="window.location.href='/'">HOME</button>
-        <div class="flex space-x-2">
-            <button class="nav-button" onclick="window.location.href='/socials'">SOCIAL</button>
-            <button class="nav-button" onclick="window.location.href='/art'">ART</button>
-            <button class="nav-button" onclick="window.location.href='/download'">DOWNLOAD</button>
-            <button class="nav-button" onclick="window.location.href='/donate'">DONATE</button>
-            <button class="nav-button" onclick="window.location.href='/contact'">CONTACT</button>
-        </div>
+    <header>
+        <a href="/" class="logo" onclick="navigateTo('/')">Home</a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="nav-desktop">
+            <a href="https://twitter.com" class="nav-link">Socials</a>
+            <a href="/art" class="nav-link" onclick="navigateTo('/art')">Art</a>
+            <a href="/download" class="nav-link" onclick="navigateTo('/download')">Download</a>
+            <a href="/donate" class="nav-link active" onclick="navigateTo('/donate')">Donate</a>
+            <a href="/contact" class="nav-link" onclick="navigateTo('/contact')">Contact</a>
+        </nav>
+        
+        <!-- Mobile Navigation Button -->
+        <button class="menu-btn" onclick="toggleMobileMenu()">☰</button>
     </header>
-
-    <main class="container mx-auto px-4 py-12 max-w-4xl">
-        <section class="mb-16">
-            <h1 class="text-4xl font-bold mb-6 text-center text-blue-400">Support Our Work</h1>
-            <div class="bg-gray-800 rounded-xl p-8 shadow-xl">
-                <h2 class="text-2xl font-semibold mb-4 text-blue-300">Why should you donate?</h2>
-                <p class="mb-4 text-gray-300">
-                    Your support helps us continue creating amazing content, tools, and resources for our community. 
-                    Every contribution, no matter the size, makes a significant difference in our ability to innovate and grow.
-                </p>
-                <p class="mb-4 text-gray-300">
-                    When you donate, you're not just supporting our work financially - you're becoming part of our journey 
-                    and helping shape what we build next for you and others like you.
-                </p>
-                <p class="text-gray-300">
-                    100% of your donation goes directly toward content creation, server costs, and improving our products 
-                    and services. Thank you for considering supporting our mission!
-                </p>
+    
+    <!-- Mobile Menu -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" onclick="toggleMobileMenu()">×</button>
+        <a href="https://twitter.com" class="mobile-nav-link">Socials</a>
+        <a href="/art" class="mobile-nav-link" onclick="navigateTo('/art')">Art</a>
+        <a href="/download" class="mobile-nav-link" onclick="navigateTo('/download')">Download</a>
+        <a href="/donate" class="mobile-nav-link" onclick="navigateTo('/donate')">Donate</a>
+        <a href="/contact" class="mobile-nav-link" onclick="navigateTo('/contact')">Contact</a>
+    </div>
+    
+    <main>
+        <section class="welcome-section">
+            <h1>Support My Work</h1>
+            <p class="welcome-text">
+                Thank you for considering to support my work! Your donations help me continue creating and improving my projects. 
+                Every contribution, no matter how small, is greatly appreciated and goes directly towards development and maintenance.
+            </p>
+            <p class="alternative-donate">
+                Wanna donate with another method? <a href="/contact" class="contact-link" onclick="navigateTo('/contact')">Contact me!</a>
+            </p>
+        </section>
+        
+        <section class="crypto-section">
+            <h2 class="section-title">Crypto Donations</h2>
+            <div class="crypto-grid">
+                <!-- Bitcoin -->
+                <div class="crypto-card">
+                    <div class="crypto-header">
+                        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="crypto-logo">
+                        <h3 class="crypto-name">Bitcoin</h3>
+                    </div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bitcoin:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" alt="Bitcoin QR Code" class="qr-code">
+                    <div class="address-container">
+                        <p class="address-label">Wallet Address:</p>
+                        <div class="address" onclick="copyToClipboard(this, '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa')">
+                            <span class="copy-notification">Copied!</span>
+                            1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ethereum -->
+                <div class="crypto-card">
+                    <div class="crypto-header">
+                        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="crypto-logo">
+                        <h3 class="crypto-name">Ethereum</h3>
+                    </div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ethereum:0x71C7656EC7ab88b098defB751B7401B5f6d8976F" alt="Ethereum QR Code" class="qr-code">
+                    <div class="address-container">
+                        <p class="address-label">Wallet Address:</p>
+                        <div class="address" onclick="copyToClipboard(this, '0x71C7656EC7ab88b098defB751B7401B5f6d8976F')">
+                            <span class="copy-notification">Copied!</span>
+                            0x71C7656EC7ab88b098defB751B7401B5f6d8976F
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Litecoin -->
+                <div class="crypto-card">
+                    <div class="crypto-header">
+                        <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" alt="Litecoin" class="crypto-logo">
+                        <h3 class="crypto-name">Litecoin</h3>
+                    </div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=litecoin:LU8Y7YsjzYHZQ8Xz7PQeJFRXQyH9XzZ2eW" alt="Litecoin QR Code" class="qr-code">
+                    <div class="address-container">
+                        <p class="address-label">Wallet Address:</p>
+                        <div class="address" onclick="copyToClipboard(this, 'LU8Y7YsjzYHZQ8Xz7PQeJFRXQyH9XzZ2eW')">
+                            <span class="copy-notification">Copied!</span>
+                            LU8Y7YsjzYHZQ8Xz7PQeJFRXQyH9XzZ2eW
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Solana -->
+                <div class="crypto-card">
+                    <div class="crypto-header">
+                        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana" class="crypto-logo">
+                        <h3 class="crypto-name">Solana</h3>
+                    </div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=solana:7vMKyX1HzaF1Fyq62K1A5M7o1k9Yd9X9JZJ8vY6X8vY6" alt="Solana QR Code" class="qr-code">
+                    <div class="address-container">
+                        <p class="address-label">Wallet Address:</p>
+                        <div class="address" onclick="copyToClipboard(this, '7vMKyX1HzaF1Fyq62K1A5M7o1k9Yd9X9JZJ8vY6X8vY6')">
+                            <span class="copy-notification">Copied!</span>
+                            7vMKyX1HzaF1Fyq62K1A5M7o1k9Yd9X9JZJ8vY6X8vY6
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-
-      <section>
-            <h2 class="text-3xl font-bold mb-8 text-center text-blue-400">Cryptocurrency Donations</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Bitcoin -->
-                <div class="crypto-card rounded-xl p-6 shadow-lg border border-gray-700">
-                    <div class="flex items-center mb-4">
-                        <img src="/Assets/CryptoLogo/Bitcoin.png" class="mr-3" />
-                        <h3 class="text-xl font-semibold">Bitcoin</h3>
-                    </div>
-                    <div class="qr-code mb-4">
-                        <img src="https://placehold.co/150x150/3b82f6/ffffff?text=BTC+QR" alt="QR code for Bitcoin donation address - scan to send Bitcoin" />
-                    </div>
-                    <div class="bg-gray-700 p-3 rounded-lg overflow-x-auto">
-                        <code class="text-xs text-blue-300 font-mono">bc1qjwpgex0fuwfn7sr0j2fe7anvx66fap2v20sjcf</code>
-                    </div>
-                </div>
-                <!-- Ethereum -->
-                <div class="crypto-card rounded-xl p-6 shadow-lg border border-gray-700">
-                    <div class="flex items-center mb-4">
-                        <img src="/Assets/CryptoLogo/Ethereum.png" class="mr-3" />
-                        <h3 class="text-xl font-semibold">Ethereum</h3>
-                    </div>
-                    <div class="qr-code mb-4">
-                        <img src="https://placehold.co/150x150/8b5cf6/ffffff?text=ETH+QR" alt="QR code for Ethereum donation address - scan to send Ethereum" />
-                    </div>
-                    <div class="bg-gray-700 p-3 rounded-lg overflow-x-auto">
-                        <code class="text-xs text-blue-300 font-mono">0xD29e33Dea83c1130De7eaEb8b383D2340499775E</code>
-                    </div>
-                </div>
-                <!-- Litecoin -->
-                <div class="crypto-card rounded-xl p-6 shadow-lg border border-gray-700">
-                    <div class="flex items-center mb-4">
-                        <img src="/Assets/CryptoLogo/Litecoin.png" class="mr-3" />
-                        <h3 class="text-xl font-semibold">Litecoin</h3>
-                    </div>
-                    <div class="qr-code mb-4">
-                        <img src="https://placehold.co/150x150/94a3b8/ffffff?text=LTC+QR" alt="QR code for Litecoin donation address - scan to send Litecoin" />
-                    </div>
-                    <div class="bg-gray-700 p-3 rounded-lg overflow-x-auto">
-                        <code class="text-xs text-blue-300 font-mono">LhixMifGZFawYoKAhUpSSphZCRYX95icxE</code>
-                    </div>
-                </div>
-                <!-- Solana -->
-                <div class="crypto-card rounded-xl p-6 shadow-lg border border-gray-700">
-                    <div class="flex items-center mb-4">
-                        <img src="/Assets/CryptoLogo/Solana.png" class="mr-3" />
-                        <h3 class="text-xl font-semibold">Solana</h3>
-                    </div>
-                    <div class="qr-code mb-4">
-                        <img src="https://placehold.co/150x150/f97316/ffffff?text=SOL+QR" alt="QR code for Solana donation address - scan to send Solana" />
-                    </div>
-                    <div class="bg-gray-700 p-3 rounded-lg overflow-x-auto">
-                        <code class="text-xs text-blue-300 font-mono">FoN4uUhi7cT5NEWDNCkgsAwhFaXzqn33SEENHpRGfEPX</code>
-                    </div>
-                </div>
-            </div>
+        
+        <section class="coming-soon">
+            <p class="coming-soon-text pulse">More donation methods coming soon! Stay tuned for updates.</p>
         </section>
     </main>
-
-    <footer class="bg-gray-900 border-t border-gray-800 py-8 mt-16">
-        <div class="container mx-auto px-4 text-center text-gray-400">
-            <p>Thank you for your support! Every contribution helps us continue our work.</p>
-            <p class="mt-2">© 2023 Our Project. All rights reserved.</p>
-        </div>
+    
+    <footer>
+        <p>&copy; 2023 Your Name. All rights reserved.</p>
     </footer>
-
+    
     <script>
-        // Mobile menu toggle functionality
-        document.querySelector('button[class*="md:hidden"]').addEventListener('click', function() {
-            const nav = document.querySelector('nav');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('right-4');
-            nav.classList.toggle('bg-gray-900');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('rounded-lg');
-            nav.classList.toggle('shadow-xl');
-            nav.classList.toggle('border');
-            nav.classList.toggle('border-gray-800');
-            nav.classList.toggle('space-y-2');
-            nav.classList.toggle('space-x-2');
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Disable scroll when menu is open
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        // Navigation function
+        function navigateTo(path) {
+            // In a real implementation, this would change the page
+            // For this example, we'll just log it
+            // console.log(`Navigating to: ${path`);
+            window.location.href = `${page}`;
+            return false; // Prevent default anchor behavior
+        }
+        
+        // Copy to clipboard function
+        function copyToClipboard(element, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show copied notification
+                element.classList.add('copied');
+                
+                // Remove the class after animation completes
+                setTimeout(() => {
+                    element.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
             });
-        });
+        }
+        
+        // Close mobile menu when clicking overlay
+        document.getElementById('overlay').addEventListener('click', toggleMobileMenu);
     </script>
 </body>
 </html>

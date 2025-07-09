@@ -1,1 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socials Page</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --card-dark: #1e1e1e;
+            --text-light: #f5f5f5;
+            --accent: #bb86fc;
+            --hover: #3700b3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        header {
+            background-color: var(--card-dark);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .home-btn {
+            background-color: transparent;
+            border: none;
+            color: var(--accent);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .home-btn:hover {
+            background-color: var(--hover);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover);
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .welcome-message h1 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .socials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-card {
+            background-color: var(--card-dark);
+            border-radius: 10px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+        }
+
+        .social-name {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .social-username {
+            color: #a0a0a0;
+            font-size: 0.8rem;
+            word-break: break-all;
+        }
+
+        .social-card:nth-child(1) .social-logo { background-color: #5865F2; border-radius: 30%; }
+        .social-card:nth-child(2) .social-logo { background-color: #0088cc; border-radius: 50%; }
+        .social-card:nth-child(3) .social-logo { background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); border-radius: 30%; }
+        .social-card:nth-child(4) .social-logo { background-color: #FF0000; border-radius: 10px; }
+        .social-card:nth-child(5) .social-logo { background-color: #1DA1F2; border-radius: 50%; }
+        .social-card:nth-child(6) .social-logo { background-color: #1185FE; border-radius: 50%; }
+        .social-card:nth-child(7) .social-logo { background-color: #FF4500; border-radius: 30%; }
+        .social-card:nth-child(8) .social-logo { background-color: #107C10; border-radius: 10px; }
+        .social-card:nth-child(9) .social-logo { background-color: #9146FF; border-radius: 30%; }
+        .social-card:nth-child(10) .social-logo { background-color: #171A21; border-radius: 10px; }
+        .social-card:nth-child(11) .social-logo { background-color: #333333; border-radius: 50%; }
+        .social-card:nth-child(12) .social-logo { background-color: #000000; border-radius: 30%; }
+
+        @media (max-width: 768px) {
+            .socials-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+            
+            .nav-buttons {
+                gap: 0.3rem;
+            }
+            
+            .nav-btn {
+                font-size: 0.8rem;
+                padding: 0.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .socials-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="home-btn" onclick="navigate('home')">Home</button>
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="navigate('socials')">Socials</button>
+            <button class="nav-btn" onclick="navigate('art')">Art</button>
+            <button class="nav-btn" onclick="navigate('download')">Download</button>
+            <button class="nav-btn" onclick="navigate('donate')">Donate</button>
+            <button class="nav-btn" onclick="navigate('contact')">Contact</button>
+        </div>
+    </header>
+
+    <div class="welcome-message">
+        <h1>Welcome to the Socials</h1>
+        <p>In this page you can find all social that stars have. If it's not listed here, it's fake stars then, so be safe!</p>
+    </div>
+
+    <div class="socials-container">
+        <div class="social-card" onclick="openSocial('discord')">
+            <img src="https://placehold.co/100x100/5865F2/FFFFFF/png?text=Discord" alt="Discord logo" class="social-logo">
+            <div class="social-name">Discord</div>
+            <div class="social-username">@username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('telegram')">
+            <img src="https://placehold.co/100x100/0088cc/FFFFFF/png?text=Telegram" alt="Telegram logo" class="social-logo">
+            <div class="social-name">Telegram</div>
+            <div class="social-username">@username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('instagram')">
+            <img src="https://placehold.co/100x100/C13584/FFFFFF/png?text=Instagram" alt="Instagram logo" class="social-logo">
+            <div class="social-name">Instagram</div>
+            <div class="social-username">@username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('youtube')">
+            <img src="https://placehold.co/100x100/FF0000/FFFFFF/png?text=YouTube" alt="YouTube logo" class="social-logo">
+            <div class="social-name">YouTube</div>
+            <div class="social-username">@username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('twitter')">
+            <img src="https://placehold.co/100x100/1DA1F2/FFFFFF/png?text=Twitter" alt="Twitter (X) logo" class="social-logo">
+            <div class="social-name">Twitter</div>
+            <div class="social-username">@username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('bluesky')">
+            <img src="https://placehold.co/100x100/1185FE/FFFFFF/png?text=BlueSky" alt="BlueSky logo" class="social-logo">
+            <div class="social-name">BlueSky</div>
+            <div class="social-username">@username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('reddit')">
+            <img src="https://placehold.co/100x100/FF4500/FFFFFF/png?text=Reddit" alt="Reddit logo" class="social-logo">
+            <div class="social-name">Reddit</div>
+            <div class="social-username">u/username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('xbox')">
+            <img src="https://placehold.co/100x100/107C10/FFFFFF/png?text=Xbox" alt="Xbox logo" class="social-logo">
+            <div class="social-name">Xbox</div>
+            <div class="social-username">gamertag</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('twitch')">
+            <img src="https://placehold.co/100x100/9146FF/FFFFFF/png?text=Twitch" alt="Twitch logo" class="social-logo">
+            <div class="social-name">Twitch</div>
+            <div class="social-username">username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('steam')">
+            <img src="https://placehold.co/100x100/171A21/FFFFFF/png?text=Steam" alt="Steam logo" class="social-logo">
+            <div class="social-name">Steam</div>
+            <div class="social-username">username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('github')">
+            <img src="https://placehold.co/100x100/333333/FFFFFF/png?text=GitHub" alt="GitHub logo" class="social-logo">
+            <div class="social-name">GitHub</div>
+            <div class="social-username">username</div>
+        </div>
+
+        <div class="social-card" onclick="openSocial('tiktok')">
+            <img src="https://placehold.co/100x100/000000/FFFFFF/png?text=TikTok" alt="TikTok logo" class="social-logo">
+            <div class="social-name">TikTok</div>
+            <div class="social-username">@username</div>
+        </div>
+    </div>
+
+    <script>
+        function navigate(page) {
+            alert(`Navigating to ${page} page`);
+            // In a real implementation, this would change the current page
+            // window.location.href = `/${page}.html`;
+        }
+
+        function openSocial(platform) {
+            const platforms = {
+                discord: 'https://discord.com',
+                telegram: 'https://telegram.org',
+                instagram: 'https://instagram.com',
+                youtube: 'https://youtube.com',
+                twitter: 'https://x.com',
+                bluesky: 'https://bsky.app',
+                reddit: 'https://reddit.com',
+                xbox: 'https://xbox.com',
+                twitch: 'https://twitch.tv',
+                steam: 'https://steamcommunity.com',
+                github: 'https://github.com',
+                tiktok: 'https://tiktok.com'
+            };
+            
+            const username = prompt(`Enter your ${platform} username:`);
+            if (username) {
+                let url = '';
+                switch(platform) {
+                    case 'twitter':
+                        url = `https://x.com/${username}`;
+                        break;
+                    case 'reddit':
+                        url = `https://reddit.com/user/${username.replace('u/', '')}`;
+                        break;
+                    case 'tiktok':
+                        url = `https://tiktok.com/@${username.replace('@', '')}`;
+                        break;
+                    default:
+                        url = `${platforms[platform]}/${
+                            platform === 'discord' ? '' : username
+                        }`;
+                }
+                window.open(url, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
 

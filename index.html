@@ -3,75 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>My Portfolio</title>
     <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+        /* Base Styles */
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #00ffff;
+            --card-bg: #1e1e1e;
+            --hover-color: #00cccc;
+            --yellow: #ffff00;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header/Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background-color: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .home-btn {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .home-btn:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+        }
+
+        .nav-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-mobile {
+                display: block;
+                position: relative;
+            }
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 150px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.show {
+            display: flex;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 7rem 2rem 3rem;
+        }
+
+        /* Profile Section */
+        .profile-section {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
         }
-        header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            position: fixed;
-            top: 0;
-            background-color: #1e1e1e;
-        }
-        .nav-button {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .nav-button:hover {
-            background-color: #333333;
-        }
-        .profile {
-            margin-top: 100px; /* Space for fixed header */
-            text-align: center;
-        }
-        .profile img {
+
+        .profile-pic-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 2rem;
             border-radius: 50%;
-            width: 150px; /* Adjust size as needed */
-            height: 150px; /* Adjust size as needed */
+            overflow: hidden;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transition: transform 0.3s ease;
         }
-        .about {
-            margin-top: 20px;
-            max-width: 600px;
+
+        .profile-pic-container:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .splash-text {
+            position: absolute;
+            bottom: -10px;
+            right: -30px;
+            transform: rotate(-15deg);
+            background-color: var(--yellow);
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: rotate(-15deg) translateY(0);
+            }
+            50% {
+                transform: rotate(-15deg) translateY(-5px);
+            }
+        }
+
+        .name {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
             text-align: center;
+            position: relative;
+        }
+
+        .name::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        /* About Section */
+        .about-section, .hobbies-section, .experience-section {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .about-section:hover, .hobbies-section:hover, .experience-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.1);
+        }
+
+        .section-title {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        /* Hobbies Section */
+        .hobbies-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            list-style-type: none;
+        }
+
+        .hobby-item {
+            background-color: rgba(0, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .hobby-item:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* Experience Section */
+        .experience-list {
+            list-style-type: none;
+        }
+
+        .experience-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2rem;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .experience-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .experience-date {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Glow Effects */
+        .glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0) 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-1 {
+            top: 20%;
+            left: 10%;
+            animation: float-glow 8s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            bottom: 15%;
+            right: 10%;
+            animation: float-glow 10s ease-in-out infinite 2s;
+        }
+
+        @keyframes float-glow {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(20px, 20px);
+            }
+            50% {
+                transform: translate(0, 40px);
+            }
+            75% {
+                transform: translate(-20px, 20px);
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .name {
+                font-size: 2rem;
+            }
+            
+            .hobbies-list {
+                grid-template-columns: 1fr;
+            }
+            
+            main {
+                padding: 6rem 1.5rem 2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Glow Effects -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
 
-<header>
-    <button class="nav-button" onclick="window.location.href='/'">HOME</button>
-    <div>
-        <button class="nav-button" onclick="window.location.href='/socials'">SOCIAL</button>
-        <button class="nav-button" onclick="window.location.href='/art'">ART</button>
-        <button class="nav-button" onclick="window.location.href='/download'">DOWNLOAD</button>
-        <button class="nav-button" onclick="window.location.href='/donate'">DONATE</button>
-        <button class="nav-button" onclick="window.location.href='/contact'">CONTACT</button>
-    </div>
-</header>
+    <!-- Header -->
+    <header>
+        <a href="#" class="home-btn">Home</a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="nav-desktop">
+            <a href="#" class="nav-link" onclick="navigateTo('socials')">Socials</a>
+            <a href="#" class="nav-link" onclick="navigateTo('art')">Art</a>
+            <a href="#" class="nav-link" onclick="navigateTo('download')">Download</a>
+            <a href="#" class="nav-link" onclick="navigateTo('donate')">Donate</a>
+            <a href="#" class="nav-link" onclick="navigateTo('contact')">Contact</a>
+        </nav>
+        
+        <!-- Mobile Navigation -->
+        <div class="nav-mobile">
+            <button class="nav-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#" class="nav-link" onclick="navigateTo('socials')">Socials</a>
+                <a href="#" class="nav-link" onclick="navigateTo('art')">Art</a>
+                <a href="#" class="nav-link" onclick="navigateTo('download')">Download</a>
+                <a href="#" class="nav-link" onclick="navigateTo('donate')">Donate</a>
+                <a href="#" class="nav-link" onclick="navigateTo('contact')">Contact</a>
+            </div>
+        </div>
+    </header>
 
-<div class="profile">
-    <img src="/Assets/StarsArt/StarsAnotherByRubicArt.png" alt="Profile Picture">
-    <div class="about">
-        <h2>About Me</h2>
-        <p>Bruh
-        nothing here, u so fastt</p>
-    </div>
-</div>
+    <!-- Main Content -->
+    <main>
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <div class="profile-pic-container">
+                <img src="https://via.placeholder.com/300" alt="Profile Picture" class="profile-pic">
+                <div class="splash-text" id="splashText">Awesome!</div>
+            </div>
+            <h1 class="name">Your Name</h1>
+        </section>
 
+        <!-- About Section -->
+        <section class="about-section">
+            <h2 class="section-title">About Me</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.</p>
+            <p>Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
+        </section>
+
+        <!-- Hobbies Section -->
+        <section class="hobbies-section">
+            <h2 class="section-title">My Hobbies</h2>
+            <ul class="hobbies-list">
+                <li class="hobby-item">Programming</li>
+                <li class="hobby-item">Digital Art</li>
+                <li class="hobby-item">Photography</li>
+                <li class="hobby-item">Music Production</li>
+                <li class="hobby-item">Gaming</li>
+                <li class="hobby-item">Reading</li>
+            </ul>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="experience-section">
+            <h2 class="section-title">My Experience</h2>
+            <ul class="experience-list">
+                <li class="experience-item">
+                    <h3 class="experience-title">Senior Developer at Tech Corp</h3>
+                    <p class="experience-date">2020 - Present</p>
+                    <p>Led a team of developers to create innovative web applications using modern technologies.</p>
+                </li>
+                <li class="experience-item">
+                    <h3 class="experience-title">UI/UX Designer at Design Studio</h3>
+                    <p class="experience-date">2017 - 2020</p>
+                    <p>Created user interfaces and experiences for various clients across multiple industries.</p>
+                </li>
+                <li class="experience-item">
+                    <h3 class="experience-title">Freelance Web Developer</h3>
+                    <p class="experience-date">2015 - 2017</p>
+                    <p>Worked with small businesses to establish their online presence through custom websites.</p>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2023 Your Name. All rights reserved.
+    </footer>
+
+    <script>
+        // Random splash texts
+        const splashTexts = [
+            "Awesome!",
+            "Cool Stuff!",
+            "Hello World!",
+            "Pixel Perfect!",
+            "404 Sleep Not Found",
+            "Ctrl+Alt+Delightful",
+            "Beep Boop",
+            "Hello There!",
+            "Nice to meet you!",
+            "Stay Creative!",
+            "Made with ❤️"
+        ];
+
+        // Set random splash text
+        function setRandomSplashText() {
+            const splashElement = document.getElementById('splashText');
+            const randomText = splashTexts[Math.floor(Math.random() * splashTexts.length)];
+            splashElement.textContent = randomText;
+        }
+
+        // Navigation function
+        function navigateTo(page) {
+            // Close mobile menu if open
+            document.getElementById('mobileMenu').classList.remove('show');
+            
+            // In a real implementation, this would navigate to the page
+            // For this example, we'll just log it
+            console.log(`Navigating to ${page}`);
+            // window.location.href = `https://domain.com/${page}`;
+            
+            // Prevent default anchor behavior
+            return false;
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('show');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setRandomSplashText();
+            
+            // Add click outside to close mobile menu
+            document.addEventListener('click', function(e) {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const navBtn = document.querySelector('.nav-btn');
+                
+                if (mobileMenu.classList.contains('show') && 
+                    e.target !== mobileMenu && 
+                    !mobileMenu.contains(e.target) && 
+                    e.target !== navBtn) {
+                    mobileMenu.classList.remove('show');
+                }
+            });
+        });
+
+        // Mouse follower glow effect
+        document.addEventListener('mousemove', function(e) {
+            const glow1 = document.querySelector('.glow-1');
+            const glow2 = document.querySelector('.glow-2');
+            
+            // Only update if not on mobile (where mouse events might not work well)
+            if (window.innerWidth > 768) {
+                glow1.style.transform = `translate(${e.clientX * 0.05}px, ${e.clientY * 0.05}px)`;
+                glow2.style.transform = `translate(${e.clientX * -0.03}px, ${e.clientY * -0.03}px)`;
+            }
+        });
+    </script>
 </body>
 </html>

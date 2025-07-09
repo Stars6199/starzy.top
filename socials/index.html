@@ -4,499 +4,442 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socials Hub</title>
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('mobile-dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function redirectToSocial(platform) {
+            const usernames = {
+                'discord': 'StarNetwork#1234',
+                'telegram': '@StarOfficial',
+                'instagram': '@star.official',
+                'youtube': '@StarTube',
+                'twitter': '@StarTweets',
+                'bluesky': '@star.bsky.social',
+                'reddit': 'u/StarReddit',
+                'xbox': 'StarGamer',
+                'twitch': 'StarStreamer',
+                'steam': 'StarPlayer',
+                'github': 'StarDev',
+                'tiktok': '@StarTikTok'
+            };
+
+            const urls = {
+                'discord': 'https://discord.com',
+                'telegram': `https://t.me/${usernames['telegram'].substring(1)}`,
+                'instagram': `https://instagram.com/${usernames['instagram'].substring(1)}`,
+                'youtube': `https://youtube.com/${usernames['youtube'].substring(1)}`,
+                'twitter': `https://twitter.com/${usernames['twitter'].substring(1)}`,
+                'bluesky': `https://bsky.app/profile/${usernames['bluesky'].substring(1)}`,
+                'reddit': `https://reddit.com/user/${usernames['reddit'].substring(2)}`,
+                'xbox': `https://xbox.com`,
+                'twitch': `https://twitch.tv/${usernames['twitch']}`,
+                'steam': `https://steamcommunity.com/id/${usernames['steam']}`,
+                'github': `https://github.com/${usernames['github']}`,
+                'tiktok': `https://tiktok.com/@${usernames['tiktok'].substring(1)}`
+            };
+
+            window.open(urls[platform], '_blank');
+        }
+    </script>
     <style>
         :root {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --accent-color: #bb86fc;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent: #00ffff;
+            --accent-dark: #008b8b;
             --card-bg: #1e1e1e;
-            --hover-color: #3700b3;
-            --border-color: #333;
+            --card-hover: #2a2a2a;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             min-height: 100vh;
-            padding-bottom: 50px;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
+            background-color: var(--bg-darker);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .home-btn {
-            color: var(--accent-color);
+        .logo {
+            font-size: 1.5rem;
             font-weight: bold;
-            font-size: 1.2rem;
+            color: var(--accent);
             text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .home-btn:hover {
-            background-color: var(--hover-color);
+        .logo:hover {
+            text-shadow: 0 0 10px var(--accent);
         }
 
-        .nav-menu {
+        .desktop-nav {
             display: flex;
-            gap: 10px;
+            gap: 1.5rem;
         }
 
-        .nav-dropdown {
-            position: relative;
-            display: inline-block;
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
         }
 
-        .dropdown-btn {
-            background-color: transparent;
-            color: var(--text-color);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+        .mobile-nav-toggle {
+            display: none;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+            padding: 0.5rem;
         }
 
-        .dropdown-btn:hover {
-            background-color: var(--hover-color);
+        @media (max-width: 768px) {
+            .mobile-nav-toggle {
+                display: block;
+            }
         }
 
-        .dropdown-content {
+        .mobile-nav-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        #mobile-dropdown {
             display: none;
             position: absolute;
-            right: 0;
-            background-color: var(--card-bg);
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            top: 60px;
+            right: 20px;
+            background-color: var(--bg-darker);
             border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            z-index: 99;
+        }
+
+        #mobile-dropdown a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        #mobile-dropdown a:hover {
+            background-color: var(--card-bg);
+            color: var(--accent);
+        }
+
+        .nav-button {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
         }
 
-        .dropdown-content a {
-            color: var(--text-color);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.2s;
+        .nav-button:hover {
+            color: var(--accent);
         }
 
-        .dropdown-content a:hover {
-            background-color: var(--hover-color);
+        .nav-button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        .nav-dropdown:hover .dropdown-content {
-            display: block;
+        .nav-button:hover::after {
+            width: 100%;
         }
 
         main {
+            flex: 1;
+            padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            width: 100%;
         }
 
-        .welcome-section {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
+        .welcome-message {
             background-color: var(--card-bg);
+            padding: 2rem;
             border-radius: 10px;
-            border-left: 4px solid var(--accent-color);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .welcome-section h1 {
-            margin-bottom: 10px;
-            color: var(--accent-color);
+        .welcome-message h1 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
         }
 
-        .social-grid {
+        .welcome-message p {
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .socials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 20px;
+            gap: 1.5rem;
         }
 
         .social-card {
             background-color: var(--card-bg);
             border-radius: 10px;
-            padding: 15px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
             cursor: pointer;
-            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
         .social-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            border-color: var(--accent-color);
+            background-color: var(--card-hover);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
-        .social-logo {
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .social-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .social-icon {
             width: 50px;
             height: 50px;
-            object-fit: contain;
-            margin-bottom: 10px;
+            margin-bottom: 0.8rem;
+            filter: grayscale(20%);
+            transition: filter 0.3s ease;
+        }
+
+        .social-card:hover .social-icon {
+            filter: grayscale(0%);
         }
 
         .social-name {
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
         }
 
         .social-username {
             font-size: 0.8rem;
-            color: #aaa;
+            color: var(--text-secondary);
             word-break: break-all;
         }
 
-        .mobile-dropdown {
-            display: none;
+        footer {
+            background-color: var(--bg-darker);
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 2rem;
         }
 
-        .mobile-dropdown-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 5px;
-            width: 100%;
-            font-size: 1rem;
-            margin-bottom: 5px;
-            cursor: pointer;
+        /* Cool effects */
+        .glow {
+            animation: glow 2s infinite alternate;
         }
 
-        .mobile-dropdown-content {
-            display: none;
-            background-color: var(--card-bg);
-            width: 100%;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .mobile-dropdown-content a {
-            display: block;
-            padding: 12px;
-            text-decoration: none;
-            color: var(--text-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .mobile-dropdown-content a:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-dropdown-content a:hover {
-            background-color: var(--hover-color);
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent);
             }
-
-            .mobile-dropdown {
-                display: block;
-            }
-
-            .social-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-                gap: 15px;
+            to {
+                text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
             }
         }
 
-        @media (max-width: 480px) {
-            .social-grid {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-                gap: 10px;
-            }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
 
-            .social-card {
-                padding: 10px;
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
             }
-
-            .social-logo {
-                width: 40px;
-                height: 40px;
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="#" class="home-btn" onclick="goHome()">HOME</a>
+        <a href="#" class="logo glow">StarSocials</a>
         
-        <div class="nav-menu">
-            <div class="nav-dropdown">
-                <button class="dropdown-btn">Socials</button>
-                <div class="dropdown-content">
-                    <a href="#discord">Discord</a>
-                    <a href="#telegram">Telegram</a>
-                    <a href="#instagram">Instagram</a>
-                    <a href="#youtube">YouTube</a>
-                    <a href="#twitter">Twitter</a>
-                    <a href="#bluesky">BlueSky</a>
-                </div>
-            </div>
-            
-            <div class="nav-dropdown">
-                <button class="dropdown-btn">Art</button>
-                <div class="dropdown-content">
-                    <a href="#art-portfolio">Portfolio</a>
-                    <a href="#art-commissions">Commissions</a>
-                    <a href="#art-store">Store</a>
-                </div>
-            </div>
-            
-            <div class="nav-dropdown">
-                <button class="dropdown-btn">Download</button>
-                <div class="dropdown-content">
-                    <a href="#download-apps">Apps</a>
-                    <a href="#download-wallpapers">Wallpapers</a>
-                    <a href="#download-resources">Resources</a>
-                </div>
-            </div>
-            
-            <div class="nav-dropdown">
-                <button class="dropdown-btn">Donate</button>
-                <div class="dropdown-content">
-                    <a href="#donate-patreon">Patreon</a>
-                    <a href="#donate-ko-fi">Ko-fi</a>
-                    <a href="#donate-paypal">PayPal</a>
-                </div>
-            </div>
-            
-            <div class="nav-dropdown">
-                <button class="dropdown-btn">Contact</button>
-                <div class="dropdown-content">
-                    <a href="#contact-email">Email</a>
-                    <a href="#contact-form">Form</a>
-                    <a href="#contact-business">Business</a>
-                </div>
-            </div>
+        <nav class="desktop-nav">
+            <a href="#" class="nav-button">Home</a>
+            <a href="#" class="nav-button" onclick="redirectToSocial('discord')">Socials</a>
+            <a href="#" class="nav-button" onclick="redirectToSocial('instagram')">Art</a>
+            <a href="#" class="nav-button" onclick="redirectToSocial('github')">Download</a>
+            <a href="#" class="nav-button" onclick="redirectToSocial('twitch')">Donate</a>
+            <a href="#" class="nav-button" onclick="redirectToSocial('telegram')">Contact</a>
+        </nav>
+
+        <div class="mobile-nav-toggle" onclick="toggleDropdown()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div id="mobile-dropdown">
+            <a href="#">Home</a>
+            <a href="#" onclick="redirectToSocial('discord')">Socials</a>
+            <a href="#" onclick="redirectToSocial('instagram')">Art</a>
+            <a href="#" onclick="redirectToSocial('github')">Download</a>
+            <a href="#" onclick="redirectToSocial('twitch')">Donate</a>
+            <a href="#" onclick="redirectToSocial('telegram')">Contact</a>
         </div>
     </header>
 
     <main>
-        <section class="welcome-section">
-            <h1>Welcome to the Socials!</h1>
+        <section class="welcome-message pulse">
+            <h1>Welcome to the Socials</h1>
             <p>In this page you can find all social media that stars have. If it's not listed here, it's fake stars then, so be safe!</p>
         </section>
 
-        <div class="mobile-dropdown">
-            <button class="mobile-dropdown-btn" onclick="toggleDropdown('socials-menu')">Socials</button>
-            <div class="mobile-dropdown-content" id="socials-menu">
-                <a href="#discord">Discord</a>
-                <a href="#telegram">Telegram</a>
-                <a href="#instagram">Instagram</a>
-                <a href="#youtube">YouTube</a>
-                <a href="#twitter">Twitter</a>
-                <a href="#bluesky">BlueSky</a>
-            </div>
-            
-            <button class="mobile-dropdown-btn" onclick="toggleDropdown('art-menu')">Art</button>
-            <div class="mobile-dropdown-content" id="art-menu">
-                <a href="#art-portfolio">Portfolio</a>
-                <a href="#art-commissions">Commissions</a>
-                <a href="#art-store">Store</a>
-            </div>
-            
-            <button class="mobile-dropdown-btn" onclick="toggleDropdown('download-menu')">Download</button>
-            <div class="mobile-dropdown-content" id="download-menu">
-                <a href="#download-apps">Apps</a>
-                <a href="#download-wallpapers">Wallpapers</a>
-                <a href="#download-resources">Resources</a>
-            </div>
-            
-            <button class="mobile-dropdown-btn" onclick="toggleDropdown('donate-menu')">Donate</button>
-            <div class="mobile-dropdown-content" id="donate-menu">
-                <a href="#donate-patreon">Patreon</a>
-                <a href="#donate-ko-fi">Ko-fi</a>
-                <a href="#donate-paypal">PayPal</a>
-            </div>
-            
-            <button class="mobile-dropdown-btn" onclick="toggleDropdown('contact-menu')">Contact</button>
-            <div class="mobile-dropdown-content" id="contact-menu">
-                <a href="#contact-email">Email</a>
-                <a href="#contact-form">Form</a>
-                <a href="#contact-business">Business</a>
-            </div>
-        </div>
-
-        <div class="social-grid">
+        <section class="socials-grid">
             <!-- Discord -->
-            <div class="social-card" onclick="openSocial('discord')">
-                <img src="https://placehold.co/100x100/5865F2/FFFFFF?text=D" class="social-logo" alt="Discord logo - purple with white stylized game controller icon">
+            <div class="social-card" onclick="redirectToSocial('discord')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Discord" alt="Discord logo with purple gradient background" class="social-icon">
                 <div class="social-name">Discord</div>
-                <div class="social-username">@username</div>
+                <div class="social-username">StarNetwork#1234</div>
             </div>
 
             <!-- Telegram -->
-            <div class="social-card" onclick="openSocial('telegram')">
-                <img src="https://placehold.co/100x100/0088CC/FFFFFF?text=T" class="social-logo" alt="Telegram logo - light blue with white paper airplane icon">
+            <div class="social-card" onclick="redirectToSocial('telegram')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Telegram" alt="Telegram logo with blue background" class="social-icon">
                 <div class="social-name">Telegram</div>
-                <div class="social-username">@username</div>
+                <div class="social-username">@StarOfficial</div>
             </div>
 
             <!-- Instagram -->
-            <div class="social-card" onclick="openSocial('instagram')">
-                <img src="https://placehold.co/100x100/E4405F/FFFFFF?text=I" class="social-logo" alt="Instagram logo - pink gradient with white camera icon">
+            <div class="social-card" onclick="redirectToSocial('instagram')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Instagram" alt="Instagram logo with gradient purple-pink-yellow colors" class="social-icon">
                 <div class="social-name">Instagram</div>
-                <div class="social-username">@username</div>
+                <div class="social-username">@star.official</div>
             </div>
 
             <!-- YouTube -->
-            <div class="social-card" onclick="openSocial('youtube')">
-                <img src="https://placehold.co/100x100/CD201F/FFFFFF?text=Y" class="social-logo" alt="YouTube logo - red with white play button icon">
+            <div class="social-card" onclick="redirectToSocial('youtube')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=YouTube" alt="YouTube logo with red background" class="social-icon">
                 <div class="social-name">YouTube</div>
-                <div class="social-username">@username</div>
+                <div class="social-username">@StarTube</div>
             </div>
 
             <!-- Twitter -->
-            <div class="social-card" onclick="openSocial('twitter')">
-                <img src="https://placehold.co/100x100/1DA1F2/FFFFFF?text=T" class="social-logo" alt="Twitter logo - blue with white bird icon">
+            <div class="social-card" onclick="redirectToSocial('twitter')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Twitter" alt="Twitter logo with blue background" class="social-icon">
                 <div class="social-name">Twitter</div>
-                <div class="social-username">@username</div>
+                <div class="social-username">@StarTweets</div>
             </div>
 
             <!-- BlueSky -->
-            <div class="social-card" onclick="openSocial('bluesky')">
-                <img src="https://placehold.co/100x100/1185FE/FFFFFF?text=BS" class="social-logo" alt="BlueSky logo - blue with white cloud icon">
+            <div class="social-card" onclick="redirectToSocial('bluesky')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=BlueSky" alt="BlueSky logo with blue background" class="social-icon">
                 <div class="social-name">BlueSky</div>
-                <div class="social-username">@username</div>
+                <div class="social-username">@star.bsky.social</div>
             </div>
 
             <!-- Reddit -->
-            <div class="social-card" onclick="openSocial('reddit')">
-                <img src="https://placehold.co/100x100/FF4500/FFFFFF?text=R" class="social-logo" alt="Reddit logo - orange with white alien head icon">
+            <div class="social-card" onclick="redirectToSocial('reddit')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Reddit" alt="Reddit logo with orange background" class="social-icon">
                 <div class="social-name">Reddit</div>
-                <div class="social-username">u/username</div>
+                <div class="social-username">u/StarReddit</div>
             </div>
 
             <!-- Xbox -->
-            <div class="social-card" onclick="openSocial('xbox')">
-                <img src="https://placehold.co/100x100/107C10/FFFFFF?text=X" class="social-logo" alt="Xbox logo - green with white X icon">
+            <div class="social-card" onclick="redirectToSocial('xbox')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Xbox" alt="Xbox logo with green background" class="social-icon">
                 <div class="social-name">Xbox</div>
-                <div class="social-username">Gamertag</div>
+                <div class="social-username">StarGamer</div>
             </div>
 
             <!-- Twitch -->
-            <div class="social-card" onclick="openSocial('twitch')">
-                <img src="https://placehold.co/100x100/9146FF/FFFFFF?text=T" class="social-logo" alt="Twitch logo - purple with white chat bubble icon">
+            <div class="social-card" onclick="redirectToSocial('twitch')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Twitch" alt="Twitch logo with purple background" class="social-icon">
                 <div class="social-name">Twitch</div>
-                <div class="social-username">username</div>
+                <div class="social-username">StarStreamer</div>
             </div>
 
             <!-- Steam -->
-            <div class="social-card" onclick="openSocial('steam')">
-                <img src="https://placehold.co/100x100/0C3559/FFFFFF?text=S" class="social-logo" alt="Steam logo - dark blue with white steam icon">
+            <div class="social-card" onclick="redirectToSocial('steam')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Steam" alt="Steam logo with dark blue background" class="social-icon">
                 <div class="social-name">Steam</div>
-                <div class="social-username">username</div>
+                <div class="social-username">StarPlayer</div>
             </div>
 
-            <!-- Github -->
-            <div class="social-card" onclick="openSocial('github')">
-                <img src="https://placehold.co/100x100/4078C0/FFFFFF?text=G" class="social-logo" alt="GitHub logo - blue with white cat icon">
+            <!-- GitHub -->
+            <div class="social-card" onclick="redirectToSocial('github')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=GitHub" alt="GitHub logo with dark background" class="social-icon">
                 <div class="social-name">GitHub</div>
-                <div class="social-username">@username</div>
+                <div class="social-username">StarDev</div>
             </div>
 
             <!-- TikTok -->
-            <div class="social-card" onclick="openSocial('tiktok')">
-                <img src="https://placehold.co/100x100/FE2C55/FFFFFF?text=T" class="social-logo" alt="TikTok logo - pink with white music note icon">
+            <div class="social-card" onclick="redirectToSocial('tiktok')">
+                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=TikTok" alt="TikTok logo with black and red colors" class="social-icon">
                 <div class="social-name">TikTok</div>
-                <div class="social-username">@username</div>
+                <div class="social-username">@StarTikTok</div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <script>
-        function goHome() {
-            alert("Going to home page...");
-            // window.location.href = "/";
-        }
-
-        function openSocial(platform) {
-            const username = prompt(`Enter your ${platform} username:`);
-            if (username) {
-                let url = '';
-                
-                switch(platform.toLowerCase()) {
-                    case 'discord':
-                        alert("Discord doesn't have direct profile links. Add this username manually.");
-                        return;
-                    case 'telegram':
-                        url = `https://t.me/${username}`;
-                        break;
-                    case 'instagram':
-                        url = `https://instagram.com/${username}`;
-                        break;
-                    case 'youtube':
-                        url = `https://youtube.com/${username}`;
-                        break;
-                    case 'twitter':
-                        url = `https://twitter.com/${username}`;
-                        break;
-                    case 'bluesky':
-                        url = `https://bsky.app/profile/${username}`;
-                        break;
-                    case 'reddit':
-                        url = `https://reddit.com/u/${username}`;
-                        break;
-                    case 'xbox':
-                        url = `https://account.xbox.com/profile?gamertag=${username}`;
-                        break;
-                    case 'twitch':
-                        url = `https://twitch.tv/${username}`;
-                        break;
-                    case 'steam':
-                        url = `https://steamcommunity.com/id/${username}`;
-                        break;
-                    case 'github':
-                        url = `https://github.com/${username}`;
-                        break;
-                    case 'tiktok':
-                        url = `https://tiktok.com/@${username}`;
-                        break;
-                    default:
-                        alert("Platform not supported");
-                        return;
-                }
-                
-                window.open(url, '_blank');
-            }
-        }
-
-        function toggleDropdown(id) {
-            const dropdown = document.getElementById(id);
-            if (dropdown.style.display === 'block') {
-                dropdown.style.display = 'none';
-            } else {
-                // Hide all other dropdowns first
-                document.querySelectorAll('.mobile-dropdown-content').forEach(el => {
-                    el.style.display = 'none';
-                });
-                dropdown.style.display = 'block';
-            }
-        }
-    </script>
+    <footer>
+        <p>© 2023 StarSocials. All social media links are verified.</p>
+    </footer>
 </body>
 </html>

@@ -74,6 +74,7 @@
             transition: var(--transition);
             position: relative;
             padding: 0.5rem 0;
+            cursor: pointer;
         }
 
         .nav-link:hover {
@@ -147,6 +148,7 @@
             padding: 0.5rem 0;
             border-bottom: 1px solid #333;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .mobile-nav-link:hover {
@@ -286,11 +288,11 @@
         
         <!-- Desktop Navigation -->
         <nav class="nav-desktop">
-            <a href="#" class="nav-link" onclick="window.location.href='socials'">Socials</a>
-            <a href="#" class="nav-link" onclick="window.location.href='art'">Art</a>
-            <a href="#" class="nav-link" onclick="window.location.href='download'">Download</a>
-            <a href="#" class="nav-link" onclick="window.location.href='donate'">Donate</a>
-            <a href="#" class="nav-link" onclick="window.location.href='contact'">Contact</a>
+            <a class="nav-link" onclick="navigateTo('/socials')">Socials</a>
+            <a class="nav-link" onclick="navigateTo('/art')">Art</a>
+            <a class="nav-link" onclick="navigateTo('/download')">Download</a>
+            <a class="nav-link" onclick="navigateTo('/donate')">Donate</a>
+            <a class="nav-link" onclick="navigateTo('/contact')">Contact</a>
         </nav>
         
         <!-- Mobile Menu Button -->
@@ -300,11 +302,11 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <button class="close-btn" onclick="toggleMobileMenu()">×</button>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('socials')">Socials</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('art')">Art</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('download')">Download</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('donate')">Donate</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('contact')">Contact</a>
+        <a class="mobile-nav-link" onclick="navigateTo('/socials')">Socials</a>
+        <a class="mobile-nav-link" onclick="navigateTo('/art')">Art</a>
+        <a class="mobile-nav-link" onclick="navigateTo('/download')">Download</a>
+        <a class="mobile-nav-link" onclick="navigateTo('/donate')">Donate</a>
+        <a class="mobile-nav-link" onclick="navigateTo('/contact')">Contact</a>
     </div>
 
     <!-- Overlay for mobile menu -->
@@ -394,10 +396,12 @@
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
         }
 
-        // Navigation function
-        function navigateTo(url) {
-            window.location.href = ${page};
-            toggleMobileMenu(); // Close menu after navigation
+        // Navigation function using relative paths
+        function navigateTo(path) {
+            window.location.href = path;
+            if (window.innerWidth <= 768) {
+                toggleMobileMenu(); // Close menu after navigation on mobile
+            }
         }
 
         // Add hover effect to art cards on touch devices
@@ -412,6 +416,13 @@
                 });
             });
         }
+
+        // Prevent default behavior for navigation links
+        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+        });
     </script>
 </body>
 </html>

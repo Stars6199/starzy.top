@@ -3,281 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art Gallery</title>
+    <title>My Art Gallery</title>
     <style>
         :root {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --accent-color: #bb86fc;
-            --secondary-bg: #1e1e1e;
-            --card-bg: #252525;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-color: #00ffff;
+            --accent-hover: #00e5e5;
+            --card-bg: #1e1e1e;
+            --transition: all 0.3s ease;
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        .header {
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--bg-darker);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background-color: var(--secondary-bg);
-            border-bottom: 1px solid #333;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        
+
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent-color);
-            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
         }
-        
-        .nav-buttons {
+
+        .logo:hover {
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Desktop Navigation */
+        .nav-desktop {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
         }
-        
-        .nav-btn {
-            background-color: transparent;
+
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
             border: none;
-            color: var(--text-color);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
-        
-        .nav-btn:hover {
-            background-color: var(--card-bg);
-            color: var(--accent-color);
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-        
-        .intro-section {
-            margin-bottom: 3rem;
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background-color: var(--bg-darker);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            z-index: 1000;
             padding: 2rem;
-            background-color: var(--secondary-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
-        
-        .intro-section h1 {
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .close-btn {
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-link:hover {
             color: var(--accent-color);
-            margin-top: 0;
+            padding-left: 0.5rem;
         }
-        
+
+        /* Main Content */
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Art Gallery Grid */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
+            margin-top: 2rem;
         }
-        
+
         .art-card {
             background-color: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            position: relative;
         }
-        
+
         .art-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 255, 255, 0.1);
         }
-        
+
+        .art-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .art-card:hover::before {
+            opacity: 1;
+        }
+
         .art-image {
             width: 100%;
             height: 250px;
             object-fit: cover;
-            transition: opacity 0.3s ease;
+            display: block;
         }
-        
-        .art-image:hover {
-            opacity: 0.9;
-        }
-        
+
         .art-info {
-            padding: 1rem;
+            padding: 1.2rem;
         }
-        
-        .art-info h3 {
-            margin: 0 0 0.5rem 0;
-            color: var(--accent-color);
+
+        .art-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
-        
-        .art-info p {
-            margin: 0;
-            color: #aaa;
+
+        .art-artist {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-darker);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--secondary-bg);
-            margin-top: 3rem;
-            border-top: 1px solid #333;
+
+        /* Overlay for mobile menu */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
         }
-        
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 1rem;
-            }
-            
-            .nav-buttons {
-                width: 100%;
-                justify-content: space-between;
-                margin-top: 1rem;
-                flex-wrap: wrap;
-            }
-            
-            .nav-btn {
-                flex-grow: 1;
-                text-align: center;
-            }
-            
-            .gallery {
-                grid-template-columns: 1fr;
-            }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo" onclick="goToHome()">Home</div>
-        <div class="nav-buttons">
-            <button class="nav-btn" onclick="openSocial()">Social</button>
-            <button class="nav-btn" onclick="openArt()">Art</button>
-            <button class="nav-btn" onclick="openDownload()">Download</button>
-            <button class="nav-btn" onclick="openDonate()">Donate</button>
-            <button class="nav-btn" onclick="openContact()">Contact</button>
-        </div>
-    </header>
-    
-    <div class="container">
-        <section class="intro-section">
-            <h1>My Art Collection</h1>
-            <p>Welcome to my personal art gallery. This collection represents years of creative exploration across various mediums including digital painting, traditional illustration, and mixed media works. Each piece tells a unique story and reflects different periods of my artistic journey.</p>
-            
-            <p>The collection is organized chronologically from newest to oldest works. You'll find detailed descriptions with each artwork, including the inspiration behind it, techniques used, and any special meaning it holds for me.</p>
-            
-            <p>Below you can browse through all my available works. Click on any image to view it in high resolution. Many of these pieces are available as prints, and some originals are available for purchase. If you have any questions about a particular work or would like to commission a similar piece, please don't hesitate to contact me.</p>
-        </section>
+    <header>
+        <a href="/" class="logo">Home</a>
         
-        <section class="gallery">
+        <!-- Desktop Navigation -->
+        <nav class="nav-desktop">
+            <a href="#" class="nav-link" onclick="window.location.href='socials'">Socials</a>
+            <a href="#" class="nav-link" onclick="window.location.href='art'">Art</a>
+            <a href="#" class="nav-link" onclick="window.location.href='download'">Download</a>
+            <a href="#" class="nav-link" onclick="window.location.href='donate'">Donate</a>
+            <a href="#" class="nav-link" onclick="window.location.href='contact'">Contact</a>
+        </nav>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" onclick="toggleMobileMenu()">×</button>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('socials')">Socials</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('art')">Art</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('download')">Download</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('donate')">Donate</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('contact')">Contact</a>
+    </div>
+
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" id="overlay" onclick="toggleMobileMenu()"></div>
+
+    <main>
+        <section class="welcome-section">
+            <h1 class="welcome-title">Welcome to My Art Gallery</h1>
+            <p class="welcome-text">
+                Explore a curated collection of my finest artworks. Each piece tells a unique story and reflects 
+                the passion and creativity poured into it. From digital illustrations to traditional paintings, 
+                this gallery showcases my artistic journey. Feel free to immerse yourself in these visual experiences.
+            </p>
+        </section>
+
+        <div class="gallery">
             <!-- Artwork 1 -->
             <div class="art-card">
-                <img src="https://placehold.co/600x400/333/FFF?text=Abstract+Landscape" alt="Abstract landscape painting with vibrant colors blending into geometric shapes" class="art-image">
+                <img src="https://source.unsplash.com/random/600x400/?abstract-art,1" alt="Abstract Art" class="art-image">
                 <div class="art-info">
-                    <h3>Cosmic Harmony</h3>
-                    <p>by Jane Doe</p>
+                    <h3 class="art-title">Cosmic Harmony</h3>
+                    <p class="art-artist">By Alex Johnson</p>
                 </div>
             </div>
-            
+
             <!-- Artwork 2 -->
             <div class="art-card">
-                <img src="https://placehold.co/600x400/333/FFF?text=Portrait+Painting" alt="Detailed portrait of a woman with dramatic lighting and emotional expression" class="art-image">
+                <img src="https://source.unsplash.com/random/600x400/?painting,2" alt="Painting" class="art-image">
                 <div class="art-info">
-                    <h3>Silent Whispers</h3>
-                    <p>by John Smith</p>
+                    <h3 class="art-title">Midnight Serenade</h3>
+                    <p class="art-artist">By Maria Chen</p>
                 </div>
             </div>
-            
+
             <!-- Artwork 3 -->
             <div class="art-card">
-                <img src="https://placehold.co/600x400/333/FFF?text=Digital+Art" alt="Futuristic cyberpunk cityscape with neon lights and flying vehicles" class="art-image">
+                <img src="https://source.unsplash.com/random/600x400/?digital-art,3" alt="Digital Art" class="art-image">
                 <div class="art-info">
-                    <h3>Neon Dreams</h3>
-                    <p>by Alex Johnson</p>
+                    <h3 class="art-title">Neon Dreams</h3>
+                    <p class="art-artist">By Sam Wilson</p>
                 </div>
             </div>
-            
+
             <!-- Artwork 4 -->
             <div class="art-card">
-                <img src="https://placehold.co/600x400/333/FFF?text=Watercolor" alt="Delicate watercolor painting of wildflowers in a meadow" class="art-image">
+                <img src="https://source.unsplash.com/random/600x400/?watercolor,4" alt="Watercolor" class="art-image">
                 <div class="art-info">
-                    <h3>Wild Bloom</h3>
-                    <p>by Maria Garcia</p>
+                    <h3 class="art-title">Ocean Whispers</h3>
+                    <p class="art-artist">By Jamie Rivera</p>
                 </div>
             </div>
-            
+
             <!-- Artwork 5 -->
             <div class="art-card">
-                <img src="https://placehold.co/600x400/333/FFF?text=Surreal+Art" alt="Surreal composition combining organic and mechanical elements" class="art-image">
+                <img src="https://source.unsplash.com/random/600x400/?illustration,5" alt="Illustration" class="art-image">
                 <div class="art-info">
-                    <h3>Metamorphosis</h3>
-                    <p>by David Kim</p>
+                    <h3 class="art-title">Fantasy Realm</h3>
+                    <p class="art-artist">By Taylor Smith</p>
                 </div>
             </div>
-            
+
             <!-- Artwork 6 -->
             <div class="art-card">
-                <img src="https://placehold.co/600x400/333/FFF?text=Minimalist+Art" alt="Minimalist black and white composition with clean geometric shapes" class="art-image">
+                <img src="https://source.unsplash.com/random/600x400/?portrait,6" alt="Portrait" class="art-image">
                 <div class="art-info">
-                    <h3>Essence</h3>
-                    <p>by Sarah Chen</p>
+                    <h3 class="art-title">Silent Thoughts</h3>
+                    <p class="art-artist">By Jordan Lee</p>
                 </div>
             </div>
-        </section>
-    </div>
-    
+        </div>
+    </main>
+
     <footer>
-        <p>&copy; 2023 Art Gallery. All rights reserved.</p>
+        <p class="footer-text">© 2023 My Art Gallery. All rights reserved.</p>
     </footer>
-    
+
     <script>
-        function goToHome() {
-            // Add your home page navigation logic here
-            console.log("Navigating to home page");
-            window.location.href = "/";
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Toggle body scroll
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
         }
-        
-        function openSocial() {
-            console.log("Opening social links");
-            // Replace with your social media links logic
-            // Example: window.open('https://twitter.com/yourprofile');
-            window.location.href = "/socials";
+
+        // Navigation function
+        function navigateTo(url) {
+            window.location.href = ${page};
+            toggleMobileMenu(); // Close menu after navigation
         }
-        
-        function openArt() {
-            console.log("Opening art gallery");
-            // Could scroll to gallery section or open in new tab
-            window.location.href = "/art";
-        }
-        
-        function openDownload() {
-            console.log("Opening download options");
-            window.location.href = "/download";
-        }
-        
-        function openDonate() {
-            console.log("Opening donation page");
-            // Example: window.open('/donate');
-            window.location.href = "/donate";
-        }
-        
-        function openContact() {
-            console.log("Opening contact form");
-            // Example: window.location.href = '/contact';
-            window.location.href = "/contact";
+
+        // Add hover effect to art cards on touch devices
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.art-card').forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.classList.add('hover-effect');
+                });
+                
+                card.addEventListener('touchend', function() {
+                    this.classList.remove('hover-effect');
+                });
+            });
         }
     </script>
 </body>
 </html>
-

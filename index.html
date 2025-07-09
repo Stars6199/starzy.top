@@ -147,9 +147,9 @@
             position: relative;
             width: 180px;
             height: 180px;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             border-radius: 50%;
-            overflow: visible;
+            overflow: hidden;
             border: 3px solid var(--accent-color);
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             transition: transform 0.3s ease;
@@ -163,43 +163,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
         }
 
-        .splash-container {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: auto;
-            height: auto;
-            overflow: visible;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .splash-text {
+        .name-container {
             position: relative;
-            background-color: var(--yellow);
-            color: #000;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            font-size: 0.8rem;
-            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
-            animation: float 3s ease-in-out infinite;
-            transform: rotate(-15deg);
-            transform-origin: left center;
-            white-space: nowrap;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: rotate(-15deg) translateY(0);
-            }
-            50% {
-                transform: rotate(-15deg) translateY(-5px);
-            }
+            display: inline-block;
+            margin-top: 1rem;
         }
 
         .name {
@@ -208,6 +177,7 @@
             color: var(--accent-color);
             text-align: center;
             position: relative;
+            padding-right: 20px; /* Space for splash text */
         }
 
         .name::after {
@@ -220,6 +190,37 @@
             height: 3px;
             background-color: var(--accent-color);
             border-radius: 3px;
+        }
+
+        .splash-container {
+            position: absolute;
+            top: -10px;
+            right: 0;
+            z-index: 2;
+        }
+
+        .splash-text {
+            background-color: var(--yellow);
+            color: #000;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+            transform: rotate(15deg);
+            transform-origin: center;
+            white-space: nowrap;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: rotate(15deg) translateY(0);
+            }
+            50% {
+                transform: rotate(15deg) translateY(-5px);
+            }
         }
 
         /* About Section */
@@ -366,6 +367,7 @@
         @media (max-width: 600px) {
             .name {
                 font-size: 2rem;
+                padding-right: 15px;
             }
             
             .hobbies-list {
@@ -379,11 +381,6 @@
             .profile-pic-container {
                 width: 150px;
                 height: 150px;
-            }
-            
-            .splash-container {
-                bottom: 5px;
-                right: 5px;
             }
             
             .splash-text {
@@ -430,11 +427,13 @@
         <section class="profile-section">
             <div class="profile-pic-container">
                 <img src="/Assets/StarsArt/StarsChibiByRubicArt.png" alt="Profile Picture" class="profile-pic">
+            </div>
+            <div class="name-container">
+                <h1 class="name">Your Name</h1>
                 <div class="splash-container">
                     <div class="splash-text" id="splashText">Awesome!</div>
                 </div>
             </div>
-            <h1 class="name">Your Name</h1>
         </section>
 
         <!-- About Section -->

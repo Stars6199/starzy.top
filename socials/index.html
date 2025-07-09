@@ -4,56 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Socials Hub</title>
-    <script>
-        function toggleDropdown() {
-            const dropdown = document.getElementById('mobile-dropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function redirectToSocial(platform) {
-            const usernames = {
-                'discord': 'StarNetwork#1234',
-                'telegram': '@StarOfficial',
-                'instagram': '@star.official',
-                'youtube': '@StarTube',
-                'twitter': '@StarTweets',
-                'bluesky': '@star.bsky.social',
-                'reddit': 'u/StarReddit',
-                'xbox': 'StarGamer',
-                'twitch': 'StarStreamer',
-                'steam': 'StarPlayer',
-                'github': 'StarDev',
-                'tiktok': '@StarTikTok'
-            };
-
-            const urls = {
-                'discord': 'https://discord.com',
-                'telegram': `https://t.me/${usernames['telegram'].substring(1)}`,
-                'instagram': `https://instagram.com/${usernames['instagram'].substring(1)}`,
-                'youtube': `https://youtube.com/${usernames['youtube'].substring(1)}`,
-                'twitter': `https://twitter.com/${usernames['twitter'].substring(1)}`,
-                'bluesky': `https://bsky.app/profile/${usernames['bluesky'].substring(1)}`,
-                'reddit': `https://reddit.com/user/${usernames['reddit'].substring(2)}`,
-                'xbox': `https://xbox.com`,
-                'twitch': `https://twitch.tv/${usernames['twitch']}`,
-                'steam': `https://steamcommunity.com/id/${usernames['steam']}`,
-                'github': `https://github.com/${usernames['github']}`,
-                'tiktok': `https://tiktok.com/@${usernames['tiktok'].substring(1)}`
-            };
-
-            window.open(urls[platform], '_blank');
-        }
-    </script>
     <style>
         :root {
             --bg-dark: #121212;
             --bg-darker: #0a0a0a;
-            --text-primary: #e0e0e0;
-            --text-secondary: #b0b0b0;
-            --accent: #00ffff;
-            --accent-dark: #008b8b;
-            --card-bg: #1e1e1e;
-            --card-hover: #2a2a2a;
+            --text-light: #e0e0e0;
+            --accent-aqua: #00ffff;
+            --accent-aqua-dark: #008b8b;
+            --transition-speed: 0.3s;
         }
 
         * {
@@ -65,19 +23,19 @@
 
         body {
             background-color: var(--bg-dark);
-            color: var(--text-primary);
+            color: var(--text-light);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
         }
 
+        /* Header Styles */
         header {
-            background-color: var(--bg-darker);
-            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            padding: 1rem 2rem;
+            background-color: var(--bg-darker);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -86,360 +44,522 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--accent);
-            text-decoration: none;
-            transition: all 0.3s ease;
+            color: var(--accent-aqua);
+            text-shadow: 0 0 10px var(--accent-aqua);
+            transition: all var(--transition-speed) ease;
         }
 
         .logo:hover {
-            text-shadow: 0 0 10px var(--accent);
+            text-shadow: 0 0 15px var(--accent-aqua);
         }
 
-        .desktop-nav {
+        /* Desktop Navigation */
+        .nav-desktop {
             display: flex;
             gap: 1.5rem;
         }
 
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-        }
-
-        .mobile-nav-toggle {
-            display: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-nav-toggle {
-                display: block;
-            }
-        }
-
-        .mobile-nav-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: var(--accent);
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-
-        #mobile-dropdown {
-            display: none;
-            position: absolute;
-            top: 60px;
-            right: 20px;
-            background-color: var(--bg-darker);
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            z-index: 99;
-        }
-
-        #mobile-dropdown a {
-            display: block;
-            padding: 0.8rem 1.5rem;
-            color: var(--text-primary);
+        .nav-desktop a {
+            color: var(--text-light);
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        #mobile-dropdown a:hover {
-            background-color: var(--card-bg);
-            color: var(--accent);
-        }
-
-        .nav-button {
-            color: var(--text-primary);
-            text-decoration: none;
+            font-weight: 500;
             padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
+            transition: all var(--transition-speed) ease;
         }
 
-        .nav-button:hover {
-            color: var(--accent);
-        }
-
-        .nav-button::after {
+        .nav-desktop a::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
+            background-color: var(--accent-aqua);
+            transition: width var(--transition-speed) ease;
         }
 
-        .nav-button:hover::after {
+        .nav-desktop a:hover {
+            color: var(--accent-aqua);
+        }
+
+        .nav-desktop a:hover::after {
             width: 100%;
         }
 
+        /* Mobile Navigation */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .hamburger-menu div {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-light);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .nav-mobile {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--bg-darker);
+            border-radius: 0 0 0 10px;
+            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            width: 200px;
+            z-index: 99;
+        }
+
+        .nav-mobile a {
+            display: block;
+            padding: 1rem;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .nav-mobile a:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            color: var(--accent-aqua);
+        }
+
+        /* Main Content Area */
         main {
-            flex: 1;
             padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            width: 100%;
         }
 
         .welcome-message {
-            background-color: var(--card-bg);
-            padding: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background-color: rgba(0, 255, 255, 0.05);
             border-radius: 10px;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--accent-aqua);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .welcome-message h1 {
-            color: var(--accent);
+            font-size: 2rem;
             margin-bottom: 1rem;
-            font-size: 1.8rem;
+            color: var(--accent-aqua);
         }
 
         .welcome-message p {
+            font-size: 1.1rem;
             line-height: 1.6;
-            color: var(--text-secondary);
         }
 
-        .socials-grid {
+        /* Social Grid */
+        .social-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 1.5rem;
         }
 
         .social-card {
-            background-color: var(--card-bg);
+            background-color: var(--bg-darker);
             border-radius: 10px;
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            padding: 1.5rem 1rem;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .social-card:hover {
             transform: translateY(-5px);
-            background-color: var(--card-hover);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--accent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .social-card:hover::before {
-            transform: scaleX(1);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+            border-color: var(--accent-aqua);
         }
 
         .social-icon {
             width: 50px;
             height: 50px;
-            margin-bottom: 0.8rem;
-            filter: grayscale(20%);
-            transition: filter 0.3s ease;
+            margin: 0 auto 1rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: brightness(0.8);
+            transition: all var(--transition-speed) ease;
         }
 
         .social-card:hover .social-icon {
-            filter: grayscale(0%);
+            filter: brightness(1.2) drop-shadow(0 0 5px var(--accent-aqua));
         }
 
-        .social-name {
-            font-weight: bold;
-            margin-bottom: 0.3rem;
-            color: var(--text-primary);
+        .social-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
         }
 
-        .social-username {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+        .social-card p {
+            font-size: 0.9rem;
+            color: var(--accent-aqua);
             word-break: break-all;
         }
 
-        footer {
-            background-color: var(--bg-darker);
-            padding: 1.5rem;
-            text-align: center;
-            color: var(--text-secondary);
-            margin-top: 2rem;
+        /* Custom icons for each social */
+        .discord-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6a/Discord_White_Icon.png');
         }
 
-        /* Cool effects */
-        .glow {
-            animation: glow 2s infinite alternate;
+        .telegram-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg');
         }
 
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent);
-            }
-            to {
-                text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
-            }
+        .instagram-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/96/Instagram.svg');
         }
 
-        .pulse {
-            animation: pulse 2s infinite;
+        .youtube-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg');
         }
 
-        @keyframes pulse {
+        .twitter-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg');
+        }
+
+        .bluesky-icon {
+            background-image: url('https://bsky.app/static/logo.png');
+        }
+
+        .reddit-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/58/Reddit_logo_new.svg');
+        }
+
+        .xbox-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Xbox_logo_2012.svg');
+        }
+
+        .twitch-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/26/Twitch_logo.svg');
+        }
+
+        .steam-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg');
+        }
+
+        .github-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg');
+        }
+
+        .tiktok-icon {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg');
+        }
+
+        /* Cool Effects */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: rgba(0, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
             0% {
-                transform: scale(1);
+                transform: translateY(0) translateX(0);
+                opacity: 1;
             }
             50% {
-                transform: scale(1.05);
+                opacity: 0.5;
             }
             100% {
-                transform: scale(1);
+                transform: translateY(-100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            .nav-desktop {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .nav-mobile.active {
+                display: block;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .welcome-message h1 {
+                font-size: 1.5rem;
+            }
+
+            .welcome-message p {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
+
     <header>
-        <a href="#" class="logo glow">StarSocials</a>
+        <a href="/" class="logo">Home</a>
         
-        <nav class="desktop-nav">
-            <a href="#" class="nav-button">Home</a>
-            <a href="#" class="nav-button" onclick="redirectToSocial('discord')">Socials</a>
-            <a href="#" class="nav-button" onclick="redirectToSocial('instagram')">Art</a>
-            <a href="#" class="nav-button" onclick="redirectToSocial('github')">Download</a>
-            <a href="#" class="nav-button" onclick="redirectToSocial('twitch')">Donate</a>
-            <a href="#" class="nav-button" onclick="redirectToSocial('telegram')">Contact</a>
+        <!-- Desktop Navigation -->
+        <nav class="nav-desktop">
+            <a href="javascript:void(0)" onclick="navigateTo('socials')">Socials</a>
+            <a href="javascript:void(0)" onclick="navigateTo('art')">Art</a>
+            <a href="javascript:void(0)" onclick="navigateTo('download')">Download</a>
+            <a href="javascript:void(0)" onclick="navigateTo('donate')">Donate</a>
+            <a href="javascript:void(0)" onclick="navigateTo('contact')">Contact</a>
         </nav>
-
-        <div class="mobile-nav-toggle" onclick="toggleDropdown()">
-            <span></span>
-            <span></span>
-            <span></span>
+        
+        <!-- Mobile Navigation -->
+        <div class="hamburger-menu" onclick="toggleMobileMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-
-        <div id="mobile-dropdown">
-            <a href="#">Home</a>
-            <a href="#" onclick="redirectToSocial('discord')">Socials</a>
-            <a href="#" onclick="redirectToSocial('instagram')">Art</a>
-            <a href="#" onclick="redirectToSocial('github')">Download</a>
-            <a href="#" onclick="redirectToSocial('twitch')">Donate</a>
-            <a href="#" onclick="redirectToSocial('telegram')">Contact</a>
-        </div>
+        <nav class="nav-mobile" id="mobileNav">
+            <a href="javascript:void(0)" onclick="navigateTo('socials')">Socials</a>
+            <a href="javascript:void(0)" onclick="navigateTo('art')">Art</a>
+            <a href="javascript:void(0)" onclick="navigateTo('download')">Download</a>
+            <a href="javascript:void(0)" onclick="navigateTo('donate')">Donate</a>
+            <a href="javascript:void(0)" onclick="navigateTo('contact')">Contact</a>
+        </nav>
     </header>
 
     <main>
-        <section class="welcome-message pulse">
+        <section class="welcome-message">
             <h1>Welcome to the Socials</h1>
-            <p>In this page you can find all social media that stars have. If it's not listed here, it's fake stars then, so be safe!</p>
+            <p>In this page you can find all social that stars have. If it's not listed here, it's fake stars then, so be safe!</p>
         </section>
 
-        <section class="socials-grid">
+        <section class="social-grid">
             <!-- Discord -->
-            <div class="social-card" onclick="redirectToSocial('discord')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Discord" alt="Discord logo with purple gradient background" class="social-icon">
-                <div class="social-name">Discord</div>
-                <div class="social-username">StarNetwork#1234</div>
+            <div class="social-card" onclick="openSocial('discord')">
+                <div class="social-icon discord-icon"></div>
+                <h3>Discord</h3>
+                <p>@star_username</p>
             </div>
-
+            
             <!-- Telegram -->
-            <div class="social-card" onclick="redirectToSocial('telegram')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Telegram" alt="Telegram logo with blue background" class="social-icon">
-                <div class="social-name">Telegram</div>
-                <div class="social-username">@StarOfficial</div>
+            <div class="social-card" onclick="openSocial('telegram')">
+                <div class="social-icon telegram-icon"></div>
+                <h3>Telegram</h3>
+                <p>@star_username</p>
             </div>
-
+            
             <!-- Instagram -->
-            <div class="social-card" onclick="redirectToSocial('instagram')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Instagram" alt="Instagram logo with gradient purple-pink-yellow colors" class="social-icon">
-                <div class="social-name">Instagram</div>
-                <div class="social-username">@star.official</div>
+            <div class="social-card" onclick="openSocial('instagram')">
+                <div class="social-icon instagram-icon"></div>
+                <h3>Instagram</h3>
+                <p>@star_username</p>
             </div>
-
+            
             <!-- YouTube -->
-            <div class="social-card" onclick="redirectToSocial('youtube')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=YouTube" alt="YouTube logo with red background" class="social-icon">
-                <div class="social-name">YouTube</div>
-                <div class="social-username">@StarTube</div>
+            <div class="social-card" onclick="openSocial('youtube')">
+                <div class="social-icon youtube-icon"></div>
+                <h3>YouTube</h3>
+                <p>@star_username</p>
             </div>
-
+            
             <!-- Twitter -->
-            <div class="social-card" onclick="redirectToSocial('twitter')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Twitter" alt="Twitter logo with blue background" class="social-icon">
-                <div class="social-name">Twitter</div>
-                <div class="social-username">@StarTweets</div>
+            <div class="social-card" onclick="openSocial('twitter')">
+                <div class="social-icon twitter-icon"></div>
+                <h3>Twitter</h3>
+                <p>@star_username</p>
             </div>
-
-            <!-- BlueSky -->
-            <div class="social-card" onclick="redirectToSocial('bluesky')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=BlueSky" alt="BlueSky logo with blue background" class="social-icon">
-                <div class="social-name">BlueSky</div>
-                <div class="social-username">@star.bsky.social</div>
+            
+            <!-- Bluesky -->
+            <div class="social-card" onclick="openSocial('bluesky')">
+                <div class="social-icon bluesky-icon"></div>
+                <h3>BlueSky</h3>
+                <p>@star_username</p>
             </div>
-
+            
             <!-- Reddit -->
-            <div class="social-card" onclick="redirectToSocial('reddit')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Reddit" alt="Reddit logo with orange background" class="social-icon">
-                <div class="social-name">Reddit</div>
-                <div class="social-username">u/StarReddit</div>
+            <div class="social-card" onclick="openSocial('reddit')">
+                <div class="social-icon reddit-icon"></div>
+                <h3>Reddit</h3>
+                <p>u/star_username</p>
             </div>
-
+            
             <!-- Xbox -->
-            <div class="social-card" onclick="redirectToSocial('xbox')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Xbox" alt="Xbox logo with green background" class="social-icon">
-                <div class="social-name">Xbox</div>
-                <div class="social-username">StarGamer</div>
+            <div class="social-card" onclick="openSocial('xbox')">
+                <div class="social-icon xbox-icon"></div>
+                <h3>Xbox</h3>
+                <p>star_username</p>
             </div>
-
+            
             <!-- Twitch -->
-            <div class="social-card" onclick="redirectToSocial('twitch')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Twitch" alt="Twitch logo with purple background" class="social-icon">
-                <div class="social-name">Twitch</div>
-                <div class="social-username">StarStreamer</div>
+            <div class="social-card" onclick="openSocial('twitch')">
+                <div class="social-icon twitch-icon"></div>
+                <h3>Twitch</h3>
+                <p>star_username</p>
             </div>
-
+            
             <!-- Steam -->
-            <div class="social-card" onclick="redirectToSocial('steam')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=Steam" alt="Steam logo with dark blue background" class="social-icon">
-                <div class="social-name">Steam</div>
-                <div class="social-username">StarPlayer</div>
+            <div class="social-card" onclick="openSocial('steam')">
+                <div class="social-icon steam-icon"></div>
+                <h3>Steam</h3>
+                <p>star_username</p>
             </div>
-
+            
             <!-- GitHub -->
-            <div class="social-card" onclick="redirectToSocial('github')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=GitHub" alt="GitHub logo with dark background" class="social-icon">
-                <div class="social-name">GitHub</div>
-                <div class="social-username">StarDev</div>
+            <div class="social-card" onclick="openSocial('github')">
+                <div class="social-icon github-icon"></div>
+                <h3>GitHub</h3>
+                <p>@star_username</p>
             </div>
-
+            
             <!-- TikTok -->
-            <div class="social-card" onclick="redirectToSocial('tiktok')">
-                <img src="https://placehold.co/100x100/1e1e1e/00ffff?text=TikTok" alt="TikTok logo with black and red colors" class="social-icon">
-                <div class="social-name">TikTok</div>
-                <div class="social-username">@StarTikTok</div>
+            <div class="social-card" onclick="openSocial('tiktok')">
+                <div class="social-icon tiktok-icon"></div>
+                <h3>TikTok</h3>
+                <p>@star_username</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>© 2023 StarSocials. All social media links are verified.</p>
+        <p>&copy; 2023 Socials Hub. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Navigation functions
+        function navigateTo(page) {
+            window.location.href = `https://${window.location.hostname}/${page}`;
+            closeMobileMenu();
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileNav').classList.remove('active');
+        }
+
+        // Social media redirects
+        function openSocial(network) {
+            const username = document.querySelector(`.social-card[onclick="openSocial('${network}')"] p`).textContent;
+            let url = '';
+            
+            switch(network) {
+                case 'discord':
+                    url = `https://discord.com/users/${username}`;
+                    break;
+                case 'telegram':
+                    url = `https://t.me/${username.replace('@', '')}`;
+                    break;
+                case 'instagram':
+                    url = `https://instagram.com/${username.replace('@', '')}`;
+                    break;
+                case 'youtube':
+                    url = `https://youtube.com/${username.replace('@', '')}`;
+                    break;
+                case 'twitter':
+                    url = `https://twitter.com/${username.replace('@', '')}`;
+                    break;
+                case 'bluesky':
+                    url = `https://bsky.app/profile/${username.replace('@', '')}`;
+                    break;
+                case 'reddit':
+                    url = `https://reddit.com/user/${username.replace('u/', '')}`;
+                    break;
+                case 'xbox':
+                    url = `https://account.xbox.com/profile?gamertag=${username}`;
+                    break;
+                case 'twitch':
+                    url = `https://twitch.tv/${username}`;
+                    break;
+                case 'steam':
+                    url = `https://steamcommunity.com/id/${username}`;
+                    break;
+                case 'github':
+                    url = `https://github.com/${username.replace('@', '')}`;
+                    break;
+                case 'tiktok':
+                    url = `https://tiktok.com/@${username.replace('@', '')}`;
+                    break;
+                default:
+                    return;
+            }
+            
+            window.open(url, '_blank');
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Randomize position and animation delay
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                particle.style.width = `${Math.random() * 3 + 1}px`;
+                particle.style.height = particle.style.width;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            
+            // Username placeholder can be replaced via API later
+            document.querySelectorAll('.social-card p').forEach(el => {
+                el.textContent = el.textContent.replace('star_username', 'example_username');
+            });
+        });
+    </script>
 </body>
 </html>

@@ -147,9 +147,9 @@
             position: relative;
             width: 180px;
             height: 180px;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             border-radius: 50%;
-            overflow: visible;
+            overflow: hidden;
             border: 3px solid var(--accent-color);
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             transition: transform 0.3s ease;
@@ -163,39 +163,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
         }
 
-        /* 4 o'clock position splash text */
-        .splash-container {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            transform: rotate(-30deg) translate(30px, -10px);
-            transform-origin: center;
-            z-index: 2;
-        }
-
-        .splash-text {
-            background-color: var(--yellow);
-            color: #000;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            font-size: 0.8rem;
-            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
-            animation: float 3s ease-in-out infinite;
-            white-space: nowrap;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: rotate(-30deg) translateY(0);
-            }
-            50% {
-                transform: rotate(-30deg) translateY(-5px);
-            }
+        .name-container {
+            position: relative;
+            display: inline-block;
         }
 
         .name {
@@ -204,6 +176,8 @@
             color: var(--accent-color);
             text-align: center;
             position: relative;
+            display: inline-block;
+            padding-right: 40px; /* Space for splash text */
         }
 
         .name::after {
@@ -216,6 +190,34 @@
             height: 3px;
             background-color: var(--accent-color);
             border-radius: 3px;
+        }
+
+        .splash-container {
+            position: absolute;
+            top: -5px;
+            right: 0;
+            z-index: 2;
+        }
+
+        .splash-text {
+            color: var(--yellow);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+            animation: float 3s ease-in-out infinite;
+            transform: rotate(15deg);
+            transform-origin: left center;
+            white-space: nowrap;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: rotate(15deg) translateY(0);
+            }
+            50% {
+                transform: rotate(15deg) translateY(-5px);
+            }
         }
 
         /* About Section */
@@ -362,6 +364,7 @@
         @media (max-width: 600px) {
             .name {
                 font-size: 2rem;
+                padding-right: 30px;
             }
             
             .hobbies-list {
@@ -377,15 +380,8 @@
                 height: 150px;
             }
             
-            .splash-container {
-                bottom: 15px;
-                right: 15px;
-                transform: rotate(-30deg) translate(25px, -8px);
-            }
-            
             .splash-text {
                 font-size: 0.7rem;
-                padding: 0.2rem 0.6rem;
             }
         }
     </style>
@@ -427,11 +423,14 @@
         <section class="profile-section">
             <div class="profile-pic-container">
                 <img src="/Assets/StarsArt/StarsChibiByRubicArt.png" alt="Profile Picture" class="profile-pic">
-                <div class="splash-container">
-                    <div class="splash-text" id="splashText">Awesome!</div>
-                </div>
             </div>
-            <h1 class="name">Your Name</h1>
+            <div class="name-container">
+                <h1 class="name">Your Name
+                    <div class="splash-container">
+                        <div class="splash-text" id="splashText">Awesome!</div>
+                    </div>
+                </h1>
+            </div>
         </section>
 
         <!-- About Section -->
@@ -491,7 +490,7 @@
             "404 Sleep Not Found",
             "Ctrl+Alt+Delightful",
             "Beep Boop",
-            "Hello There!",
+            "100% Made By AI",
             "Nice to meet you!",
             "Stay Creative!",
             "Made with ❤️"
@@ -502,9 +501,6 @@
             const splashElement = document.getElementById('splashText');
             const randomText = splashTexts[Math.floor(Math.random() * splashTexts.length)];
             splashElement.textContent = randomText;
-            
-            // Adjust width to prevent text wrapping
-            splashElement.style.minWidth = `${randomText.length * 8 + 20}px`;
         }
 
         // Navigation function

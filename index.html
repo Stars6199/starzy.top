@@ -149,7 +149,7 @@
             height: 180px;
             margin-bottom: 2rem;
             border-radius: 50%;
-            overflow: hidden;
+            overflow: visible;
             border: 3px solid var(--accent-color);
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             transition: transform 0.3s ease;
@@ -163,13 +163,22 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .splash-container {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: auto;
+            height: auto;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 2;
         }
 
         .splash-text {
-            position: absolute;
-            bottom: -10px;
-            right: -30px;
-            transform: rotate(-15deg);
+            position: relative;
             background-color: var(--yellow);
             color: #000;
             padding: 0.3rem 0.8rem;
@@ -179,6 +188,9 @@
             font-size: 0.8rem;
             box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
             animation: float 3s ease-in-out infinite;
+            transform: rotate(-15deg);
+            transform-origin: left center;
+            white-space: nowrap;
         }
 
         @keyframes float {
@@ -363,6 +375,21 @@
             main {
                 padding: 6rem 1.5rem 2rem;
             }
+            
+            .profile-pic-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .splash-container {
+                bottom: 5px;
+                right: 5px;
+            }
+            
+            .splash-text {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.6rem;
+            }
         }
     </style>
 </head>
@@ -403,7 +430,9 @@
         <section class="profile-section">
             <div class="profile-pic-container">
                 <img src="/Assets/StarsArt/StarsChibiByRubicArt.png" alt="Profile Picture" class="profile-pic">
-                <div class="splash-text" id="splashText">Awesome!</div>
+                <div class="splash-container">
+                    <div class="splash-text" id="splashText">Awesome!</div>
+                </div>
             </div>
             <h1 class="name">Your Name</h1>
         </section>
@@ -476,6 +505,9 @@
             const splashElement = document.getElementById('splashText');
             const randomText = splashTexts[Math.floor(Math.random() * splashTexts.length)];
             splashElement.textContent = randomText;
+            
+            // Adjust width to prevent text wrapping
+            splashElement.style.minWidth = `${randomText.length * 8 + 20}px`;
         }
 
         // Navigation function

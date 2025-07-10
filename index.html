@@ -254,11 +254,8 @@
             background-color: var(--accent-color);
         }
 
-        /* Fixed Hobbies Section for Windows */
+        /* Hobbies Section - Vertical List */
         .hobbies-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
             list-style-type: none;
             padding: 0;
         }
@@ -269,8 +266,12 @@
             border-radius: 8px;
             border-left: 3px solid var(--accent-color);
             transition: all 0.3s ease;
-            margin: 0;
+            margin-bottom: 0.8rem;
             word-break: break-word;
+        }
+
+        .hobby-item:last-child {
+            margin-bottom: 0;
         }
 
         .hobby-item:hover {
@@ -371,10 +372,6 @@
                 padding-right: 30px;
             }
             
-            .hobbies-list {
-                grid-template-columns: 1fr;
-            }
-            
             main {
                 padding: 6rem 1.5rem 2rem;
             }
@@ -444,7 +441,7 @@
             <p>Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
         </section>
 
-        <!-- Hobbies Section - Fixed for Windows -->
+        <!-- Hobbies Section - Vertical List -->
         <section class="hobbies-section">
             <h2 class="section-title">My Hobbies</h2>
             <ul class="hobbies-list">
@@ -514,7 +511,7 @@
             
             // In a real implementation, this would navigate to the page
             // For this example, we'll just log it
-            // console.log(`Navigating to ${page}`);
+            //console.log(`Navigating to ${page}`);
             window.location.href = `${page}`;
             
             // Prevent default anchor behavior

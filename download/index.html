@@ -267,12 +267,21 @@
             transition: var(--transition);
             text-decoration: none;
             display: inline-block;
+            margin-right: 0.5rem;
         }
 
         .download-btn:hover {
             background-color: var(--accent-dark);
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 255, 255, 0.3);
+        }
+
+        .download-btn.resource {
+            background-color: #4CAF50;
+        }
+
+        .download-btn.world {
+            background-color: #2196F3;
         }
 
         .not-available {
@@ -289,13 +298,47 @@
             text-align: center;
         }
 
+        .skin-viewer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .skin-selector {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skin-option {
+            background-color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .skin-option:hover {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        .skin-option.active {
+            background-color: var(--accent);
+            color: #000;
+            font-weight: bold;
+        }
+
         .skin-viewer {
             width: 100%;
             max-width: 300px;
             height: 300px;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto;
             position: relative;
             perspective: 1000px;
+            touch-action: pan-y;
         }
 
         .skin-container {
@@ -303,12 +346,11 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            animation: rotate 20s infinite linear;
+            cursor: grab;
         }
 
-        @keyframes rotate {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
+        .skin-container:active {
+            cursor: grabbing;
         }
 
         .skin-front, .skin-back {
@@ -322,11 +364,11 @@
         }
 
         .skin-front {
-            background-image: url('https://mc-heads.net/body/Player/left');
+            background-image: var(--skin-front);
         }
 
         .skin-back {
-            background-image: url('https://mc-heads.net/body/Player/right');
+            background-image: var(--skin-back);
             transform: rotateY(180deg);
         }
 
@@ -338,6 +380,13 @@
             font-size: 1.3rem;
             color: var(--accent);
             margin-bottom: 0.5rem;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: var(--transition);
+        }
+
+        .skin-name:hover {
+            color: #fff;
         }
 
         .skin-creator {
@@ -413,6 +462,11 @@
             h1 {
                 font-size: 2rem;
             }
+
+            .skin-selector {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -467,34 +521,55 @@
                 <tbody>
                     <tr>
                         <td>Skyblock Adventure</td>
-                        <td><a href="#" class="download-btn" onclick="downloadResource('skyblock')">Download</a></td>
-                        <td><a href="#" class="download-btn" onclick="downloadWorld('skyblock')">Download</a></td>
+                        <td>
+                            <a href="https://example.com/download/skyblock_resource" class="download-btn resource" download>Download</a>
+                            <a href="https://example.com/info/skyblock_resource" class="download-btn">Info</a>
+                        </td>
+                        <td>
+                            <a href="https://example.com/download/skyblock_world" class="download-btn world" download>Download</a>
+                            <a href="https://example.com/info/skyblock_world" class="download-btn">Info</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Medieval RPG</td>
-                        <td><a href="#" class="download-btn" onclick="downloadResource('medieval')">Download</a></td>
+                        <td>
+                            <a href="https://example.com/download/medieval_resource" class="download-btn resource" download>Download</a>
+                            <a href="https://example.com/info/medieval_resource" class="download-btn">Info</a>
+                        </td>
                         <td class="not-available">Not Available</td>
                     </tr>
                     <tr>
                         <td>Survival Games</td>
                         <td class="not-available">Not Available</td>
-                        <td><a href="#" class="download-btn" onclick="downloadWorld('survival_games')">Download</a></td>
+                        <td>
+                            <a href="https://example.com/download/survival_games_world" class="download-btn world" download>Download</a>
+                            <a href="https://example.com/info/survival_games_world" class="download-btn">Info</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
         <section class="skin-section">
-            <h2>My Minecraft Skin</h2>
-            <div class="skin-viewer">
-                <div class="skin-container">
-                    <div class="skin-front"></div>
-                    <div class="skin-back"></div>
+            <h2>My Minecraft Skins</h2>
+            <div class="skin-viewer-container">
+                <div class="skin-selector">
+                    <div class="skin-option active" onclick="changeSkin('original', '66c412e3de8d39c7', 'Original Skin by creqpe')">Original</div>
+                    <div class="skin-option" onclick="changeSkin('cherry', 'dda37598fb40b976', 'Cherry Skin by creqpe')">Cherry</div>
+                    <div class="skin-option" onclick="changeSkin('snow', 'e3809abed28a207a', 'Snow Skin by creqpe')">Snow</div>
                 </div>
-            </div>
-            <div class="skin-info">
-                <div class="skin-name">Cyber Ninja</div>
-                <div class="skin-creator">Created by: SkinMaster123</div>
+                
+                <div class="skin-viewer" id="skinViewer">
+                    <div class="skin-container" id="skinContainer">
+                        <div class="skin-front"></div>
+                        <div class="skin-back"></div>
+                    </div>
+                </div>
+                
+                <div class="skin-info">
+                    <div class="skin-name" id="skinNameLink">Original Skin by creqpe</div>
+                    <div class="skin-creator" id="skinCreator">Skin ID: 66c412e3de8d39c7</div>
+                </div>
             </div>
         </section>
 
@@ -519,58 +594,124 @@
 
         // Navigation functions
         function goToHome() {
-            //alert('Navigating to Home');
-            window.location.href = "/";
+            alert('Navigating to Home');
+            // window.location.href = "/";
         }
 
         function goToSocials() {
-            // alert('Navigating to Socials');
-            window.location.href = "/socials";
+            alert('Navigating to Socials');
+            // window.location.href = "/socials";
         }
 
         function goToArt() {
-            //alert('Navigating to Art');
-            window.location.href = "/art";
+            alert('Navigating to Art');
+            // window.location.href = "/art";
         }
 
         function goToDownloads() {
-            //alert('Already on Downloads page');
-            window.location.href = "/downloads";
+            alert('Already on Downloads page');
+            // window.location.href = "/downloads";
         }
 
         function goToDonate() {
-            //alert('Navigating to Donate');
-            window.location.href = "/donate";
+            alert('Navigating to Donate');
+            // window.location.href = "/donate";
         }
 
         function goToContact() {
-            //alert('Navigating to Contact');
-            window.location.href = "/contact";
+            alert('Navigating to Contact');
+            // window.location.href = "/contact";
         }
 
-        // Download functions
-        function downloadResource(packName) {
-            alert(`Downloading ${packName} resource pack`);
-            // Actual download logic would go here
+        // Skin viewer functionality
+        let currentRotation = 0;
+        let isDragging = false;
+        let startX, startY;
+        let startRotation;
+        const skinContainer = document.getElementById('skinContainer');
+        const skinNameLink = document.getElementById('skinNameLink');
+        const skinCreator = document.getElementById('skinCreator');
+        
+        // Current skin data
+        let currentSkin = {
+            id: '66c412e3de8d39c7',
+            name: 'Original Skin by creqpe',
+            url: 'https://namemc.com/skin/66c412e3de8d39c7'
+        };
+
+        // Set up skin rotation
+        function updateSkinRotation() {
+            skinContainer.style.transform = `rotateY(${currentRotation}deg)`;
         }
 
-        function downloadWorld(worldName) {
-            alert(`Downloading ${worldName} world`);
-            // Actual download logic would go here
+        // Mouse/touch events for skin rotation
+        skinContainer.addEventListener('mousedown', startDrag);
+        skinContainer.addEventListener('touchstart', startDrag);
+        
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag);
+        
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+
+        function startDrag(e) {
+            isDragging = true;
+            const clientX = e.clientX || e.touches[0].clientX;
+            startX = clientX;
+            startRotation = currentRotation;
+            skinContainer.style.cursor = 'grabbing';
+            e.preventDefault();
         }
 
-        // Replace 'Player' in skin URLs with actual username
-        document.addEventListener('DOMContentLoaded', function() {
-            // This would be replaced with your actual username
-            const username = '_Sangri';
+        function drag(e) {
+            if (!isDragging) return;
+            const clientX = e.clientX || e.touches[0].clientX;
+            const deltaX = clientX - startX;
+            currentRotation = startRotation + deltaX / 2;
+            updateSkinRotation();
+            e.preventDefault();
+        }
+
+        function endDrag() {
+            isDragging = false;
+            skinContainer.style.cursor = 'grab';
+        }
+
+        // Change skin function
+        function changeSkin(type, skinId, skinName) {
+            // Update active button
+            document.querySelectorAll('.skin-option').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update skin images
             const skinFront = document.querySelector('.skin-front');
             const skinBack = document.querySelector('.skin-back');
             
-            if (skinFront && skinBack) {
-                skinFront.style.backgroundImage = `url('https://mc-heads.net/body/${username}/left')`;
-                skinBack.style.backgroundImage = `url('https://mc-heads.net/body/${username}/right')`;
-            }
+            skinFront.style.backgroundImage = `url('https://mc-heads.net/body/${skinId}/left')`;
+            skinBack.style.backgroundImage = `url('https://mc-heads.net/body/${skinId}/right')`;
+            
+            // Update skin info
+            currentSkin = {
+                id: skinId,
+                name: skinName,
+                url: `https://namemc.com/skin/${skinId}`
+            };
+            
+            skinNameLink.textContent = skinName;
+            skinNameLink.href = currentSkin.url;
+            skinCreator.textContent = `Skin ID: ${skinId}`;
+        }
+
+        // Set up skin name link
+        skinNameLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open(currentSkin.url, '_blank');
         });
+
+        // Initialize the skin viewer
+        updateSkinRotation();
     </script>
 </body>
 </html>

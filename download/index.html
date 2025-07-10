@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Center</title>
+    <title>Minecraft Downloads</title>
     <style>
         :root {
-            --primary-color: #7289da;
-            --text-color: #e0e0e0;
-            --bg-color: #1e1e1e;
-            --card-bg: #2e2e2e;
-            --hover-color: #5865f2;
-            --border-color: #444;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent: #00ffff;
+            --accent-dark: #008b8b;
+            --card-bg: #1e1e1e;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -22,196 +25,437 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* Header Styles */
         header {
+            background-color: var(--bg-darker);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background-color: #121212;
-            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            color: var(--primary-color);
+            color: var(--accent);
             text-decoration: none;
-            cursor: pointer;
+            transition: var(--transition);
         }
 
-        .nav-buttons {
+        .logo:hover {
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* Desktop Navigation */
+        .nav-desktop {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
-        .nav-button {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 4px;
-            transition: background-color 0.2s;
+            transition: var(--transition);
+            position: relative;
         }
 
-        .nav-button:hover {
-            background-color: var(--hover-color);
+        .nav-link:hover {
+            color: var(--accent);
         }
 
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background-color: var(--bg-darker);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            z-index: 1000;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close-menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-left: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--accent);
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        /* Main Content */
         main {
             padding: 2rem;
-            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        h2 {
+            color: var(--accent);
+            margin: 1.5rem 0;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .welcome-message {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent);
         }
 
         .download-intro {
-            text-align: center;
-            margin-bottom: 2rem;
             font-size: 1.2rem;
-        }
-
-        .section-title {
-            color: var(--primary-color);
             margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary-color);
+            color: var(--text-secondary);
         }
 
-        .minecraft-events {
-            margin-bottom: 3rem;
-        }
-
+        /* Events Table */
         .events-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 1.5rem;
+            margin-top: 1.5rem;
+            background-color: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .events-table th, .events-table td {
             padding: 1rem;
-            text-align: center;
-            border: 1px solid var(--border-color);
+            text-align: left;
+            border-bottom: 1px solid #333;
         }
 
         .events-table th {
-            background-color: #323232;
+            background-color: var(--bg-darker);
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .events-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .events-table tr:hover {
+            background-color: #252525;
         }
 
         .download-btn {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: var(--accent);
+            color: #000;
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            font-weight: bold;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
         }
 
         .download-btn:hover {
-            background-color: var(--hover-color);
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.3);
         }
 
-        .skins-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+        .not-available {
+            color: var(--text-secondary);
+            font-style: italic;
         }
 
-        .skin-card {
+        /* Skin Section */
+        .skin-section {
             background-color: var(--card-bg);
+            padding: 2rem;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s;
+            box-shadow: var(--card-shadow);
+            text-align: center;
         }
 
-        .skin-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .skin-image-container {
+        .skin-viewer {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            margin: 0 auto 1.5rem;
             position: relative;
-            padding-top: 100%;
-            background-color: #1e1e1e;
+            perspective: 1000px;
         }
 
-        .skin-image {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .skin-container {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .skin-front, .skin-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .skin-front {
+            background-image: url('https://mc-heads.net/body/Player/left');
+        }
+
+        .skin-back {
+            background-image: url('https://mc-heads.net/body/Player/right');
+            transform: rotateY(180deg);
         }
 
         .skin-info {
-            padding: 1rem;
-            text-align: center;
+            margin-top: 1rem;
         }
 
         .skin-name {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            color: var(--accent);
             margin-bottom: 0.5rem;
-            color: var(--primary-color);
         }
 
         .skin-creator {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            color: var(--text-secondary);
         }
 
-        footer {
+        /* Coming Soon Section */
+        .coming-soon {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
             text-align: center;
-            padding: 1rem;
-            background-color: #121212;
-            border-top: 1px solid var(--border-color);
-            margin-top: auto;
+            position: relative;
+            overflow: hidden;
         }
 
+        .coming-soon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent 45%,
+                rgba(0, 255, 255, 0.1) 50%,
+                transparent 55%
+            );
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translate(-30%, -30%) rotate(0deg); }
+            100% { transform: translate(30%, 30%) rotate(360deg); }
+        }
+
+        .coming-soon-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .coming-soon h2 {
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-darker);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .nav-buttons {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
             .events-table {
                 display: block;
                 overflow-x: auto;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <a class="logo" onclick="navigate('home')">HOME</a>
-        <div class="nav-buttons">
-            <button class="nav-button" onclick="navigate('social')">Social</button>
-            <button class="nav-button" onclick="navigate('art')">Art</button>
-            <button class="nav-button" onclick="navigate('download')">Download</button>
-            <button class="nav-button" onclick="navigate('donate')">Donate</button>
-            <button class="nav-button" onclick="navigate('contact')">Contact</button>
+        <a href="#" class="logo" onclick="goToHome()">Home</a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="nav-desktop">
+            <a href="#" class="nav-link" onclick="goToSocials()">Socials</a>
+            <a href="#" class="nav-link" onclick="goToArt()">Art</a>
+            <a href="#" class="nav-link" onclick="goToDownloads()">Downloads</a>
+            <a href="#" class="nav-link" onclick="goToDonate()">Donate</a>
+            <a href="#" class="nav-link" onclick="goToContact()">Contact</a>
+        </nav>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        
+        <!-- Mobile Navigation -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <h3>Menu</h3>
+                <button class="close-menu-btn" onclick="toggleMobileMenu()">×</button>
+            </div>
+            <a href="#" class="mobile-nav-link" onclick="goToSocials()">Socials</a>
+            <a href="#" class="mobile-nav-link" onclick="goToArt()">Art</a>
+            <a href="#" class="mobile-nav-link" onclick="goToDownloads()">Downloads</a>
+            <a href="#" class="mobile-nav-link" onclick="goToDonate()">Donate</a>
+            <a href="#" class="mobile-nav-link" onclick="goToContact()">Contact</a>
         </div>
     </header>
 
     <main>
-        <div class="download-intro">
-            <h1>u wanna download some cool files? here i gotchu</h1>
-        </div>
+        <section>
+            <div class="welcome-message">
+                <h1>Welcome to My Minecraft Downloads!</h1>
+                <p class="download-intro">Here you can find all the resources and worlds from my Minecraft server events.</p>
+            </div>
 
-        <section class="minecraft-events">
-            <h2 class="section-title">Minecraft Events</h2>
+            <h2>Server Events</h2>
+            <p>Wanna download resources and world from Minecraft server event? I gotchu bro!</p>
+            
             <table class="events-table">
                 <thead>
                     <tr>
@@ -222,92 +466,111 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Winter Festival</td>
-                        <td>
-                            <button class="download-btn" onclick="downloadFile('winter-fest-pack')">Download</button>
-                        </td>
-                        <td>
-                            <button class="download-btn" onclick="downloadFile('winter-fest-world')">Download</button>
-                        </td>
+                        <td>Skyblock Adventure</td>
+                        <td><a href="#" class="download-btn" onclick="downloadResource('skyblock')">Download</a></td>
+                        <td><a href="#" class="download-btn" onclick="downloadWorld('skyblock')">Download</a></td>
                     </tr>
                     <tr>
-                        <td>Halloween Horror</td>
-                        <td>
-                            <button class="download-btn" onclick="downloadFile('halloween-pack')">Download</button>
-                        </td>
-                        <td>
-                            <button class="download-btn" onclick="downloadFile('halloween-world')">Download</button>
-                        </td>
+                        <td>Medieval RPG</td>
+                        <td><a href="#" class="download-btn" onclick="downloadResource('medieval')">Download</a></td>
+                        <td class="not-available">Not Available</td>
                     </tr>
                     <tr>
-                        <td>Summer Adventure</td>
-                        <td>
-                            <button class="download-btn" onclick="downloadFile('summer-pack')">Download</button>
-                        </td>
-                        <td>
-                            <button class="download-btn" onclick="downloadFile('summer-world')">Download</button>
-                        </td>
+                        <td>Survival Games</td>
+                        <td class="not-available">Not Available</td>
+                        <td><a href="#" class="download-btn" onclick="downloadWorld('survival_games')">Download</a></td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
-        <section class="skin-downloads">
-            <h2 class="section-title">My Skins</h2>
-            <div class="skins-container">
-                <div class="skin-card">
-                    <div class="skin-image-container">
-                        <img src="https://placehold.co/600x600" alt="Minecraft skin of a cyberpunk warrior with neon blue highlights on black armor" class="skin-image" />
-                    </div>
-                    <div class="skin-info">
-                        <div class="skin-name">Cyber Warrior</div>
-                        <div class="skin-creator">Created by: Me</div>
-                        <button class="download-btn" onclick="downloadFile('cyber-warrior-skin')">Download</button>
-                    </div>
+        <section class="skin-section">
+            <h2>My Minecraft Skin</h2>
+            <div class="skin-viewer">
+                <div class="skin-container">
+                    <div class="skin-front"></div>
+                    <div class="skin-back"></div>
                 </div>
+            </div>
+            <div class="skin-info">
+                <div class="skin-name">Cyber Ninja</div>
+                <div class="skin-creator">Created by: SkinMaster123</div>
+            </div>
+        </section>
 
-                <div class="skin-card">
-                    <div class="skin-image-container">
-                        <img src="https://placehold.co/600x600" alt="Minecraft skin of a steampunk inventor with goggles and brown leather coat" class="skin-image" />
-                    </div>
-                    <div class="skin-info">
-                        <div class="skin-name">Steampunk Inventor</div>
-                        <div class="skin-creator">Created by: Me</div>
-                        <button class="download-btn" onclick="downloadFile('steampunk-skin')">Download</button>
-                    </div>
-                </div>
-
-                <div class="skin-card">
-                    <div class="skin-image-container">
-                        <img src="https://placehold.co/600x600" alt="Minecraft skin of a phoenix with fiery wings and glowing red patterns" class="skin-image" />
-                    </div>
-                    <div class="skin-info">
-                        <div class="skin-name">Phoenix</div>
-                        <div class="skin-creator">Created by: Me</div>
-                        <button class="download-btn" onclick="downloadFile('phoenix-skin')">Download</button>
-                    </div>
-                </div>
+        <section class="coming-soon">
+            <div class="coming-soon-content">
+                <h2>Coming Soon!</h2>
+                <p>There will be cool stuff available for download soon. Stay tuned!</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 My Creations. All rights reserved.</p>
+        <p>&copy; 2023 Minecraft Downloads. All rights reserved.</p>
     </footer>
 
     <script>
-        function navigate(page) {
-           window.location.href = `/${page}`;
-            // In a real implementation, you would navigate to the actual page
-            // window.location.href = `/${page}.html`;
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
         }
 
-        function downloadFile(fileName) {
-            alert(`Downloading ${fileName}`);
-            // In a real implementation, you would initiate a file download
-            // window.location.href = `/downloads/${fileName}.zip`;
+        // Navigation functions
+        function goToHome() {
+            alert('Navigating to Home');
+            // window.location.href = "/";
         }
+
+        function goToSocials() {
+            alert('Navigating to Socials');
+            // window.location.href = "/socials";
+        }
+
+        function goToArt() {
+            alert('Navigating to Art');
+            // window.location.href = "/art";
+        }
+
+        function goToDownloads() {
+            alert('Already on Downloads page');
+            // window.location.href = "/downloads";
+        }
+
+        function goToDonate() {
+            alert('Navigating to Donate');
+            // window.location.href = "/donate";
+        }
+
+        function goToContact() {
+            alert('Navigating to Contact');
+            // window.location.href = "/contact";
+        }
+
+        // Download functions
+        function downloadResource(packName) {
+            alert(`Downloading ${packName} resource pack`);
+            // Actual download logic would go here
+        }
+
+        function downloadWorld(worldName) {
+            alert(`Downloading ${worldName} world`);
+            // Actual download logic would go here
+        }
+
+        // Replace 'Player' in skin URLs with actual username
+        document.addEventListener('DOMContentLoaded', function() {
+            // This would be replaced with your actual username
+            const username = 'Player';
+            const skinFront = document.querySelector('.skin-front');
+            const skinBack = document.querySelector('.skin-back');
+            
+            if (skinFront && skinBack) {
+                skinFront.style.backgroundImage = `url('https://mc-heads.net/body/${username}/left')`;
+                skinBack.style.backgroundImage = `url('https://mc-heads.net/body/${username}/right')`;
+            }
+        });
     </script>
 </body>
 </html>
-

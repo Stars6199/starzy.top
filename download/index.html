@@ -31,15 +31,430 @@
             overflow-x: hidden;
         }
 
-        /* [Previous CSS remains exactly the same, just removing it for brevity] */
-        /* ... All your existing CSS styles ... */
+        header {
+            background-color: var(--bg-darker);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background-color: var(--bg-darker);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            z-index: 1000;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close-menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-left: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--accent);
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        h2 {
+            color: var(--accent);
+            margin: 1.5rem 0;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .welcome-message {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .download-intro {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .events-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background-color: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .events-table th, .events-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .events-table th {
+            background-color: var(--bg-darker);
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .events-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .events-table tr:hover {
+            background-color: #252525;
+        }
+
+        .download-btn {
+            background-color: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.3);
+        }
+
+        .download-btn.resource {
+            background-color: #4CAF50;
+        }
+
+        .download-btn.world {
+            background-color: #2196F3;
+        }
+
+        .not-available {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .skin-section {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+
+        .skin-viewer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .skin-selector {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skin-option {
+            background-color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .skin-option:hover {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        .skin-option.active {
+            background-color: var(--accent);
+            color: #000;
+            font-weight: bold;
+        }
+
+        .skin-viewer-3d {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .skin-model {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+        }
+
+        .skin-model img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            backface-visibility: hidden;
+        }
+
+        .skin-front-view {
+            transform: rotateY(0deg);
+        }
+
+        .skin-side-view {
+            transform: rotateY(90deg);
+        }
+
+        .skin-back-view {
+            transform: rotateY(180deg);
+        }
+
+        .skin-other-side-view {
+            transform: rotateY(270deg);
+        }
+
+        .skin-info {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .skin-name {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 0.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .skin-name:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .skin-creator {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .coming-soon {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coming-soon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent 45%,
+                rgba(0, 255, 255, 0.1) 50%,
+                transparent 55%
+            );
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translate(-30%, -30%) rotate(0deg); }
+            100% { transform: translate(30%, 30%) rotate(360deg); }
+        }
+
+        .coming-soon-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .coming-soon h2 {
+            margin-bottom: 1rem;
+        }
+
+        .coming-soon p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            background-color: var(--bg-darker);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .events-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .skin-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .skin-viewer-3d {
+                width: 250px;
+                height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <a href="#" class="logo" id="homeBtn">Home</a>
         
-        <!-- Desktop Navigation -->
         <nav class="nav-desktop">
             <a href="#" class="nav-link" data-page="socials">Socials</a>
             <a href="#" class="nav-link" data-page="art">Art</a>
@@ -48,10 +463,8 @@
             <a href="#" class="nav-link" data-page="contact">Contact</a>
         </nav>
         
-        <!-- Mobile Menu Button -->
         <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         
-        <!-- Mobile Navigation -->
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-header">
                 <h3>Menu</h3>
@@ -115,9 +528,9 @@
             <h2>My Minecraft Skins</h2>
             <div class="skin-viewer-container">
                 <div class="skin-selector" id="skinSelector">
-                    <div class="skin-option active" data-skin="original" data-id="66c412e3de8d39c7" data-name="Original Skin">Original</div>
-                    <div class="skin-option" data-skin="cherry" data-id="dda37598fb40b976" data-name="Cherry Skin">Cherry</div>
-                    <div class="skin-option" data-skin="snow" data-id="e3809abed28a207a" data-name="Snow Skin">Snow</div>
+                    <div class="skin-option active" data-skin-id="66c412e3de8d39c7" data-skin-name="Original Skin">Original</div>
+                    <div class="skin-option" data-skin-id="dda37598fb40b976" data-skin-name="Cherry Skin">Cherry</div>
+                    <div class="skin-option" data-skin-id="e3809abed28a207a" data-skin-name="Snow Skin">Snow</div>
                 </div>
                 
                 <div class="skin-viewer-3d" id="skinViewer">
@@ -130,7 +543,7 @@
                 </div>
                 
                 <div class="skin-info">
-                    <div class="skin-name" id="skinNameLink">Original Skin</div>
+                    <a href="https://namemc.com/skin/66c412e3de8d39c7" class="skin-name" target="_blank" id="skinName">Original Skin</a>
                     <div class="skin-creator">by creqpe</div>
                 </div>
             </div>
@@ -149,152 +562,132 @@
     </footer>
 
     <script>
-        // DOM Elements
-        const elements = {
-            mobileMenuBtn: document.getElementById('mobileMenuBtn'),
-            closeMenuBtn: document.getElementById('closeMenuBtn'),
-            mobileMenu: document.getElementById('mobileMenu'),
-            homeBtn: document.getElementById('homeBtn'),
-            skinModel: document.getElementById('skinModel'),
-            skinNameLink: document.getElementById('skinNameLink'),
-            skinSelector: document.getElementById('skinSelector')
-        };
-
-        // State
-        const state = {
-            currentRotation: 0,
-            isDragging: false,
-            startX: 0,
-            currentSkin: {
-                id: '66c412e3de8d39c7',
-                name: 'Original Skin',
-                url: 'https://namemc.com/skin/66c412e3de8d39c7'
-            }
-        };
-
-        // Event Handlers
-        const handlers = {
-            toggleMobileMenu: () => {
-                elements.mobileMenu.classList.toggle('active');
-            },
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
             
-            navigate: (e) => {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+            });
+            
+            closeMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+            
+            // Navigation
+            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = this.getAttribute('data-page');
+                    // alert(`Navigating to ${page}`);
+                    window.location.href = `/${page}`;
+                });
+            });
+            
+            // Home button
+            document.getElementById('homeBtn').addEventListener('click', function(e) {
                 e.preventDefault();
-                const page = e.target.dataset.page;
-                //alert(`Navigating to ${page}`);
-                window.location.href = `/${page}`;
-            },
+                alert('Navigating to Home');
+                // window.location.href = "/";
+            });
             
-            goToHome: (e) => {
-                e.preventDefault();
-                //alert('Navigating to Home');
-                window.location.href = "/";
-            },
+            // Skin viewer functionality
+            const skinModel = document.getElementById('skinModel');
+            const skinName = document.getElementById('skinName');
+            let isDragging = false;
+            let startX, startRotation = 0;
             
-            changeSkin: (e) => {
-                const target = e.target.closest('.skin-option');
-                if (!target) return;
+            // Load initial skin
+            loadSkin('66c412e3de8d39c7', 'Original Skin');
+            
+            // Skin selector
+            document.getElementById('skinSelector').addEventListener('click', function(e) {
+                const skinOption = e.target.closest('.skin-option');
+                if (!skinOption) return;
                 
                 // Update active button
                 document.querySelectorAll('.skin-option').forEach(btn => {
                     btn.classList.remove('active');
                 });
-                target.classList.add('active');
+                skinOption.classList.add('active');
                 
-                // Update skin data
-                const skinId = target.dataset.id;
-                const skinName = target.dataset.name;
-                
-                state.currentSkin = {
-                    id: skinId,
-                    name: skinName,
-                    url: `https://namemc.com/skin/${skinId}`
-                };
+                // Load new skin
+                const skinId = skinOption.getAttribute('data-skin-id');
+                const skinNameText = skinOption.getAttribute('data-skin-name');
+                loadSkin(skinId, skinNameText);
+            });
+            
+            // Skin loading function
+            function loadSkin(skinId, skinNameText) {
+                const baseUrl = `https://mc-heads.net/body/${skinId}`;
                 
                 // Update skin images
-                const baseUrl = `https://mc-heads.net/body/${skinId}`;
                 document.querySelector('.skin-front-view').src = `${baseUrl}/front`;
                 document.querySelector('.skin-side-view').src = `${baseUrl}/right`;
                 document.querySelector('.skin-back-view').src = `${baseUrl}/back`;
                 document.querySelector('.skin-other-side-view').src = `${baseUrl}/left`;
                 
                 // Update skin info
-                elements.skinNameLink.textContent = skinName;
-                elements.skinNameLink.href = state.currentSkin.url;
-            },
-            
-            openSkinLink: (e) => {
-                e.preventDefault();
-                window.open(state.currentSkin.url, '_blank');
-            },
-            
-            startDrag: (e) => {
-                state.isDragging = true;
-                const clientX = e.clientX || e.touches[0].clientX;
-                state.startX = clientX;
-                elements.skinModel.style.cursor = 'grabbing';
-                e.preventDefault();
-            },
-            
-            drag: (e) => {
-                if (!state.isDragging) return;
-                const clientX = e.clientX || e.touches[0].clientX;
-                const deltaX = clientX - state.startX;
-                state.currentRotation += deltaX / 3;
-                state.startX = clientX;
-                elements.skinModel.style.transform = `rotateY(${state.currentRotation}deg)`;
-                e.preventDefault();
-            },
-            
-            endDrag: () => {
-                state.isDragging = false;
-                elements.skinModel.style.cursor = 'grab';
+                skinName.textContent = skinNameText;
+                skinName.href = `https://namemc.com/skin/${skinId}`;
             }
-        };
-
-        // Event Listeners
-        const setupEventListeners = () => {
-            // Mobile menu
-            elements.mobileMenuBtn.addEventListener('click', handlers.toggleMobileMenu);
-            elements.closeMenuBtn.addEventListener('click', handlers.toggleMobileMenu);
             
-            // Navigation
-            elements.homeBtn.addEventListener('click', handlers.goToHome);
-            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-                link.addEventListener('click', handlers.navigate);
+            // 3D rotation controls
+            skinModel.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                startX = e.clientX;
+                startRotation = getCurrentRotation();
+                this.style.cursor = 'grabbing';
+                e.preventDefault();
             });
             
-            // Skin viewer
-            elements.skinSelector.addEventListener('click', handlers.changeSkin);
-            elements.skinNameLink.addEventListener('click', handlers.openSkinLink);
+            document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                const deltaX = e.clientX - startX;
+                const newRotation = startRotation + deltaX / 3;
+                skinModel.style.transform = `rotateY(${newRotation}deg)`;
+                e.preventDefault();
+            });
             
-            // 3D rotation
-            elements.skinModel.addEventListener('mousedown', handlers.startDrag);
-            elements.skinModel.addEventListener('touchstart', handlers.startDrag, { passive: false });
-            document.addEventListener('mousemove', handlers.drag);
-            document.addEventListener('touchmove', handlers.drag, { passive: false });
-            document.addEventListener('mouseup', handlers.endDrag);
-            document.addEventListener('touchend', handlers.endDrag);
-        };
-
-        // Initialize
-        const init = () => {
-            setupEventListeners();
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+                skinModel.style.cursor = 'grab';
+            });
             
-            // Load initial skin
-            const firstSkin = document.querySelector('.skin-option');
-            if (firstSkin) {
-                const skinId = firstSkin.dataset.id;
-                const baseUrl = `https://mc-heads.net/body/${skinId}`;
-                document.querySelector('.skin-front-view').src = `${baseUrl}/front`;
-                document.querySelector('.skin-side-view').src = `${baseUrl}/right`;
-                document.querySelector('.skin-back-view').src = `${baseUrl}/back`;
-                document.querySelector('.skin-other-side-view').src = `${baseUrl}/left`;
+            // Touch support for mobile
+            skinModel.addEventListener('touchstart', function(e) {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                startRotation = getCurrentRotation();
+                this.style.cursor = 'grabbing';
+                e.preventDefault();
+            }, { passive: false });
+            
+            document.addEventListener('touchmove', function(e) {
+                if (!isDragging) return;
+                const deltaX = e.touches[0].clientX - startX;
+                const newRotation = startRotation + deltaX / 3;
+                skinModel.style.transform = `rotateY(${newRotation}deg)`;
+                e.preventDefault();
+            }, { passive: false });
+            
+            document.addEventListener('touchend', function() {
+                isDragging = false;
+                skinModel.style.cursor = 'grab';
+            });
+            
+            // Helper function to get current rotation
+            function getCurrentRotation() {
+                const transform = window.getComputedStyle(skinModel).getPropertyValue('transform');
+                if (transform === 'none') return 0;
+                const values = transform.split('(')[1].split(')')[0].split(',');
+                const a = values[0];
+                const b = values[1];
+                return Math.round(Math.atan2(b, a) * (180 / Math.PI));
             }
-        };
-
-        // Start the application
-        document.addEventListener('DOMContentLoaded', init);
+        });
     </script>
 </body>
 </html>

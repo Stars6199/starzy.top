@@ -177,7 +177,7 @@
             text-align: center;
             position: relative;
             display: inline-block;
-            padding-right: 40px; /* Space for splash text */
+            padding-right: 40px;
         }
 
         .name::after {
@@ -254,12 +254,13 @@
             background-color: var(--accent-color);
         }
 
-        /* Hobbies Section */
+        /* Fixed Hobbies Section for Windows */
         .hobbies-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             list-style-type: none;
+            padding: 0;
         }
 
         .hobby-item {
@@ -268,6 +269,8 @@
             border-radius: 8px;
             border-left: 3px solid var(--accent-color);
             transition: all 0.3s ease;
+            margin: 0;
+            word-break: break-word;
         }
 
         .hobby-item:hover {
@@ -278,6 +281,7 @@
         /* Experience Section */
         .experience-list {
             list-style-type: none;
+            padding: 0;
         }
 
         .experience-item {
@@ -422,10 +426,10 @@
         <!-- Profile Section -->
         <section class="profile-section">
             <div class="profile-pic-container">
-                <img src="/Assets/StarsArt/StarsChibiByRubicArt.png" alt="Profile Picture" class="profile-pic">
+                <img src="/Assets/Art/StarsChibiByRubicArt.png" alt="Profile Picture" class="profile-pic">
             </div>
             <div class="name-container">
-                <h1 class="name">Hello, I Am Stars.
+                <h1 class="name">Your Name
                     <div class="splash-container">
                         <div class="splash-text" id="splashText">Awesome!</div>
                     </div>
@@ -440,7 +444,7 @@
             <p>Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
         </section>
 
-        <!-- Hobbies Section -->
+        <!-- Hobbies Section - Fixed for Windows -->
         <section class="hobbies-section">
             <h2 class="section-title">My Hobbies</h2>
             <ul class="hobbies-list">
@@ -490,7 +494,7 @@
             "404 Sleep Not Found",
             "Ctrl+Alt+Delightful",
             "Beep Boop",
-            "100% Made By AI",
+            "Hello There!",
             "Nice to meet you!",
             "Stay Creative!",
             "Made with ❤️"
@@ -511,7 +515,7 @@
             // In a real implementation, this would navigate to the page
             // For this example, we'll just log it
             // console.log(`Navigating to ${page}`);
-            window.location.href = `${page}`;
+            window.location.href = `https://domain.com/${page}`;
             
             // Prevent default anchor behavior
             return false;

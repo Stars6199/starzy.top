@@ -366,7 +366,7 @@
         <a href="#" class="logo">Home</a>
         
         <nav class="nav-desktop">
-            <a href="#" class="nav-link">Socials</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/socials'>Socials</a>
             <a href="#" class="nav-link" onclick="window.location.href='/art'">Art</a>
             <a href="#" class="nav-link" onclick="window.location.href='/download'">Download</a>
             <a href="#" class="nav-link" onclick="window.location.href='/donate'">Donate</a>
@@ -376,7 +376,7 @@
         <div class="nav-mobile">
             <button class="menu-btn" onclick="toggleDropdown()">☰</button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#" class="dropdown-link">Socials</a>
+                <a href="#" class="dropdown-link" onclick="window.location.href='/socials'>Socials</a>
                 <a href="#" class="dropdown-link" onclick="window.location.href='/art'">Art</a>
                 <a href="#" class="dropdown-link" onclick="window.location.href='/download'">Download</a>
                 <a href="#" class="dropdown-link" onclick="window.location.href='/donate'">Donate</a>
@@ -457,7 +457,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2023 Minecraft Downloads. All rights reserved.</p>
+        <p>&copy; 2025 Stars. All rights reserved.</p>
     </footer>
     
     <script>
@@ -485,9 +485,9 @@
             // Default Steve skin for demonstration
             // Replace these with actual skin URLs
             const skinUrls = [
-                'https://mc-heads.net/skin/8667ba71b85a4004af54457a9734eed7',
-                'https://mc-heads.net/skin/853c80ef3c3749fdaa49938b674adae6',
-                'https://mc-heads.net/skin/1a4d5f3e3a8d4b9e8b1c1d5f3e3a8d4b'
+                'https://s.namemc.com/i/66c412e3de8d39c7.png',
+                'https://s.namemc.com/i/dda37598fb40b976.png',
+                'https://s.namemc.com/i/e3809abed28a207a.png'
             ];
             
             // Create skin viewers
@@ -515,8 +515,8 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     // In a real implementation, this would download the actual skin file
-                    alert(`Downloading skin: ${this.textContent}`);
-                    // window.location.href = skinUrls[index] + '.png'; // Actual download link
+                    //alert(`Downloading skin: ${this.textContent}`);
+                    window.location.href = skinUrls[index]; // Actual download link
                 });
             });
             

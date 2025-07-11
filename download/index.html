@@ -418,18 +418,18 @@
                 <div class="skins-slider">
                     <div class="skin-card">
                         <div class="skin-viewer" id="skinViewer1"></div>
-                        <a href="#" class="skin-name">Cyber Ninja</a>
-                        <p class="skin-creator">Created by: Player1</p>
+                        <a href="https://mc-heads.net/download/Notch" class="skin-name">Notch Style</a>
+                        <p class="skin-creator">Created by: Notch</p>
                     </div>
                     <div class="skin-card">
                         <div class="skin-viewer" id="skinViewer2"></div>
-                        <a href="#" class="skin-name">Dragon Knight</a>
-                        <p class="skin-creator">Created by: Player2</p>
+                        <a href="https://mc-heads.net/download/MHF_Steve" class="skin-name">Classic Steve</a>
+                        <p class="skin-creator">Created by: Mojang</p>
                     </div>
                     <div class="skin-card">
                         <div class="skin-viewer" id="skinViewer3"></div>
-                        <a href="#" class="skin-name">Steampunk Explorer</a>
-                        <p class="skin-creator">Created by: Player3</p>
+                        <a href="https://mc-heads.net/download/MHF_Alex" class="skin-name">Alex Style</a>
+                        <p class="skin-creator">Created by: Mojang</p>
                     </div>
                 </div>
             </div>
@@ -454,38 +454,43 @@
             mobileMenu.classList.toggle('active');
         }
 
-        // Initialize skin viewers
+        // Initialize skin viewers with working skin URLs
         document.addEventListener('DOMContentLoaded', function() {
-            // Skin 1
+            // Skin 1 - Notch
             const viewer1 = new skinview3d.SkinViewer({
                 canvas: document.getElementById("skinViewer1"),
                 width: 250,
                 height: 300,
-                skin: "Assets/Skins/Stars.png"
+                skin: "https://mc-heads.net/skin/Notch"
             });
             viewer1.animation = new skinview3d.WalkingAnimation();
             viewer1.animation.speed = 0.5;
+            viewer1.camera.position.z = 25;
+            viewer1.controls.enableZoom = false;
             
-            // Skin 2
+            // Skin 2 - Steve
             const viewer2 = new skinview3d.SkinViewer({
                 canvas: document.getElementById("skinViewer2"),
                 width: 250,
                 height: 300,
-                skin: "Assets/Skins/StarsCherry.png"
+                skin: "https://mc-heads.net/skin/MHF_Steve"
             });
             viewer2.animation = new skinview3d.RunningAnimation();
             viewer2.animation.speed = 0.7;
+            viewer2.camera.position.z = 25;
+            viewer2.controls.enableZoom = false;
             
-            // Skin 3
+            // Skin 3 - Alex
             const viewer3 = new skinview3d.SkinViewer({
                 canvas: document.getElementById("skinViewer3"),
                 width: 250,
                 height: 300,
-                skin: "https://s.namemc.com/i/e3809abed28a207a.png"
+                skin: "https://mc-heads.net/skin/MHF_Alex"
             });
             viewer3.animation = new skinview3d.FlyingAnimation();
             viewer3.animation.speed = 0.4;
-            viewer3.camera.position.z = 30;
+            viewer3.camera.position.z = 25;
+            viewer3.controls.enableZoom = false;
         });
 
         // Simple navigation handler

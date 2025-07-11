@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft Downloads</title>
+    <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.0.0/build/skinview3d.min.js"></script>
     <style>
         :root {
             --bg-dark: #121212;
@@ -13,8 +14,7 @@
             --accent: #00ffff;
             --accent-dark: #008b8b;
             --card-bg: #1e1e1e;
-            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            --transition: all 0.3s ease;
+            --card-border: #2e2e2e;
         }
 
         * {
@@ -27,20 +27,21 @@
         body {
             background-color: var(--bg-dark);
             color: var(--text-primary);
+            min-height: 100vh;
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
+        /* Header Styles */
         header {
             background-color: var(--bg-darker);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
@@ -48,7 +49,7 @@
             font-weight: bold;
             color: var(--accent);
             text-decoration: none;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .logo:hover {
@@ -66,84 +67,71 @@
             }
         }
 
-        .nav-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: var(--transition);
+        .nav-mobile {
+            display: none;
             position: relative;
         }
 
-        .nav-link:hover {
-            color: var(--accent);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
         @media (max-width: 768px) {
-            .mobile-menu-btn {
+            .nav-mobile {
                 display: block;
             }
         }
 
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 70%;
-            height: 100vh;
-            background-color: var(--bg-darker);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-            transition: var(--transition);
-            z-index: 1000;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
         }
 
-        .mobile-menu.active {
-            right: 0;
+        .nav-link:hover {
+            color: var(--accent);
+            background-color: rgba(0, 255, 255, 0.1);
         }
 
-        .mobile-menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .close-menu-btn {
+        .menu-btn {
             background: none;
             border: none;
             color: var(--text-primary);
             font-size: 1.5rem;
             cursor: pointer;
+            padding: 0.5rem;
         }
 
-        .mobile-nav-link {
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: var(--bg-darker);
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: none;
+            width: 200px;
+            z-index: 10;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-link {
+            display: block;
+            padding: 0.75rem 1.5rem;
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 1.2rem;
-            padding: 0.5rem;
-            border-left: 3px solid transparent;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
-        .mobile-nav-link:hover {
+        .dropdown-link:hover {
+            background-color: rgba(0, 255, 255, 0.1);
             color: var(--accent);
-            border-left: 3px solid var(--accent);
-            padding-left: 1rem;
         }
 
+        /* Main Content Styles */
         main {
             padding: 2rem;
             max-width: 1200px;
@@ -152,98 +140,86 @@
 
         section {
             margin-bottom: 3rem;
-            animation: fadeIn 0.5s ease-out;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             color: var(--accent);
             margin-bottom: 1rem;
             font-size: 2.5rem;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            text-align: center;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
         }
 
         h2 {
             color: var(--accent);
-            margin: 1.5rem 0;
-            position: relative;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--accent-dark);
             padding-bottom: 0.5rem;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent);
+            display: inline-block;
         }
 
         .welcome-message {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--accent);
-        }
-
-        .download-intro {
             font-size: 1.2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
             color: var(--text-secondary);
         }
 
-        .events-table {
+        .event-message {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        /* Event Table Styles */
+        .event-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 1.5rem;
-            background-color: var(--card-bg);
-            box-shadow: var(--card-shadow);
-            border-radius: 8px;
-            overflow: hidden;
         }
 
-        .events-table th, .events-table td {
+        .event-table th, .event-table td {
             padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid var(--card-border);
         }
 
-        .events-table th {
-            background-color: var(--bg-darker);
-            color: var(--accent);
+        .event-table th {
+            background-color: var(--accent-dark);
+            color: white;
             font-weight: bold;
         }
 
-        .events-table tr:last-child td {
-            border-bottom: none;
+        .event-table tr:nth-child(even) {
+            background-color: rgba(0, 139, 139, 0.1);
         }
 
-        .events-table tr:hover {
-            background-color: #252525;
+        .event-table tr:hover {
+            background-color: rgba(0, 255, 255, 0.1);
         }
 
         .download-btn {
             background-color: var(--accent);
-            color: #000;
+            color: var(--bg-darker);
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
         }
@@ -254,117 +230,75 @@
             box-shadow: 0 4px 8px rgba(0, 255, 255, 0.3);
         }
 
-        .download-btn.resource {
-            background-color: #4CAF50;
-        }
-
-        .download-btn.world {
-            background-color: #2196F3;
-        }
-
         .not-available {
             color: var(--text-secondary);
             font-style: italic;
         }
 
-        .skin-section {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
+        /* Skin Section Styles */
+        .skin-message {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
             text-align: center;
         }
 
-        .skin-viewer-container {
+        .skin-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .skin-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .skin-slider::-webkit-scrollbar-track {
+            background: var(--card-bg);
+        }
+
+        .skin-slider::-webkit-scrollbar-thumb {
+            background-color: var(--accent);
+            border-radius: 4px;
+        }
+
+        .skin-card {
+            min-width: 250px;
+            scroll-snap-align: start;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--card-border);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .skin-selector {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 1.5rem;
+        .skin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 255, 255, 0.2);
         }
 
-        .skin-option {
-            background-color: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .skin-option:hover {
-            background-color: var(--accent);
-            color: #000;
-        }
-
-        .skin-option.active {
-            background-color: var(--accent);
-            color: #000;
-            font-weight: bold;
-        }
-
-        .skin-viewer-3d {
-            width: 300px;
+        .skin-viewer {
+            width: 200px;
             height: 300px;
-            margin: 0 auto;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .skin-model {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.1s;
-        }
-
-        .skin-model img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            backface-visibility: hidden;
-        }
-
-        .skin-front-view {
-            transform: rotateY(0deg);
-        }
-
-        .skin-side-view {
-            transform: rotateY(90deg);
-        }
-
-        .skin-back-view {
-            transform: rotateY(180deg);
-        }
-
-        .skin-other-side-view {
-            transform: rotateY(270deg);
-        }
-
-        .skin-info {
-            margin-top: 1rem;
-            text-align: center;
+            margin-bottom: 1rem;
         }
 
         .skin-name {
-            font-size: 1.3rem;
             color: var(--accent);
-            margin-bottom: 0.2rem;
-            cursor: pointer;
-            transition: var(--transition);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .skin-name:hover {
-            color: #fff;
-            text-decoration: underline;
+            text-shadow: 0 0 8px var(--accent);
         }
 
         .skin-creator {
@@ -372,123 +306,95 @@
             font-size: 0.9rem;
         }
 
+        /* Coming Soon Section */
         .coming-soon {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .coming-soon::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                transparent 45%,
-                rgba(0, 255, 255, 0.1) 50%,
-                transparent 55%
-            );
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translate(-30%, -30%) rotate(0deg); }
-            100% { transform: translate(30%, 30%) rotate(360deg); }
-        }
-
-        .coming-soon-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .coming-soon h2 {
-            margin-bottom: 1rem;
+            padding: 2rem;
         }
 
         .coming-soon p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+            }
+        }
+
+        /* Footer Styles */
         footer {
             background-color: var(--bg-darker);
             padding: 1.5rem;
             text-align: center;
             margin-top: 3rem;
             color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .events-table {
+            .event-table {
                 display: block;
                 overflow-x: auto;
             }
-
+            
             main {
                 padding: 1rem;
             }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .skin-selector {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .skin-viewer-3d {
-                width: 250px;
-                height: 250px;
+            
+            section {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="#" class="logo" id="homeBtn">Home</a>
+        <a href="#" class="logo">Home</a>
         
         <nav class="nav-desktop">
-            <a href="#" class="nav-link" data-page="socials">Socials</a>
-            <a href="#" class="nav-link" data-page="art">Art</a>
-            <a href="#" class="nav-link" data-page="download">Downloads</a>
-            <a href="#" class="nav-link" data-page="donate">Donate</a>
-            <a href="#" class="nav-link" data-page="contact">Contact</a>
+            <a href="#" class="nav-link">Socials</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/art'">Art</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/download'">Download</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/donate'">Donate</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/contact'">Contact</a>
         </nav>
         
-        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-        
-        <div class="mobile-menu" id="mobileMenu">
-            <div class="mobile-menu-header">
-                <h3>Menu</h3>
-                <button class="close-menu-btn" id="closeMenuBtn">×</button>
+        <div class="nav-mobile">
+            <button class="menu-btn" onclick="toggleDropdown()">☰</button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" class="dropdown-link">Socials</a>
+                <a href="#" class="dropdown-link" onclick="window.location.href='/art'">Art</a>
+                <a href="#" class="dropdown-link" onclick="window.location.href='/download'">Download</a>
+                <a href="#" class="dropdown-link" onclick="window.location.href='/donate'">Donate</a>
+                <a href="#" class="dropdown-link" onclick="window.location.href='/contact'">Contact</a>
             </div>
-            <a href="#" class="mobile-nav-link" data-page="socials">Socials</a>
-            <a href="#" class="mobile-nav-link" data-page="art">Art</a>
-            <a href="#" class="mobile-nav-link" data-page="downloads">Download</a>
-            <a href="#" class="mobile-nav-link" data-page="donate">Donate</a>
-            <a href="#" class="mobile-nav-link" data-page="contact">Contact</a>
         </div>
     </header>
-
+    
     <main>
+        <h1>Welcome to Minecraft Downloads!</h1>
+        <p class="welcome-message">Here you can find all the resources, worlds, and skins from our Minecraft server events.</p>
+        
+        <!-- Event Section -->
         <section>
-            <div class="welcome-message">
-                <h1>Welcome to My Minecraft Downloads!</h1>
-                <p class="download-intro">Here you can find all the resources and worlds from my Minecraft server events.</p>
-            </div>
-
             <h2>Server Events</h2>
-            <p>Wanna download resources and world from Minecraft server event? I gotchu bro!</p>
+            <p class="event-message">Wanna download resource and world from Minecraft server event? I gotchu bro!</p>
             
-            <table class="events-table">
+            <table class="event-table">
                 <thead>
                     <tr>
                         <th>Event Name</th>
@@ -498,195 +404,133 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Skyblock Adventure</td>
-                        <td>
-                            <a href="https://example.com/download/skyblock_resource" class="download-btn resource" download>Download</a>
-                        </td>
-                        <td>
-                            <a href="https://example.com/download/skyblock_world" class="download-btn world" download>Download</a>
-                        </td>
+                        <td>Halloween Special 2023</td>
+                        <td><a href="#" class="download-btn">Download</a></td>
+                        <td><a href="#" class="download-btn">Download</a></td>
                     </tr>
                     <tr>
-                        <td>Medieval RPG</td>
-                        <td>
-                            <a href="https://example.com/download/medieval_resource" class="download-btn resource" download>Download</a>
-                        </td>
-                        <td class="not-available">Not Available</td>
+                        <td>Winter Wonderland</td>
+                        <td><a href="#" class="download-btn">Download</a></td>
+                        <td><span class="not-available">Not Available</span></td>
                     </tr>
                     <tr>
-                        <td>Survival Games</td>
-                        <td class="not-available">Not Available</td>
-                        <td>
-                            <a href="https://example.com/download/survival_games_world" class="download-btn world" download>Download</a>
-                        </td>
+                        <td>Summer Adventure</td>
+                        <td><span class="not-available">Not Available</span></td>
+                        <td><a href="#" class="download-btn">Download</a></td>
                     </tr>
                 </tbody>
             </table>
         </section>
-
-        <section class="skin-section">
-            <h2>My Minecraft Skins</h2>
-            <div class="skin-viewer-container">
-                <div class="skin-selector" id="skinSelector">
-                    <div class="skin-option active" data-skin-id="66c412e3de8d39c7" data-skin-name="Original Skin">Original</div>
-                    <div class="skin-option" data-skin-id="dda37598fb40b976" data-skin-name="Cherry Skin">Cherry</div>
-                    <div class="skin-option" data-skin-id="e3809abed28a207a" data-skin-name="Snow Skin">Snow</div>
+        
+        <!-- Skin Section -->
+        <section>
+            <h2>Skins</h2>
+            <p class="skin-message">Click the skin name to download!</p>
+            
+            <div class="skin-slider">
+                <div class="skin-card">
+                    <div class="skin-viewer" id="skinViewer1"></div>
+                    <a href="#" class="skin-name">Cyber Ninja</a>
+                    <p class="skin-creator">Created by Player123</p>
                 </div>
                 
-                <div class="skin-viewer-3d" id="skinViewer">
-                    <div class="skin-model" id="skinModel">
-                        <img class="skin-front-view" src="" alt="Front view">
-                        <img class="skin-side-view" src="" alt="Side view">
-                        <img class="skin-back-view" src="" alt="Back view">
-                        <img class="skin-other-side-view" src="" alt="Other side view">
-                    </div>
+                <div class="skin-card">
+                    <div class="skin-viewer" id="skinViewer2"></div>
+                    <a href="#" class="skin-name">Dragon Warrior</a>
+                    <p class="skin-creator">Created by SkinMaster</p>
                 </div>
                 
-                <div class="skin-info">
-                    <a href="https://namemc.com/skin/66c412e3de8d39c7" class="skin-name" target="_blank" id="skinName">Original Skin</a>
-                    <div class="skin-creator">by creqpe</div>
+                <div class="skin-card">
+                    <div class="skin-viewer" id="skinViewer3"></div>
+                    <a href="#" class="skin-name">Steampunk Explorer</a>
+                    <p class="skin-creator">Created by BlockBuilder</p>
                 </div>
             </div>
         </section>
-
-        <section class="coming-soon">
-            <div class="coming-soon-content">
-                <h2>Coming Soon!</h2>
-                <p>There will be cool stuff available for download soon. Stay tuned!</p>
-            </div>
+        
+        <!-- Coming Soon Section -->
+        <section class="coming-soon pulse">
+            <h2>Coming Soon</h2>
+            <p>There will be cool stuff available for download soon!</p>
+            <p>Stay tuned for more awesome Minecraft content.</p>
         </section>
     </main>
-
+    
     <footer>
         <p>&copy; 2023 Minecraft Downloads. All rights reserved.</p>
     </footer>
-
+    
     <script>
+        // Mobile dropdown menu toggle
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('show');
+        }
+        
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-btn')) {
+                const dropdowns = document.getElementsByClassName('dropdown-menu');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        
+        // Initialize skin viewers
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const closeMenuBtn = document.getElementById('closeMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
+            // Default Steve skin for demonstration
+            // Replace these with actual skin URLs
+            const skinUrls = [
+                'https://mc-heads.net/skin/8667ba71b85a4004af54457a9734eed7',
+                'https://mc-heads.net/skin/853c80ef3c3749fdaa49938b674adae6',
+                'https://mc-heads.net/skin/1a4d5f3e3a8d4b9e8b1c1d5f3e3a8d4b'
+            ];
             
-            mobileMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.add('active');
-            });
+            // Create skin viewers
+            for (let i = 1; i <= 3; i++) {
+                const viewer = new skinview3d.SkinViewer({
+                    canvas: document.getElementById(`skinViewer${i}`),
+                    width: 200,
+                    height: 300,
+                    skin: skinUrls[i-1]
+                });
+                
+                // Add animation
+                viewer.animation = new skinview3d.WalkingAnimation();
+                viewer.animation.speed = 0.5;
+                
+                // Add controls
+                const control = skinview3d.createOrbitControls(viewer);
+                control.enableRotate = true;
+                control.enableZoom = false;
+                control.enablePan = false;
+            }
             
-            closeMenuBtn.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-            });
-            
-            // Navigation
-            document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+            // Add click handlers for skin downloads
+            document.querySelectorAll('.skin-name').forEach((link, index) => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const page = this.getAttribute('data-page');
-                    // alert(`Navigating to ${page}`);
-                    window.location.href = `/${page}`;
+                    // In a real implementation, this would download the actual skin file
+                    alert(`Downloading skin: ${this.textContent}`);
+                    // window.location.href = skinUrls[index] + '.png'; // Actual download link
                 });
             });
             
-            // Home button
-            document.getElementById('homeBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                //alert('Navigating to Home');
-                window.location.href = "/";
-            });
-            
-            // Skin viewer functionality
-            const skinModel = document.getElementById('skinModel');
-            const skinName = document.getElementById('skinName');
-            let isDragging = false;
-            let startX, startRotation = 0;
-            
-            // Load initial skin
-            loadSkin('66c412e3de8d39c7', 'Original Skin');
-            
-            // Skin selector
-            document.getElementById('skinSelector').addEventListener('click', function(e) {
-                const skinOption = e.target.closest('.skin-option');
-                if (!skinOption) return;
-                
-                // Update active button
-                document.querySelectorAll('.skin-option').forEach(btn => {
-                    btn.classList.remove('active');
+            // Add click handlers for download buttons
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    if (!this.classList.contains('not-available')) {
+                        e.preventDefault();
+                        alert('Download started! (This is a demo)');
+                        // In a real implementation, this would start the actual download
+                        // window.location.href = this.getAttribute('href');
+                    }
                 });
-                skinOption.classList.add('active');
-                
-                // Load new skin
-                const skinId = skinOption.getAttribute('data-skin-id');
-                const skinNameText = skinOption.getAttribute('data-skin-name');
-                loadSkin(skinId, skinNameText);
             });
-            
-            // Skin loading function
-            function loadSkin(skinId, skinNameText) {
-                const baseUrl = `https://mc-heads.net/body/${skinId}`;
-                
-                // Update skin images
-                document.querySelector('.skin-front-view').src = `${baseUrl}/front`;
-                document.querySelector('.skin-side-view').src = `${baseUrl}/right`;
-                document.querySelector('.skin-back-view').src = `${baseUrl}/back`;
-                document.querySelector('.skin-other-side-view').src = `${baseUrl}/left`;
-                
-                // Update skin info
-                skinName.textContent = skinNameText;
-                skinName.href = `https://namemc.com/skin/${skinId}`;
-            }
-            
-            // 3D rotation controls
-            skinModel.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                startX = e.clientX;
-                startRotation = getCurrentRotation();
-                this.style.cursor = 'grabbing';
-                e.preventDefault();
-            });
-            
-            document.addEventListener('mousemove', function(e) {
-                if (!isDragging) return;
-                const deltaX = e.clientX - startX;
-                const newRotation = startRotation + deltaX / 3;
-                skinModel.style.transform = `rotateY(${newRotation}deg)`;
-                e.preventDefault();
-            });
-            
-            document.addEventListener('mouseup', function() {
-                isDragging = false;
-                skinModel.style.cursor = 'grab';
-            });
-            
-            // Touch support for mobile
-            skinModel.addEventListener('touchstart', function(e) {
-                isDragging = true;
-                startX = e.touches[0].clientX;
-                startRotation = getCurrentRotation();
-                this.style.cursor = 'grabbing';
-                e.preventDefault();
-            }, { passive: false });
-            
-            document.addEventListener('touchmove', function(e) {
-                if (!isDragging) return;
-                const deltaX = e.touches[0].clientX - startX;
-                const newRotation = startRotation + deltaX / 3;
-                skinModel.style.transform = `rotateY(${newRotation}deg)`;
-                e.preventDefault();
-            }, { passive: false });
-            
-            document.addEventListener('touchend', function() {
-                isDragging = false;
-                skinModel.style.cursor = 'grab';
-            });
-            
-            // Helper function to get current rotation
-            function getCurrentRotation() {
-                const transform = window.getComputedStyle(skinModel).getPropertyValue('transform');
-                if (transform === 'none') return 0;
-                const values = transform.split('(')[1].split(')')[0].split(',');
-                const a = values[0];
-                const b = values[1];
-                return Math.round(Math.atan2(b, a) * (180 / Math.PI));
-            }
         });
     </script>
 </body>

@@ -231,10 +231,11 @@
 
         .minecraft-skin {
             width: 100px;
-            height: 100px;
+            height: 150px; /* Adjusted to proper skin aspect ratio */
             margin: 0 auto 10px;
             image-rendering: pixelated;
             transition: all 0.3s ease;
+            object-fit: cover;
         }
 
         .minecraft-name {
@@ -259,6 +260,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
+            text-align: center;
         }
 
         .minecraft-btn:hover {
@@ -290,10 +292,11 @@
         }
 
         .modal-skin {
-            width: 300px;
-            height: 300px;
+            width: 200px;
+            height: 300px; /* Proper aspect ratio for enlarged view */
             image-rendering: pixelated;
             margin-bottom: 15px;
+            object-fit: cover;
         }
 
         .modal-username {
@@ -471,25 +474,19 @@
         <div class="minecraft-grid">
             <!-- Java Edition Account -->
             <div class="minecraft-card">
-                <img src="https://mc-heads.net/avatar/starsusername/100" alt="Minecraft Skin" class="minecraft-skin">
-                <div class="minecraft-name">StarsUsername</div>
+                <img src="https://mc-heads.net/body/_Sangri/100" alt="Minecraft Skin" class="minecraft-skin">
+                <div class="minecraft-name">_Sangri</div>
                 <div class="minecraft-buttons">
-                    <button class="minecraft-btn" onclick="showSkinModal('starsusername')">View Skin</button>
-                    <a href="https://namemc.com/profile/starsusername" class="minecraft-btn" target="_blank">NameMC</a>
-                    <a href="https://laby.net/@starsusername" class="minecraft-btn" target="_blank">Laby.net</a>
-                    <a href="https://capes.me/player/starsusername" class="minecraft-btn" target="_blank">Capes.me</a>
+                    <button class="minecraft-btn" onclick="showSkinModal('_Sangri')">View Skin</button>
                 </div>
             </div>
 
             <!-- Bedrock Edition Account (if different) -->
             <div class="minecraft-card">
-                <img src="https://mc-heads.net/avatar/starsbedrock/100" alt="Minecraft Skin" class="minecraft-skin">
-                <div class="minecraft-name">StarsBedrock</div>
+                <img src="https://mc-heads.net/body/Hypervitaminosis/100" alt="Minecraft Skin" class="minecraft-skin">
+                <div class="minecraft-name">Hypervitaminosis</div>
                 <div class="minecraft-buttons">
-                    <button class="minecraft-btn" onclick="showSkinModal('starsbedrock')">View Skin</button>
-                    <a href="https://namemc.com/profile/starsbedrock" class="minecraft-btn" target="_blank">NameMC</a>
-                    <a href="https://laby.net/@starsbedrock" class="minecraft-btn" target="_blank">Laby.net</a>
-                    <a href="https://capes.me/player/starsbedrock" class="minecraft-btn" target="_blank">Capes.me</a>
+                    <button class="minecraft-btn" onclick="showSkinModal('Hypervitaminosis')">View Skin</button>
                 </div>
             </div>
         </div>
@@ -535,7 +532,7 @@
             const labyLink = document.getElementById('labyLink');
             const capesLink = document.getElementById('capesLink');
 
-            // Set the skin image (larger version)
+            // Set the skin image (larger version with proper aspect ratio)
             modalSkin.src = `https://mc-heads.net/body/${username}/300`;
             modalUsername.textContent = username;
             

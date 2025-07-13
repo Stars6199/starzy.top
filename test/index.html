@@ -232,7 +232,7 @@
         .minecraft-skin {
             width: 100px;
             height: 150px;
-            margin: 0 auto 10px;
+            margin: 0 auto;
             image-rendering: pixelated;
             object-fit: contain;
         }
@@ -266,24 +266,6 @@
             background-color: rgba(0, 255, 255, 0.3);
         }
 
-        .skin-type-badge {
-            font-size: 0.7rem;
-            padding: 2px 5px;
-            border-radius: 3px;
-            margin-top: 5px;
-            display: inline-block;
-        }
-
-        .skin-type-normal {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .skin-type-slim {
-            background-color: #2196F3;
-            color: white;
-        }
-
         /* Modal for enlarged skin view */
         .modal {
             display: none;
@@ -314,18 +296,6 @@
             image-rendering: pixelated;
             margin-bottom: 15px;
             object-fit: contain;
-        }
-
-        .modal-username {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin-bottom: 5px;
-        }
-
-        .modal-skin-type {
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            color: var(--text-color);
         }
 
         .modal-buttons {
@@ -495,23 +465,21 @@
     <h2 class="section-header">Minecraft Accounts</h2>
     <div class="minecraft-section">
         <div class="minecraft-grid">
-            <!-- Java Edition Account (Normal) -->
+            <!-- Java Edition Account (Slim) -->
             <div class="minecraft-card">
-                <img src="https://mc-heads.net/player/Hypervitaminosis" alt="Minecraft Skin" class="minecraft-skin">
-                <div class="minecraft-name">Hypervitaminosis</div>
-                <span class="skin-type-badge skin-type-normal">Normal Arms</span>
+                <img src="https://mc-heads.net/body/_Sangri/slim" alt="Minecraft Skin" class="minecraft-skin">
+                <div class="minecraft-name">_Sangri</div>
                 <div class="minecraft-buttons">
-                    <button class="minecraft-btn" onclick="showSkinModal('Hypervitaminosis', 'normal')">View Skin</button>
+                    <button class="minecraft-btn" onclick="showSkinModal('_Sangri', 'slim')">View</button>
                 </div>
             </div>
 
-            <!-- Bedrock Edition Account (Slim) -->
+            <!-- Bedrock Edition Account (Normal) -->
             <div class="minecraft-card">
-                <img src="https://mc-heads.net/player/_Sangri/slim" alt="Minecraft Skin" class="minecraft-skin">
-                <div class="minecraft-name">_Sangri</div>
-                <span class="skin-type-badge skin-type-slim">Slim Arms</span>
+                <img src="https://mc-heads.net/body/Hypervitaminosis" alt="Minecraft Skin" class="minecraft-skin">
+                <div class="minecraft-name">Hypervitaminosis</div>
                 <div class="minecraft-buttons">
-                    <button class="minecraft-btn" onclick="showSkinModal('_Sangri', 'slim')">View Skin</button>
+                    <button class="minecraft-btn" onclick="showSkinModal('Hypervitaminosis', 'normal')">View</button>
                 </div>
             </div>
         </div>
@@ -522,8 +490,6 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <img id="modalSkin" src="" alt="Minecraft Skin" class="modal-skin">
-            <div id="modalUsername" class="modal-username"></div>
-            <div id="modalSkinType" class="modal-skin-type"></div>
             <div class="modal-buttons">
                 <a id="namemcLink" href="#" class="minecraft-btn" target="_blank">NameMC</a>
                 <a id="labyLink" href="#" class="minecraft-btn" target="_blank">Laby.net</a>
@@ -553,25 +519,19 @@
         function showSkinModal(username, skinType) {
             const modal = document.getElementById('skinModal');
             const modalSkin = document.getElementById('modalSkin');
-            const modalUsername = document.getElementById('modalUsername');
-            const modalSkinType = document.getElementById('modalSkinType');
             const namemcLink = document.getElementById('namemcLink');
             const labyLink = document.getElementById('labyLink');
             const capesLink = document.getElementById('capesLink');
 
-            // Set the skin image with proper geometry
-            const skinUrl = skinType === 'slim' 
-                ? `https://mc-heads.net/player/${username}/slim`
-                : `https://mc-heads.net/player/${username}`;
-            
-            modalSkin.src = skinUrl;
-            modalUsername.textContent = username;
-            modalSkinType.textContent = skinType === 'slim' ? 'Slim Arms (Alex Model)' : 'Normal Arms (Steve Model)';
+            // Set the skin with proper geometry
+            modalSkin.src = skinType === 'slim' 
+                ? `https://mc-heads.net/body/${username}/slim` 
+                : `https://mc-heads.net/body/${username}`;
             
             // Update the links
             namemcLink.href = `https://namemc.com/profile/${username}`;
             labyLink.href = `https://laby.net/@${username}`;
-            capesLink.href = `https://capes.me/${username}`;
+            capesLink.href = `https://capes.me/player/${username}`;
             
             // Show the modal
             modal.style.display = 'flex';
@@ -588,20 +548,6 @@
                 closeModal();
             }
         });
-
-        // Detect skin type automatically (optional)
-        async function detectSkinType(username) {
-            try {
-                const response = await fetch(`https://mc-heads.net/skin/${username}`);
-                const skinBlob = await response.blob();
-                // Skin type detection logic would go here
-                // This is complex and requires analyzing the skin texture
-                return 'normal'; // Default to normal if detection fails
-            } catch (error) {
-                console.error('Error detecting skin type:', error);
-                return 'normal';
-            }
-        }
     </script>
 </body>
 </html>

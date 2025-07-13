@@ -10,10 +10,10 @@
             --bg-darker: #0a0a0a;
             --text-primary: #e0e0e0;
             --text-secondary: #b0b0b0;
-            --accent-color: #00ffff;
-            --accent-hover: #00cccc;
+            --accent: #00ffff;
+            --accent-dark: #008b8b;
             --card-bg: #1e1e1e;
-            --card-border: #2e2e2e;
+            --hover-bg: #2a2a2a;
         }
 
         * {
@@ -39,24 +39,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .logo {
-            color: var(--accent-color);
-            font-weight: bold;
             font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .logo:hover {
-            text-shadow: 0 0 10px var(--accent-color);
+            text-shadow: 0 0 10px var(--accent);
+            transform: scale(1.05);
         }
 
+        /* Desktop Navigation */
         .nav-desktop {
             display: flex;
             gap: 1.5rem;
@@ -68,33 +70,50 @@
             }
         }
 
-        .nav-mobile {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .nav-mobile {
-                display: block;
-            }
-        }
-
         .nav-link {
             color: var(--text-primary);
             text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-link:hover {
-            color: var(--accent-color);
+            color: var(--accent);
+            background-color: var(--hover-bg);
         }
 
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Mobile Navigation */
         .mobile-menu-btn {
+            display: none;
             background: none;
             border: none;
             color: var(--text-primary);
             font-size: 1.5rem;
             cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
         }
 
         .mobile-menu {
@@ -104,20 +123,20 @@
             width: 70%;
             height: 100vh;
             background-color: var(--bg-darker);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
             transition: right 0.3s ease;
             z-index: 1000;
             padding: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .mobile-menu.active {
             right: 0;
         }
 
-        .close-menu {
+        .close-btn {
             align-self: flex-end;
             background: none;
             border: none;
@@ -144,23 +163,23 @@
         }
 
         h1 {
-            color: var(--accent-color);
+            color: var(--accent);
             margin-bottom: 1rem;
             font-size: 2.5rem;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         h2 {
-            color: var(--accent-color);
+            color: var(--accent);
             margin: 1.5rem 0;
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-dark);
             display: inline-block;
         }
 
-        p {
-            margin-bottom: 1.5rem;
+        .welcome-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
             color: var(--text-secondary);
         }
 
@@ -178,13 +197,12 @@
         .event-table th, .event-table td {
             padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid #333;
         }
 
         .event-table th {
-            background-color: var(--bg-darker);
-            color: var(--accent-color);
-            font-weight: 600;
+            background-color: var(--accent-dark);
+            color: white;
         }
 
         .event-table tr:last-child td {
@@ -192,26 +210,26 @@
         }
 
         .event-table tr:hover {
-            background-color: rgba(0, 255, 255, 0.05);
+            background-color: var(--hover-bg);
         }
 
         .download-btn {
-            background-color: var(--accent-color);
-            color: var(--bg-darker);
+            background-color: var(--accent);
+            color: #000;
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: bold;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
         }
 
         .download-btn:hover {
-            background-color: var(--accent-hover);
+            background-color: var(--accent-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.3);
         }
 
         .not-available {
@@ -232,51 +250,17 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .skin-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 255, 255, 0.1);
         }
 
-        .skin-preview {
+        .skin-image {
             width: 100%;
-            height: 200px;
-            background-color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            perspective: 1000px;
-        }
-
-        .skin-render {
-            width: 100px;
-            height: 200px;
-            position: relative;
-            transform-style: preserve-3d;
-            transform: rotateY(-20deg) rotateX(10deg);
-            transition: transform 0.3s ease;
-        }
-
-        .skin-render img {
-            position: absolute;
-            image-rendering: pixelated;
-        }
-
-        .skin-front {
-            transform: translateZ(8px);
-            width: 100%;
-            height: 100%;
-        }
-
-        .skin-side {
-            transform: rotateY(90deg) translateZ(8px);
-            width: 16px;
-            height: 100%;
-            left: 0;
+            height: auto;
+            display: block;
         }
 
         .skin-info {
@@ -284,17 +268,16 @@
         }
 
         .skin-name {
-            color: var(--accent-color);
-            font-weight: 600;
+            color: var(--accent);
             text-decoration: none;
+            font-weight: bold;
             display: block;
             margin-bottom: 0.5rem;
             transition: color 0.3s ease;
         }
 
         .skin-name:hover {
-            color: var(--accent-hover);
-            text-decoration: underline;
+            color: var(--accent-dark);
         }
 
         .skin-creator {
@@ -302,18 +285,25 @@
             font-size: 0.9rem;
         }
 
+        .section-message {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
         /* Coming Soon Section */
         .coming-soon {
             background-color: var(--card-bg);
-            border-radius: 8px;
             padding: 2rem;
+            border-radius: 8px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: 1px dashed var(--accent-color);
         }
 
         .coming-soon h2 {
-            border-bottom: none;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
         }
 
         .pulse {
@@ -321,9 +311,9 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 0.7; }
+            0% { opacity: 0.6; }
             50% { opacity: 1; }
-            100% { opacity: 0.7; }
+            100% { opacity: 0.6; }
         }
 
         /* Footer */
@@ -331,55 +321,61 @@
             background-color: var(--bg-darker);
             padding: 1.5rem;
             text-align: center;
+            margin-top: 2rem;
             color: var(--text-secondary);
-            margin-top: 3rem;
         }
 
-        /* Glow Effect */
-        .glow {
-            text-shadow: 0 0 5px var(--accent-color);
-            transition: text-shadow 0.3s ease;
-        }
-
-        .glow:hover {
-            text-shadow: 0 0 15px var(--accent-color);
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .event-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            header {
+                padding: 1rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="#" class="logo glow">Home</a>
+        <a href="#" class="logo">Home</a>
         
+        <!-- Desktop Navigation -->
         <nav class="nav-desktop">
-            <a href="#socials" class="nav-link">Socials</a>
-            <a href="/art" class="nav-link">Art</a>
-            <a href="/download" class="nav-link">Download</a>
-            <a href="/donate" class="nav-link">Donate</a>
-            <a href="/contact" class="nav-link">Contact</a>
+            <a href="#" class="nav-link">Socials</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/art'">Art</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/download'">Download</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/donate'">Donate</a>
+            <a href="#" class="nav-link" onclick="window.location.href='/contact'">Contact</a>
         </nav>
         
-        <div class="nav-mobile">
-            <button class="mobile-menu-btn">☰</button>
-            <div class="mobile-menu" id="mobileMenu">
-                <button class="close-menu">×</button>
-                <a href="#socials" class="nav-link">Socials</a>
-                <a href="/art" class="nav-link">Art</a>
-                <a href="/download" class="nav-link">Download</a>
-                <a href="/donate" class="nav-link">Donate</a>
-                <a href="/contact" class="nav-link">Contact</a>
-            </div>
-        </div>
+        <!-- Mobile Navigation Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
     </header>
-
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-btn" id="closeMenuBtn">×</button>
+        <a href="#" class="nav-link">Socials</a>
+        <a href="#" class="nav-link" onclick="window.location.href='/art'">Art</a>
+        <a href="#" class="nav-link" onclick="window.location.href='/download'">Download</a>
+        <a href="#" class="nav-link" onclick="window.location.href='/donate'">Donate</a>
+        <a href="#" class="nav-link" onclick="window.location.href='/contact'">Contact</a>
+    </div>
+    
     <main>
         <section>
-            <h1>Welcome to My Minecraft Downloads!</h1>
-            <p>Here you can find all the resources, worlds, and skins from my Minecraft adventures. Feel free to download anything you like!</p>
-        </section>
-
-        <section>
+            <h1>Welcome to Minecraft Downloads!</h1>
+            <p class="welcome-message">Here you can find all the resources from our server events and more.</p>
+            
             <h2>Server Events</h2>
-            <p class="glow">Wanna download resources and worlds from Minecraft server events? I gotchu bro!</p>
+            <p class="section-message">Wanna download resource and world from Minecraft server event? I gotchu bro!</p>
             
             <table class="event-table">
                 <thead>
@@ -391,132 +387,96 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Halloween Special 2023</td>
+                        <td>Summer Adventure 2023</td>
                         <td><a href="#" class="download-btn">Download</a></td>
                         <td><a href="#" class="download-btn">Download</a></td>
                     </tr>
                     <tr>
-                        <td>Winter Festival 2023</td>
-                        <td><span class="not-available">Not available</span></td>
+                        <td>Winter Wonderland 2022</td>
                         <td><a href="#" class="download-btn">Download</a></td>
+                        <td class="not-available">Not available</td>
                     </tr>
                     <tr>
-                        <td>Summer Adventure 2024</td>
+                        <td>Halloween Horror 2023</td>
+                        <td class="not-available">Not available</td>
                         <td><a href="#" class="download-btn">Download</a></td>
-                        <td><span class="not-available">Not available</span></td>
                     </tr>
                 </tbody>
             </table>
         </section>
-
+        
         <section>
-            <h2>Minecraft Skins</h2>
-            <p>Click the skin name to download!</p>
+            <h2>Skins</h2>
+            <p class="section-message">Click the skin name to download!</p>
             
             <div class="skins-container">
                 <div class="skin-card">
-                    <div class="skin-preview">
-                        <div class="skin-render">
-                            <img class="skin-front" src="https://mc-heads.net/body/1/100" alt="Front view">
-                            <img class="skin-side" src="https://mc-heads.net/body/1/16" alt="Side view">
-                        </div>
-                    </div>
+                    <img src="https://mc-heads.net/skin/1" alt="Minecraft Skin" class="skin-image">
                     <div class="skin-info">
-                        <a href="https://mc-heads.net/download/1" class="skin-name">Cyber Ninja</a>
-                        <p class="skin-creator">Created by: Player123</p>
+                        <a href="#" class="skin-name" download="cool_skin.png">Cool Adventurer</a>
+                        <p class="skin-creator">Created by: SkinMaker123</p>
                     </div>
                 </div>
                 
                 <div class="skin-card">
-                    <div class="skin-preview">
-                        <div class="skin-render">
-                            <img class="skin-front" src="https://mc-heads.net/body/2/100" alt="Front view">
-                            <img class="skin-side" src="https://mc-heads.net/body/2/16" alt="Side view">
-                        </div>
-                    </div>
+                    <img src="https://mc-heads.net/skin/2" alt="Minecraft Skin" class="skin-image">
                     <div class="skin-info">
-                        <a href="https://mc-heads.net/download/2" class="skin-name">Dragon Warrior</a>
-                        <p class="skin-creator">Created by: SkinMaster</p>
+                        <a href="#" class="skin-name" download="nether_warrior.png">Nether Warrior</a>
+                        <p class="skin-creator">Created by: BlockDesigner</p>
                     </div>
                 </div>
                 
                 <div class="skin-card">
-                    <div class="skin-preview">
-                        <div class="skin-render">
-                            <img class="skin-front" src="https://mc-heads.net/body/3/100" alt="Front view">
-                            <img class="skin-side" src="https://mc-heads.net/body/3/16" alt="Side view">
-                        </div>
-                    </div>
+                    <img src="https://mc-heads.net/skin/3" alt="Minecraft Skin" class="skin-image">
                     <div class="skin-info">
-                        <a href="https://mc-heads.net/download/3" class="skin-name">Steampunk Explorer</a>
-                        <p class="skin-creator">Created by: BuilderPro</p>
+                        <a href="#" class="skin-name" download="steampunk_engineer.png">Steampunk Engineer</a>
+                        <p class="skin-creator">Created by: PixelArtist</p>
                     </div>
                 </div>
             </div>
         </section>
-
+        
         <section>
             <div class="coming-soon">
-                <h2 class="pulse">Coming Soon!</h2>
-                <p>There will be cool stuff available for download soon. Stay tuned!</p>
+                <h2>Coming Soon!</h2>
+                <p class="pulse">There will be cool stuff available for download soon. Stay tuned!</p>
             </div>
         </section>
     </main>
-
+    
     <footer>
-        <p>© 2023 Minecraft Downloads. All rights reserved.</p>
+        <p>&copy; 2023 Minecraft Downloads. All rights reserved.</p>
     </footer>
-
+    
     <script>
         // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.add('active');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
         });
-
-        document.querySelector('.close-menu').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.remove('active');
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
         });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (event) => {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuBtn = document.querySelector('.mobile-menu-btn');
-            
-            if (mobileMenu.classList.contains('active') && 
-                !mobileMenu.contains(event.target) && 
-                event.target !== menuBtn) {
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && e.target !== mobileMenuBtn) {
                 mobileMenu.classList.remove('active');
             }
         });
-
-        // Skin render interaction
-        document.querySelectorAll('.skin-render').forEach(render => {
-            render.addEventListener('mousemove', (e) => {
-                const rect = render.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateY = (x - centerX) / 20;
-                const rotateX = (centerY - y) / 20;
-                
-                render.style.transform = `rotateY(${-20 + rotateY}deg) rotateX(${10 + rotateX}deg)`;
-            });
-            
-            render.addEventListener('mouseleave', () => {
-                render.style.transform = 'rotateY(-20deg) rotateX(10deg)';
-            });
-        });
-
-        // Simple download handlers
-        document.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const eventName = btn.closest('tr').querySelector('td').textContent;
-                const downloadType = btn.closest('td').getAttribute('data-type') || 'file';
-                console.log(`Downloading ${downloadType} for ${eventName}`);
-                // Actual download would go here
+        
+        // Simulate download functionality
+        document.querySelectorAll('.download-btn, .skin-name').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.href === '#') {
+                    e.preventDefault();
+                    alert('Download would start here!');
+                    // In a real implementation, this would link to actual files
+                }
             });
         });
     </script>

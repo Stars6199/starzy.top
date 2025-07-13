@@ -249,12 +249,34 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            perspective: 1000px;
         }
 
-        .skin-preview img {
-            max-width: 100%;
-            max-height: 100%;
+        .skin-render {
+            width: 100px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(-20deg) rotateX(10deg);
+            transition: transform 0.3s ease;
+        }
+
+        .skin-render img {
+            position: absolute;
             image-rendering: pixelated;
+        }
+
+        .skin-front {
+            transform: translateZ(8px);
+            width: 100%;
+            height: 100%;
+        }
+
+        .skin-side {
+            transform: rotateY(90deg) translateZ(8px);
+            width: 16px;
+            height: 100%;
+            left: 0;
         }
 
         .skin-info {
@@ -394,30 +416,39 @@
             <div class="skins-container">
                 <div class="skin-card">
                     <div class="skin-preview">
-                        <img src="https://mc-heads.net/skin/1" alt="Cyber Ninja Skin">
+                        <div class="skin-render">
+                            <img class="skin-front" src="https://mc-heads.net/body/1/100" alt="Front view">
+                            <img class="skin-side" src="https://mc-heads.net/body/1/16" alt="Side view">
+                        </div>
                     </div>
                     <div class="skin-info">
-                        <a href="cyber-ninja.png" download class="skin-name">Cyber Ninja</a>
+                        <a href="https://mc-heads.net/download/1" class="skin-name">Cyber Ninja</a>
                         <p class="skin-creator">Created by: Player123</p>
                     </div>
                 </div>
                 
                 <div class="skin-card">
                     <div class="skin-preview">
-                        <img src="https://mc-heads.net/skin/2" alt="Dragon Warrior Skin">
+                        <div class="skin-render">
+                            <img class="skin-front" src="https://mc-heads.net/body/2/100" alt="Front view">
+                            <img class="skin-side" src="https://mc-heads.net/body/2/16" alt="Side view">
+                        </div>
                     </div>
                     <div class="skin-info">
-                        <a href="dragon-warrior.png" download class="skin-name">Dragon Warrior</a>
+                        <a href="https://mc-heads.net/download/2" class="skin-name">Dragon Warrior</a>
                         <p class="skin-creator">Created by: SkinMaster</p>
                     </div>
                 </div>
                 
                 <div class="skin-card">
                     <div class="skin-preview">
-                        <img src="https://mc-heads.net/skin/3" alt="Steampunk Explorer Skin">
+                        <div class="skin-render">
+                            <img class="skin-front" src="https://mc-heads.net/body/3/100" alt="Front view">
+                            <img class="skin-side" src="https://mc-heads.net/body/3/16" alt="Side view">
+                        </div>
                     </div>
                     <div class="skin-info">
-                        <a href="steampunk-explorer.png" download class="skin-name">Steampunk Explorer</a>
+                        <a href="https://mc-heads.net/download/3" class="skin-name">Steampunk Explorer</a>
                         <p class="skin-creator">Created by: BuilderPro</p>
                     </div>
                 </div>
@@ -456,6 +487,26 @@
                 event.target !== menuBtn) {
                 mobileMenu.classList.remove('active');
             }
+        });
+
+        // Skin render interaction
+        document.querySelectorAll('.skin-render').forEach(render => {
+            render.addEventListener('mousemove', (e) => {
+                const rect = render.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateY = (x - centerX) / 20;
+                const rotateX = (centerY - y) / 20;
+                
+                render.style.transform = `rotateY(${-20 + rotateY}deg) rotateX(${10 + rotateX}deg)`;
+            });
+            
+            render.addEventListener('mouseleave', () => {
+                render.style.transform = 'rotateY(-20deg) rotateX(10deg)';
+            });
         });
 
         // Simple download handlers

@@ -165,6 +165,24 @@
             width: 100%;
         }
 
+        .section-title {
+            color: var(--accent-color);
+            margin: 2rem 0 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 0.5rem auto;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
         .welcome-section {
             text-align: center;
             margin-bottom: 3rem;
@@ -186,13 +204,13 @@
             line-height: 1.6;
         }
 
-        .socials-grid {
+        .socials-grid, .minecraft-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
-        .social-card {
+        .social-card, .minecraft-card {
             background-color: var(--card-bg);
             border-radius: 10px;
             padding: 1.5rem;
@@ -202,9 +220,10 @@
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(0, 255, 255, 0.1);
+            height: 100%;
         }
 
-        .social-card:hover {
+        .social-card:hover, .minecraft-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
             border-color: var(--accent-color);
@@ -219,16 +238,37 @@
             transition: all 0.3s ease;
         }
 
-        .social-card:hover .social-icon {
+        .minecraft-skin-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .minecraft-skin {
+            height: 100%;
+            width: auto;
+            image-rendering: pixelated;
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover .social-icon, 
+        .minecraft-card:hover .minecraft-skin {
             filter: grayscale(0%) drop-shadow(0 0 5px var(--accent-color));
             transform: scale(1.1);
         }
 
-        .social-name {
+        .social-name, .minecraft-username {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: var(--accent-color);
+            text-align: center;
         }
 
         .social-username {
@@ -240,7 +280,7 @@
             text-align: center;
         }
 
-        .social-link {
+        .social-link, .minecraft-view-btn {
             display: inline-block;
             padding: 0.5rem 1.5rem;
             background-color: transparent;
@@ -250,12 +290,111 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: auto;
         }
 
-        .social-link:hover {
+        .social-link:hover, .minecraft-view-btn:hover {
             background-color: var(--accent-color);
             color: var(--bg-color);
             box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Skin Modal */
+        .skin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .skin-modal-content {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-color);
+            position: relative;
+        }
+
+        .modal-skin-container {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem auto;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .modal-skin {
+            height: 100%;
+            width: auto;
+            image-rendering: pixelated;
+        }
+
+        .modal-username {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .modal-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .modal-link {
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-link:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .modal-link img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--text-color);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
         }
 
         footer {
@@ -280,11 +419,13 @@
             }
         }
 
-        .social-card:nth-child(odd):hover {
+        .social-card:nth-child(odd):hover, 
+        .minecraft-card:nth-child(odd):hover {
             animation: float 3s ease-in-out infinite;
         }
 
-        .social-card:nth-child(even):hover {
+        .social-card:nth-child(even):hover, 
+        .minecraft-card:nth-child(even):hover {
             animation: float 3s ease-in-out infinite reverse;
         }
 
@@ -299,13 +440,12 @@
             background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
             box-shadow: 0 0 10px var(--accent-color);
         }
-
     </style>
 </head>
 <body>
     <header>
         <a href="/" class="logo" onclick="event.preventDefault(); window.location.href='/'">Home</a>
-        
+
         <nav class="nav-desktop">
             <a href="/socials" class="nav-link" onclick="event.preventDefault(); window.location.href='/socials'">Socials</a>
             <a href="/art" class="nav-link" onclick="event.preventDefault(); window.location.href='/art'">Art</a>
@@ -313,7 +453,7 @@
             <a href="/donate" class="nav-link" onclick="event.preventDefault(); window.location.href='/donate'">Donate</a>
             <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'">Contact</a>
         </nav>
-        
+
         <div class="nav-mobile">
             <div class="hamburger" onclick="toggleMenu()">
                 <div class="hamburger-line"></div>
@@ -336,104 +476,172 @@
             <p>In this page you can find all social media that Stars has. If it's not listed here, it's fake Stars then, so be safe!</p>
         </section>
 
-        <section class="socials-grid">
-            <!-- Row 1 -->
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" class="social-icon">
-                <h3 class="social-name">Discord</h3>
-                <p class="social-username">Stars6199</p>
-                <a href="https://discord.com/users/895228843500126209" class="social-link" target="_blank">Messages !</a>
-            </div>
+        <section>
+            <h2 class="section-title">Social Media Accounts</h2>
+            <div class="socials-grid">
+                <!-- Row 1 -->
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" class="social-icon">
+                    <h3 class="social-name">Discord</h3>
+                    <p class="social-username">Stars6199</p>
+                    <a href="https://discord.com/users/895228843500126209" class="social-link" target="_blank">Messages !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/telegram.svg" alt="Telegram" class="social-icon">
-                <h3 class="social-name">Telegram</h3>
-                <p class="social-username">@stars6199</p>
-                <a href="https://t.me/Stars6199" class="social-link" target="_blank">Messages !</a>
-            </div>
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/telegram.svg" alt="Telegram" class="social-icon">
+                    <h3 class="social-name">Telegram</h3>
+                    <p class="social-username">@stars6199</p>
+                    <a href="https://t.me/Stars6199" class="social-link" target="_blank">Messages !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" class="social-icon">
-                <h3 class="social-name">Instagram</h3>
-                <p class="social-username">@Hypervitaminosis</p>
-                <a href="https://instagram.com/Hypervitaminosis" class="social-link" target="_blank">Follow !</a>
-            </div>
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" class="social-icon">
+                    <h3 class="social-name">Instagram</h3>
+                    <p class="social-username">@Hypervitaminosis</p>
+                    <a href="https://instagram.com/Hypervitaminosis" class="social-link" target="_blank">Follow !</a>
+                </div>
 
-            <!-- Row 2 -->
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" class="social-icon">
-                <h3 class="social-name">YouTube</h3>
-                <p class="social-username">@Hypervitaminosis</p>
-                <a href="https://youtube.com/@Hypervitaminosis" class="social-link" target="_blank">Subscribe !</a>
-            </div>
+                <!-- Row 2 -->
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" class="social-icon">
+                    <h3 class="social-name">YouTube</h3>
+                    <p class="social-username">@Hypervitaminosis</p>
+                    <a href="https://youtube.com/@Hypervitaminosis" class="social-link" target="_blank">Subscribe !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" class="social-icon">
-                <h3 class="social-name">Twitter</h3>
-                <p class="social-username">@Gemintang</p>
-                <a href="https://twitter.com/Gemintang" class="social-link" target="_blank">Follow !</a>
-            </div>
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" class="social-icon">
+                    <h3 class="social-name">Twitter</h3>
+                    <p class="social-username">@Gemintang</p>
+                    <a href="https://twitter.com/Gemintang" class="social-link" target="_blank">Follow !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Bluesky_logo_%28black%29.svg" alt="BlueSky" class="social-icon">
-                <h3 class="social-name">BlueSky</h3>
-                <p class="social-username">@starzy.top</p>
-                <a href="https://bsky.app/profile/starzy.top" class="social-link" target="_blank">Follow !</a>
-            </div>
+                <div class="social-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Bluesky_logo_%28black%29.svg" alt="BlueSky" class="social-icon">
+                    <h3 class="social-name">BlueSky</h3>
+                    <p class="social-username">@starzy.top</p>
+                    <a href="https://bsky.app/profile/starzy.top" class="social-link" target="_blank">Follow !</a>
+                </div>
 
-            <!-- Row 3 -->
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/reddit.svg" alt="Reddit" class="social-icon">
-                <h3 class="social-name">Reddit</h3>
-                <p class="social-username">u/KenaSuspendMulu</p>
-                <a href="https://reddit.com/user/KenaSuspendMulu" class="social-link" target="_blank">Follow !</a>
-            </div>
+                <!-- Row 3 -->
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/reddit.svg" alt="Reddit" class="social-icon">
+                    <h3 class="social-name">Reddit</h3>
+                    <p class="social-username">u/KenaSuspendMulu</p>
+                    <a href="https://reddit.com/user/KenaSuspendMulu" class="social-link" target="_blank">Follow !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/xbox.svg" alt="Xbox" class="social-icon">
-                <h3 class="social-name">Xbox</h3>
-                <p class="social-username">Stars6199</p>
-                <a href="https://www.xbox.com/en-us/play/user/Stars6199" class="social-link" target="_blank">Add !</a>
-            </div>
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/xbox.svg" alt="Xbox" class="social-icon">
+                    <h3 class="social-name">Xbox</h3>
+                    <p class="social-username">Stars6199</p>
+                    <a href="https://www.xbox.com/en-us/play/user/Stars6199" class="social-link" target="_blank">Add !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" class="social-icon">
-                <h3 class="social-name">Twitch</h3>
-                <p class="social-username">Stars6199</p>
-                <a href="https://twitch.tv/Stars6199" class="social-link" target="_blank">Follow !</a>
-            </div>
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" class="social-icon">
+                    <h3 class="social-name">Twitch</h3>
+                    <p class="social-username">Stars6199</p>
+                    <a href="https://twitch.tv/Stars6199" class="social-link" target="_blank">Follow !</a>
+                </div>
 
-            <!-- Row 4 -->
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" class="social-icon">
-                <h3 class="social-name">Steam</h3>
-                <p class="social-username">Stars</p>
-                <a href="https://steamcommunity.com/profiles/76561199141831904" class="social-link" target="_blank">Add !</a>
-            </div>
+                <!-- Row 4 -->
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" class="social-icon">
+                    <h3 class="social-name">Steam</h3>
+                    <p class="social-username">Stars</p>
+                    <a href="https://steamcommunity.com/profiles/76561199141831904" class="social-link" target="_blank">Add !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" class="social-icon">
-                <h3 class="social-name">GitHub</h3>
-                <p class="social-username">Stars6199</p>
-                <a href="https://github.com/Stars6199" class="social-link" target="_blank">Follow !</a>
-            </div>
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" class="social-icon">
+                    <h3 class="social-name">GitHub</h3>
+                    <p class="social-username">Stars6199</p>
+                    <a href="https://github.com/Stars6199" class="social-link" target="_blank">Follow !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok" class="social-icon">
-                <h3 class="social-name">TikTok</h3>
-                <p class="social-username">@Stars6199</p>
-                <a href="https://tiktok.com/@Stars6199" class="social-link" target="_blank">Follow !</a>
-            </div>
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok" class="social-icon">
+                    <h3 class="social-name">TikTok</h3>
+                    <p class="social-username">@Stars6199</p>
+                    <a href="https://tiktok.com/@Stars6199" class="social-link" target="_blank">Follow !</a>
+                </div>
 
-            <div class="social-card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Oguserslogo.png" alt="TikTok" class="social-icon">
-                <h3 class="social-name">TikTok</h3>
-                <p class="social-username">/Sick7771</p>
-                <a href="https://oguser.com/Sick7771" class="social-link" target="_blank">Check !</a>
+                <div class="social-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Oguserslogo.png" alt="OgUsers" class="social-icon">
+                    <h3 class="social-name">OgUsers</h3>
+                    <p class="social-username">/Sick7771</p>
+                    <a href="https://oguser.com/Sick7771" class="social-link" target="_blank">Check !</a>
+                </div>
             </div>
         </section>
 
+        <section>
+            <h2 class="section-title">Minecraft Accounts</h2>
+            <div class="minecraft-grid">
+                <!-- Minecraft Account 1 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/Stars6199" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">Stars6199</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Stars6199')">View</button>
+                </div>
+
+                <!-- Minecraft Account 2 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/Gemintang" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">Gemintang</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Gemintang')">View</button>
+                </div>
+
+                <!-- Minecraft Account 3 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/Sick7771" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">Sick7771</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Sick7771')">View</button>
+                </div>
+
+                <!-- Minecraft Account 4 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/Starzy" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">Starzy</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Starzy')">View</button>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!-- Skin Modal -->
+    <div class="skin-modal" id="skinModal">
+        <div class="skin-modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-skin-container">
+                <img id="modalSkinImage" src="" alt="Minecraft Skin" class="modal-skin">
+            </div>
+            <h3 id="modalUsername" class="modal-username"></h3>
+            <div class="modal-links">
+                <a id="capesLink" href="#" class="modal-link" target="_blank">
+                    <img src="https://capes.me/favicon.ico" alt="Capes.me">
+                    Capes.me
+                </a>
+                <a id="labyLink" href="#" class="modal-link" target="_blank">
+                    <img src="https://laby.net/favicon.ico" alt="Laby.net">
+                    Laby.net
+                </a>
+                <a id="nameMCLink" href="#" class="modal-link" target="_blank">
+                    <img src="https://namemc.com/favicon.ico" alt="NameMC">
+                    NameMC
+                </a>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p class="footer-text">© 2025 Stars. All rights reserved.</p>
@@ -443,7 +651,7 @@
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
-            
+
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
         }
@@ -452,12 +660,44 @@
         document.addEventListener('click', function(event) {
             const hamburger = document.querySelector('.hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
-            
+
             if (!event.target.closest('.nav-mobile') && mobileMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
             }
         });
+
+        // Skin Modal Functions
+        function showSkinModal(username) {
+            const modal = document.getElementById('skinModal');
+            const skinImg = document.getElementById('modalSkinImage');
+            const usernameEl = document.getElementById('modalUsername');
+            const capesLink = document.getElementById('capesLink');
+            const labyLink = document.getElementById('labyLink');
+            const nameMCLink = document.getElementById('nameMCLink');
+
+            // Set content
+            skinImg.src = `https://mc-heads.net/body/${username}`;
+            usernameEl.textContent = username;
+            capesLink.href = `https://capes.me/${username}`;
+            labyLink.href = `https://laby.net/@${username}`;
+            nameMCLink.href = `https://namemc.com/profile/${username}`;
+
+            // Show modal
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('skinModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('skinModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 </html>

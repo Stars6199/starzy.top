@@ -67,16 +67,6 @@
             }
         }
 
-        .nav-mobile {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .nav-mobile {
-                display: block;
-            }
-        }
-
         .nav-link {
             color: var(--text-primary);
             text-decoration: none;
@@ -283,7 +273,7 @@
 
         .skins-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
@@ -302,9 +292,10 @@
 
         .skin-image {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 150px;
+            object-fit: contain;
             background-color: #333;
+            padding: 10px;
         }
 
         .skin-info {
@@ -457,7 +448,7 @@
             
             <div class="skins-container">
                 <div class="skin-card">
-                    <img src="https://mc-heads.net/body/Player/200" alt="Minecraft Skin" class="skin-image">
+                    <img src="https://mc-heads.net/body/Player/150" alt="Minecraft Skin" class="skin-image">
                     <div class="skin-info">
                         <a href="#" class="skin-name" download="Cyber_Ninja.png">Cyber Ninja</a>
                         <p class="skin-creator">Created by: PixelMaster</p>
@@ -465,7 +456,7 @@
                 </div>
                 
                 <div class="skin-card">
-                    <img src="https://mc-heads.net/body/Steve/200" alt="Minecraft Skin" class="skin-image">
+                    <img src="https://mc-heads.net/body/Steve/150" alt="Minecraft Skin" class="skin-image">
                     <div class="skin-info">
                         <a href="#" class="skin-name" download="Steampunk_Adventurer.png">Steampunk Adventurer</a>
                         <p class="skin-creator">Created by: BlockBuilder</p>
@@ -473,7 +464,7 @@
                 </div>
                 
                 <div class="skin-card">
-                    <img src="https://mc-heads.net/body/Alex/200" alt="Minecraft Skin" class="skin-image">
+                    <img src="https://mc-heads.net/body/Alex/150" alt="Minecraft Skin" class="skin-image">
                     <div class="skin-info">
                         <a href="#" class="skin-name" download="Mage_Of_The_Nether.png">Mage of the Nether</a>
                         <p class="skin-creator">Created by: SkinWizard</p>

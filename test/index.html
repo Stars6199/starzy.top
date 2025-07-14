@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Stars' Socials</title>
     <style>
         :root {
@@ -18,6 +18,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -26,13 +27,14 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            touch-action: manipulation;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
+            padding: 1.5rem 2rem;
             background-color: rgba(30, 30, 30, 0.8);
             backdrop-filter: blur(10px);
             position: sticky;
@@ -42,7 +44,7 @@
         }
 
         .logo {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent-color);
             text-decoration: none;
@@ -54,19 +56,23 @@
         }
 
         .nav-desktop {
-            display: none;
-            gap: 1.2rem;
+            display: flex;
+            gap: 1.5rem;
         }
 
-        @media (min-width: 768px) {
+        @media (max-width: 768px) {
             .nav-desktop {
-                display: flex;
+                display: none;
             }
-            header {
-                padding: 1.5rem 2rem;
-            }
-            .logo {
-                font-size: 1.5rem;
+        }
+
+        .nav-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-mobile {
+                display: block;
             }
         }
 
@@ -99,17 +105,17 @@
         }
 
         .hamburger {
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: space-between;
-            width: 28px;
-            height: 20px;
+            width: 30px;
+            height: 21px;
             cursor: pointer;
         }
 
-        @media (min-width: 768px) {
+        @media (max-width: 768px) {
             .hamburger {
-                display: none;
+                display: flex;
             }
         }
 
@@ -121,7 +127,7 @@
         }
 
         .hamburger.active .hamburger-line:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+            transform: translateY(9px) rotate(45deg);
         }
 
         .hamburger.active .hamburger-line:nth-child(2) {
@@ -129,21 +135,21 @@
         }
 
         .hamburger.active .hamburger-line:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+            transform: translateY(-9px) rotate(-45deg);
         }
 
         .mobile-menu {
             position: fixed;
-            top: 60px;
+            top: 80px;
             right: -100%;
-            width: 80%;
-            height: calc(100vh - 60px);
+            width: 70%;
+            height: calc(100vh - 80px);
             background-color: var(--card-bg);
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 1.5rem 0;
-            gap: 1.2rem;
+            padding: 2rem 0;
+            gap: 1.5rem;
             transition: right 0.3s ease;
             z-index: 99;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
@@ -155,7 +161,7 @@
 
         main {
             flex: 1;
-            padding: 1.5rem;
+            padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
@@ -163,8 +169,8 @@
 
         .section-title {
             color: var(--accent-color);
-            margin: 1.5rem 0 1rem;
-            font-size: 1.5rem;
+            margin: 2rem 0 1.5rem;
+            font-size: 1.8rem;
             text-align: center;
             position: relative;
         }
@@ -172,138 +178,78 @@
         .section-title::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 100px;
             height: 3px;
             background: var(--accent-color);
             margin: 0.5rem auto;
-            box-shadow: 0 0 8px var(--accent-color);
-        }
-
-        @media (min-width: 768px) {
-            .section-title {
-                margin: 2rem 0 1.5rem;
-                font-size: 1.8rem;
-            }
-            .section-title::after {
-                width: 100px;
-            }
+            box-shadow: 0 0 10px var(--accent-color);
         }
 
         .welcome-section {
             text-align: center;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
             background-color: var(--card-bg);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border-left: 3px solid var(--accent-color);
-        }
-
-        @media (min-width: 768px) {
-            .welcome-section {
-                margin-bottom: 3rem;
-                padding: 2rem;
-                border-left-width: 4px;
-            }
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--accent-color);
         }
 
         .welcome-section h1 {
             color: var(--accent-color);
-            margin-bottom: 0.8rem;
-            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
         }
 
         .welcome-section p {
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        @media (min-width: 768px) {
-            .welcome-section h1 {
-                font-size: 2rem;
-                margin-bottom: 1rem;
-            }
-            .welcome-section p {
-                font-size: 1.1rem;
-            }
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         .socials-grid, .minecraft-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 640px) {
-            .socials-grid, .minecraft-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 2rem;
-            }
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
         .social-card, .minecraft-card {
             background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.2rem;
+            border-radius: 10px;
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(0, 255, 255, 0.1);
             height: 100%;
         }
 
-        @media (min-width: 768px) {
-            .social-card, .minecraft-card {
-                padding: 1.5rem;
-                border-radius: 10px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            }
-        }
-
         .social-card:hover, .minecraft-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 18px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
             border-color: var(--accent-color);
         }
 
         .social-icon {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 0.8rem;
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
             object-fit: contain;
             filter: grayscale(30%);
             transition: all 0.3s ease;
         }
 
-        @media (min-width: 768px) {
-            .social-icon {
-                width: 60px;
-                height: 60px;
-                margin-bottom: 1rem;
-            }
-        }
-
         .minecraft-skin-container {
-            width: 130px;
-            height: 130px;
+            width: 150px;
+            height: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
-        }
-
-        @media (min-width: 768px) {
-            .minecraft-skin-container {
-                width: 150px;
-                height: 150px;
-                margin-bottom: 1rem;
-                border-radius: 8px;
-            }
         }
 
         .minecraft-skin {
@@ -315,68 +261,47 @@
 
         .social-card:hover .social-icon, 
         .minecraft-card:hover .minecraft-skin {
-            filter: grayscale(0%) drop-shadow(0 0 4px var(--accent-color));
+            filter: grayscale(0%) drop-shadow(0 0 5px var(--accent-color));
             transform: scale(1.1);
         }
 
         .social-name, .minecraft-username {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
             color: var(--accent-color);
             text-align: center;
         }
 
-        @media (min-width: 768px) {
-            .social-name, .minecraft-username {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
-            }
-        }
-
         .social-username {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-color);
             opacity: 0.8;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             word-break: break-all;
             text-align: center;
         }
 
-        @media (min-width: 768px) {
-            .social-username {
-                font-size: 0.9rem;
-                margin-bottom: 1rem;
-            }
-        }
-
         .social-link, .minecraft-view-btn {
             display: inline-block;
-            padding: 0.4rem 1.2rem;
+            padding: 0.5rem 1.5rem;
             background-color: transparent;
             color: var(--accent-color);
             border: 1px solid var(--accent-color);
-            border-radius: 4px;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             cursor: pointer;
             margin-top: auto;
-            font-size: 0.9rem;
-        }
-
-        @media (min-width: 768px) {
-            .social-link, .minecraft-view-btn {
-                padding: 0.5rem 1.5rem;
-                font-size: 1rem;
-                border-radius: 5px;
-            }
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .social-link:hover, .minecraft-view-btn:hover {
             background-color: var(--accent-color);
             color: var(--bg-color);
-            box-shadow: 0 0 8px var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
         }
 
         /* Skin Modal */
@@ -391,100 +316,60 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
-            box-sizing: border-box;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .skin-modal-content {
             background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
+            padding: 2rem;
+            border-radius: 10px;
             text-align: center;
-            width: 100%;
-            max-width: 400px;
+            max-width: 500px;
+            width: 90%;
             border: 1px solid var(--accent-color);
-            box-shadow: 0 0 15px var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-color);
             position: relative;
-            margin: auto;
-        }
-
-        @media (min-width: 480px) {
-            .skin-modal-content {
-                max-width: 450px;
-                padding: 2rem;
-                border-radius: 10px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .skin-modal-content {
-                max-width: 500px;
-            }
+            margin: 20px;
         }
 
         .modal-skin-container {
             width: 100%;
-            max-width: 250px;
-            height: auto;
-            max-height: 250px;
-            aspect-ratio: 1/1;
+            max-width: 300px;
+            height: 300px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 1rem auto;
             background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
         }
 
-        @media (min-width: 480px) {
+        @media (max-width: 480px) {
             .modal-skin-container {
-                max-width: 300px;
-                max-height: 300px;
-                border-radius: 8px;
+                height: 250px;
             }
         }
 
         .modal-skin {
-            width: 100%;
-            height: auto;
-            max-height: 100%;
+            height: 100%;
+            width: auto;
             image-rendering: pixelated;
         }
 
         .modal-username {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: var(--accent-color);
             margin: 1rem 0;
-            word-break: break-word;
-        }
-
-        @media (min-width: 480px) {
-            .modal-username {
-                font-size: 1.4rem;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .modal-username {
-                font-size: 1.5rem;
-            }
         }
 
         .modal-links {
             display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
             margin-top: 1.5rem;
-        }
-
-        @media (min-width: 480px) {
-            .modal-links {
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
         }
 
         .modal-link {
@@ -492,21 +377,13 @@
             background-color: transparent;
             color: var(--accent-color);
             border: 1px solid var(--accent-color);
-            border-radius: 4px;
+            border-radius: 5px;
             text-decoration: none;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 0.5rem;
             font-size: 0.9rem;
-        }
-
-        @media (min-width: 480px) {
-            .modal-link {
-                font-size: 1rem;
-                border-radius: 5px;
-            }
         }
 
         .modal-link:hover {
@@ -515,34 +392,20 @@
         }
 
         .modal-link img {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             object-fit: contain;
-        }
-
-        @media (min-width: 480px) {
-            .modal-link img {
-                width: 20px;
-                height: 20px;
-            }
         }
 
         .close-modal {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             color: var(--text-color);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: rgba(30, 30, 30, 0.7);
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            line-height: 1;
+            z-index: 1;
         }
 
         .close-modal:hover {
@@ -552,7 +415,7 @@
 
         footer {
             text-align: center;
-            padding: 1.2rem;
+            padding: 1.5rem;
             background-color: var(--card-bg);
             margin-top: 2rem;
         }
@@ -560,16 +423,6 @@
         .footer-text {
             color: var(--text-color);
             opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        @media (min-width: 768px) {
-            footer {
-                padding: 1.5rem;
-            }
-            .footer-text {
-                font-size: 1rem;
-            }
         }
 
         /* Animation effects */
@@ -578,7 +431,7 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-8px);
+                transform: translateY(-10px);
             }
         }
 
@@ -596,19 +449,12 @@
         header::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -5px;
             left: 0;
             width: 100%;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            box-shadow: 0 0 8px var(--accent-color);
-        }
-
-        @media (min-width: 768px) {
-            header::after {
-                bottom: -5px;
-                box-shadow: 0 0 10px var(--accent-color);
-            }
+            box-shadow: 0 0 10px var(--accent-color);
         }
     </style>
 </head>
@@ -624,20 +470,21 @@
             <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'">Contact</a>
         </nav>
 
-        <div class="hamburger" onclick="toggleMenu()">
-            <div class="hamburger-line"></div>
-            <div class="hamburger-line"></div>
-            <div class="hamburger-line"></div>
+        <div class="nav-mobile">
+            <div class="hamburger" onclick="toggleMenu()">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="/socials" class="nav-link" onclick="event.preventDefault(); window.location.href='/socials'; toggleMenu()">Socials</a>
+                <a href="/art" class="nav-link" onclick="event.preventDefault(); window.location.href='/art'; toggleMenu()">Art</a>
+                <a href="/download" class="nav-link" onclick="event.preventDefault(); window.location.href='/download'; toggleMenu()">Download</a>
+                <a href="/donate" class="nav-link" onclick="event.preventDefault(); window.location.href='/donate'; toggleMenu()">Donate</a>
+                <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'; toggleMenu()">Contact</a>
+            </div>
         </div>
     </header>
-
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="/socials" class="nav-link" onclick="event.preventDefault(); window.location.href='/socials'; toggleMenu()">Socials</a>
-        <a href="/art" class="nav-link" onclick="event.preventDefault(); window.location.href='/art'; toggleMenu()">Art</a>
-        <a href="/download" class="nav-link" onclick="event.preventDefault(); window.location.href='/download'; toggleMenu()">Download</a>
-        <a href="/donate" class="nav-link" onclick="event.preventDefault(); window.location.href='/donate'; toggleMenu()">Donate</a>
-        <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'; toggleMenu()">Contact</a>
-    </div>
 
     <main>
         <section class="welcome-section">
@@ -751,37 +598,28 @@
                 <!-- Minecraft Account 1 -->
                 <div class="minecraft-card">
                     <div class="minecraft-skin-container">
-                        <img src="https://mc-heads.net/body/_Sangri" alt="Minecraft Skin" class="minecraft-skin">
-                    </div>
-                    <h3 class="minecraft-username">_Sangri</h3>
-                    <button class="minecraft-view-btn" onclick="showSkinModal('_Sangri')">View</button>
-                </div>
-
-                <!-- Minecraft Account 2 -->
-                <div class="minecraft-card">
-                    <div class="minecraft-skin-container">
                         <img src="https://mc-heads.net/body/Gemintang" alt="Minecraft Skin" class="minecraft-skin">
                     </div>
                     <h3 class="minecraft-username">Gemintang</h3>
                     <button class="minecraft-view-btn" onclick="showSkinModal('Gemintang')">View</button>
                 </div>
 
+                <!-- Minecraft Account 2 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/Hypervitaminosis" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">Hypervitaminosis</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Hypervitaminosis')">View</button>
+                </div>
+
                 <!-- Minecraft Account 3 -->
                 <div class="minecraft-card">
                     <div class="minecraft-skin-container">
-                        <img src="https://mc-heads.net/body/Sick7771" alt="Minecraft Skin" class="minecraft-skin">
+                        <img src="https://mc-heads.net/body/Jeova" alt="Minecraft Skin" class="minecraft-skin">
                     </div>
-                    <h3 class="minecraft-username">Sick7771</h3>
-                    <button class="minecraft-view-btn" onclick="showSkinModal('Sick7771')">View</button>
-                </div>
-
-                <!-- Minecraft Account 4 -->
-                <div class="minecraft-card">
-                    <div class="minecraft-skin-container">
-                        <img src="https://mc-heads.net/body/Starzy" alt="Minecraft Skin" class="minecraft-skin">
-                    </div>
-                    <h3 class="minecraft-username">Starzy</h3>
-                    <button class="minecraft-view-btn" onclick="showSkinModal('Starzy')">View</button>
+                    <h3 class="minecraft-username">Jeova</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Jeova')">View</button>
                 </div>
             </div>
         </section>
@@ -797,7 +635,7 @@
             <h3 id="modalUsername" class="modal-username"></h3>
             <div class="modal-links">
                 <a id="capesLink" href="#" class="modal-link" target="_blank">
-                    <img src="https://capes.me/favicon.ico" alt="Capes.me">
+                    <img src="/Assets/icon/Capes.me.ico" alt="Capes.me">
                     Capes.me
                 </a>
                 <a id="labyLink" href="#" class="modal-link" target="_blank">
@@ -830,7 +668,7 @@
             const hamburger = document.querySelector('.hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
 
-            if (!event.target.closest('.hamburger') && !event.target.closest('.mobile-menu') && mobileMenu.classList.contains('active')) {
+            if (!event.target.closest('.nav-mobile') && mobileMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
             }
@@ -862,18 +700,17 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking outside or pressing ESC
-        window.onclick = function(event) {
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
             const modal = document.getElementById('skinModal');
-            if (event.target == modal) {
+            if (event.target === modal) {
                 closeModal();
             }
-        };
+        });
 
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
+        // Prevent modal from closing when clicking inside content
+        document.querySelector('.skin-modal-content').addEventListener('click', function(e) {
+            e.stopPropagation();
         });
     </script>
 </body>

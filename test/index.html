@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stars' Socials</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #00ffff;
+            --card-bg: #1e1e1e;
+            --hover-color: #00cccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .nav-desktop {
+            display: none;
+            gap: 1.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-desktop {
+                display: flex;
+            }
+            header {
+                padding: 1.5rem 2rem;
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 60px;
+            right: -100%;
+            width: 80%;
+            height: calc(100vh - 60px);
+            background-color: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 0;
+            gap: 1.2rem;
+            transition: right 0.3s ease;
+            z-index: 99;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        main {
+            flex: 1;
+            padding: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            color: var(--accent-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 0.5rem auto;
+            box-shadow: 0 0 8px var(--accent-color);
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                margin: 2rem 0 1.5rem;
+                font-size: 1.8rem;
+            }
+            .section-title::after {
+                width: 100px;
+            }
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--accent-color);
+        }
+
+        @media (min-width: 768px) {
+            .welcome-section {
+                margin-bottom: 3rem;
+                padding: 2rem;
+                border-left-width: 4px;
+            }
+        }
+
+        .welcome-section h1 {
+            color: var(--accent-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.6rem;
+        }
+
+        .welcome-section p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        @media (min-width: 768px) {
+            .welcome-section h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            .welcome-section p {
+                font-size: 1.1rem;
+            }
+        }
+
+        .socials-grid, .minecraft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .socials-grid, .minecraft-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        .social-card, .minecraft-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            height: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .social-card, .minecraft-card {
+                padding: 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .social-card:hover, .minecraft-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 255, 255, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 0.8rem;
+            object-fit: contain;
+            filter: grayscale(30%);
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .social-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .minecraft-skin-container {
+            width: 130px;
+            height: 130px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .minecraft-skin-container {
+                width: 150px;
+                height: 150px;
+                margin-bottom: 1rem;
+                border-radius: 8px;
+            }
+        }
+
+        .minecraft-skin {
+            height: 100%;
+            width: auto;
+            image-rendering: pixelated;
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover .social-icon, 
+        .minecraft-card:hover .minecraft-skin {
+            filter: grayscale(0%) drop-shadow(0 0 4px var(--accent-color));
+            transform: scale(1.1);
+        }
+
+        .social-name, .minecraft-username {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--accent-color);
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .social-name, .minecraft-username {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .social-username {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 0.8rem;
+            word-break: break-all;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .social-username {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .social-link, .minecraft-view-btn {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .social-link, .minecraft-view-btn {
+                padding: 0.5rem 1.5rem;
+                font-size: 1rem;
+                border-radius: 5px;
+            }
+        }
+
+        .social-link:hover, .minecraft-view-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 8px var(--accent-color);
+        }
+
+        /* Skin Modal */
+        .skin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .skin-modal-content {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-color);
+            position: relative;
+            margin: auto;
+        }
+
+        @media (min-width: 480px) {
+            .skin-modal-content {
+                max-width: 450px;
+                padding: 2rem;
+                border-radius: 10px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .skin-modal-content {
+                max-width: 500px;
+            }
+        }
+
+        .modal-skin-container {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            max-height: 250px;
+            aspect-ratio: 1/1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem auto;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .modal-skin-container {
+                max-width: 300px;
+                max-height: 300px;
+                border-radius: 8px;
+            }
+        }
+
+        .modal-skin {
+            width: 100%;
+            height: auto;
+            max-height: 100%;
+            image-rendering: pixelated;
+        }
+
+        .modal-username {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin: 1rem 0;
+            word-break: break-word;
+        }
+
+        @media (min-width: 480px) {
+            .modal-username {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .modal-username {
+                font-size: 1.5rem;
+            }
+        }
+
+        .modal-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (min-width: 480px) {
+            .modal-links {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        .modal-link {
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 480px) {
+            .modal-link {
+                font-size: 1rem;
+                border-radius: 5px;
+            }
+        }
+
+        .modal-link:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .modal-link img {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+
+        @media (min-width: 480px) {
+            .modal-link img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(30, 30, 30, 0.7);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.2rem;
+            background-color: var(--card-bg);
+            margin-top: 2rem;
+        }
+
+        .footer-text {
+            color: var(--text-color);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            footer {
+                padding: 1.5rem;
+            }
+            .footer-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animation effects */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .social-card:nth-child(odd):hover, 
+        .minecraft-card:nth-child(odd):hover {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .social-card:nth-child(even):hover, 
+        .minecraft-card:nth-child(even):hover {
+            animation: float 3s ease-in-out infinite reverse;
+        }
+
+        /* Glow effect for header */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            box-shadow: 0 0 8px var(--accent-color);
+        }
+
+        @media (min-width: 768px) {
+            header::after {
+                bottom: -5px;
+                box-shadow: 0 0 10px var(--accent-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo" onclick="event.preventDefault(); window.location.href='/'">Home</a>
+
+        <nav class="nav-desktop">
+            <a href="/socials" class="nav-link" onclick="event.preventDefault(); window.location.href='/socials'">Socials</a>
+            <a href="/art" class="nav-link" onclick="event.preventDefault(); window.location.href='/art'">Art</a>
+            <a href="/download" class="nav-link" onclick="event.preventDefault(); window.location.href='/download'">Download</a>
+            <a href="/donate" class="nav-link" onclick="event.preventDefault(); window.location.href='/donate'">Donate</a>
+            <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'">Contact</a>
+        </nav>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/socials" class="nav-link" onclick="event.preventDefault(); window.location.href='/socials'; toggleMenu()">Socials</a>
+        <a href="/art" class="nav-link" onclick="event.preventDefault(); window.location.href='/art'; toggleMenu()">Art</a>
+        <a href="/download" class="nav-link" onclick="event.preventDefault(); window.location.href='/download'; toggleMenu()">Download</a>
+        <a href="/donate" class="nav-link" onclick="event.preventDefault(); window.location.href='/donate'; toggleMenu()">Donate</a>
+        <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'; toggleMenu()">Contact</a>
+    </div>
+
+    <main>
+        <section class="welcome-section">
+            <h1>Welcome to the Socials</h1>
+            <p>In this page you can find all social media that Stars has. If it's not listed here, it's fake Stars then, so be safe!</p>
+        </section>
+
+        <section>
+            <h2 class="section-title">Social Media Accounts</h2>
+            <div class="socials-grid">
+                <!-- Row 1 -->
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" class="social-icon">
+                    <h3 class="social-name">Discord</h3>
+                    <p class="social-username">Stars6199</p>
+                    <a href="https://discord.com/users/895228843500126209" class="social-link" target="_blank">Messages !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/telegram.svg" alt="Telegram" class="social-icon">
+                    <h3 class="social-name">Telegram</h3>
+                    <p class="social-username">@stars6199</p>
+                    <a href="https://t.me/Stars6199" class="social-link" target="_blank">Messages !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" class="social-icon">
+                    <h3 class="social-name">Instagram</h3>
+                    <p class="social-username">@Hypervitaminosis</p>
+                    <a href="https://instagram.com/Hypervitaminosis" class="social-link" target="_blank">Follow !</a>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" alt="YouTube" class="social-icon">
+                    <h3 class="social-name">YouTube</h3>
+                    <p class="social-username">@Hypervitaminosis</p>
+                    <a href="https://youtube.com/@Hypervitaminosis" class="social-link" target="_blank">Subscribe !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg" alt="Twitter" class="social-icon">
+                    <h3 class="social-name">Twitter</h3>
+                    <p class="social-username">@Gemintang</p>
+                    <a href="https://twitter.com/Gemintang" class="social-link" target="_blank">Follow !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Bluesky_logo_%28black%29.svg" alt="BlueSky" class="social-icon">
+                    <h3 class="social-name">BlueSky</h3>
+                    <p class="social-username">@starzy.top</p>
+                    <a href="https://bsky.app/profile/starzy.top" class="social-link" target="_blank">Follow !</a>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/reddit.svg" alt="Reddit" class="social-icon">
+                    <h3 class="social-name">Reddit</h3>
+                    <p class="social-username">u/KenaSuspendMulu</p>
+                    <a href="https://reddit.com/user/KenaSuspendMulu" class="social-link" target="_blank">Follow !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/xbox.svg" alt="Xbox" class="social-icon">
+                    <h3 class="social-name">Xbox</h3>
+                    <p class="social-username">Stars6199</p>
+                    <a href="https://www.xbox.com/en-us/play/user/Stars6199" class="social-link" target="_blank">Add !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" alt="Twitch" class="social-icon">
+                    <h3 class="social-name">Twitch</h3>
+                    <p class="social-username">Stars6199</p>
+                    <a href="https://twitch.tv/Stars6199" class="social-link" target="_blank">Follow !</a>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg" alt="Steam" class="social-icon">
+                    <h3 class="social-name">Steam</h3>
+                    <p class="social-username">Stars</p>
+                    <a href="https://steamcommunity.com/profiles/76561199141831904" class="social-link" target="_blank">Add !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" class="social-icon">
+                    <h3 class="social-name">GitHub</h3>
+                    <p class="social-username">Stars6199</p>
+                    <a href="https://github.com/Stars6199" class="social-link" target="_blank">Follow !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tiktok.svg" alt="TikTok" class="social-icon">
+                    <h3 class="social-name">TikTok</h3>
+                    <p class="social-username">@Stars6199</p>
+                    <a href="https://tiktok.com/@Stars6199" class="social-link" target="_blank">Follow !</a>
+                </div>
+
+                <div class="social-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Oguserslogo.png" alt="OgUsers" class="social-icon">
+                    <h3 class="social-name">OgUsers</h3>
+                    <p class="social-username">/Sick7771</p>
+                    <a href="https://oguser.com/Sick7771" class="social-link" target="_blank">Check !</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Minecraft Accounts</h2>
+            <div class="minecraft-grid">
+                <!-- Minecraft Account 1 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/_Sangri" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">_Sangri</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('_Sangri')">View</button>
+                </div>
+
+                <!-- Minecraft Account 2 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/Gemintang" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">Gemintang</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Gemintang')">View</button>
+                </div>
+
+                <!-- Minecraft Account 3 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/Sick7771" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">Sick7771</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Sick7771')">View</button>
+                </div>
+
+                <!-- Minecraft Account 4 -->
+                <div class="minecraft-card">
+                    <div class="minecraft-skin-container">
+                        <img src="https://mc-heads.net/body/Starzy" alt="Minecraft Skin" class="minecraft-skin">
+                    </div>
+                    <h3 class="minecraft-username">Starzy</h3>
+                    <button class="minecraft-view-btn" onclick="showSkinModal('Starzy')">View</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Skin Modal -->
+    <div class="skin-modal" id="skinModal">
+        <div class="skin-modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-skin-container">
+                <img id="modalSkinImage" src="" alt="Minecraft Skin" class="modal-skin">
+            </div>
+            <h3 id="modalUsername" class="modal-username"></h3>
+            <div class="modal-links">
+                <a id="capesLink" href="#" class="modal-link" target="_blank">
+                    <img src="https://capes.me/favicon.ico" alt="Capes.me">
+                    Capes.me
+                </a>
+                <a id="labyLink" href="#" class="modal-link" target="_blank">
+                    <img src="https://laby.net/favicon.ico" alt="Laby.net">
+                    Laby.net
+                </a>
+                <a id="nameMCLink" href="#" class="modal-link" target="_blank">
+                    <img src="https://namemc.com/favicon.ico" alt="NameMC">
+                    NameMC
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="footer-text">© 2025 Stars. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (!event.target.closest('.hamburger') && !event.target.closest('.mobile-menu') && mobileMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Skin Modal Functions
+        function showSkinModal(username) {
+            const modal = document.getElementById('skinModal');
+            const skinImg = document.getElementById('modalSkinImage');
+            const usernameEl = document.getElementById('modalUsername');
+            const capesLink = document.getElementById('capesLink');
+            const labyLink = document.getElementById('labyLink');
+            const nameMCLink = document.getElementById('nameMCLink');
+
+            // Set content
+            skinImg.src = `https://mc-heads.net/body/${username}`;
+            usernameEl.textContent = username;
+            capesLink.href = `https://capes.me/${username}`;
+            labyLink.href = `https://laby.net/@${username}`;
+            nameMCLink.href = `https://namemc.com/profile/${username}`;
+
+            // Show modal
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('skinModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside or pressing ESC
+        window.onclick = function(event) {
+            const modal = document.getElementById('skinModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        };
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

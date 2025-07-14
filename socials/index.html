@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Stars' Socials</title>
     <style>
         :root {
@@ -18,6 +18,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -26,6 +27,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            touch-action: manipulation;
         }
 
         header {
@@ -292,6 +294,8 @@
             transition: all 0.3s ease;
             cursor: pointer;
             margin-top: auto;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .social-link:hover, .minecraft-view-btn:hover {
@@ -312,6 +316,8 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .skin-modal-content {
@@ -324,10 +330,12 @@
             border: 1px solid var(--accent-color);
             box-shadow: 0 0 20px var(--accent-color);
             position: relative;
+            margin: 20px;
         }
 
         .modal-skin-container {
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             height: 300px;
             display: flex;
             justify-content: center;
@@ -336,6 +344,12 @@
             background-color: rgba(0, 0, 0, 0.2);
             border-radius: 8px;
             overflow: hidden;
+        }
+
+        @media (max-width: 480px) {
+            .modal-skin-container {
+                height: 250px;
+            }
         }
 
         .modal-skin {
@@ -369,6 +383,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .modal-link:hover {
@@ -390,6 +405,7 @@
             font-size: 1.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            z-index: 1;
         }
 
         .close-modal:hover {
@@ -605,7 +621,7 @@
                     <h3 class="minecraft-username">Jeova</h3>
                     <button class="minecraft-view-btn" onclick="showSkinModal('Jeova')">View</button>
                 </div>
-
+            </div>
         </section>
     </main>
 
@@ -676,19 +692,26 @@
 
             // Show modal
             modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('skinModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         // Close modal when clicking outside
-        window.onclick = function(event) {
+        window.addEventListener('click', function(event) {
             const modal = document.getElementById('skinModal');
-            if (event.target == modal) {
+            if (event.target === modal) {
                 closeModal();
             }
-        }
+        });
+
+        // Prevent modal from closing when clicking inside content
+        document.querySelector('.skin-modal-content').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
     </script>
 </body>
 </html>

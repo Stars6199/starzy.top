@@ -312,30 +312,23 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
-            box-sizing: border-box;
-            overflow-y: auto;
         }
 
         .skin-modal-content {
             background-color: var(--card-bg);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 10px;
             text-align: center;
-            width: 100%;
             max-width: 500px;
+            width: 90%;
             border: 1px solid var(--accent-color);
             box-shadow: 0 0 20px var(--accent-color);
             position: relative;
-            margin: auto;
         }
 
         .modal-skin-container {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            max-height: 300px;
-            aspect-ratio: 1/1;
+            width: 300px;
+            height: 300px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -346,32 +339,23 @@
         }
 
         .modal-skin {
-            width: 100%;
-            height: auto;
-            max-height: 100%;
+            height: 100%;
+            width: auto;
             image-rendering: pixelated;
         }
 
         .modal-username {
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            font-size: 1.5rem;
             color: var(--accent-color);
             margin: 1rem 0;
-            word-break: break-word;
         }
 
         .modal-links {
             display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
             margin-top: 1.5rem;
-        }
-
-        @media (min-width: 480px) {
-            .modal-links {
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
         }
 
         .modal-link {
@@ -384,9 +368,12 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 0.5rem;
-            font-size: clamp(0.8rem, 3vw, 1rem);
+        }
+
+        .modal-link:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
         }
 
         .modal-link img {
@@ -397,19 +384,12 @@
 
         .close-modal {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             color: var(--text-color);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: rgba(30, 30, 30, 0.7);
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
         }
 
         .close-modal:hover {
@@ -626,7 +606,6 @@
                     <button class="minecraft-view-btn" onclick="showSkinModal('Jeova')">View</button>
                 </div>
 
-            </div>
         </section>
     </main>
 
@@ -640,7 +619,7 @@
             <h3 id="modalUsername" class="modal-username"></h3>
             <div class="modal-links">
                 <a id="capesLink" href="#" class="modal-link" target="_blank">
-                    <img src="/Assets/icon/Capes.me.ico" alt="Capes.me">
+                    <img src="https://capes.me/favicon.ico" alt="Capes.me">
                     Capes.me
                 </a>
                 <a id="labyLink" href="#" class="modal-link" target="_blank">

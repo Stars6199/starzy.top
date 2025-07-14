@@ -312,23 +312,30 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow-y: auto;
         }
 
         .skin-modal-content {
             background-color: var(--card-bg);
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 10px;
             text-align: center;
+            width: 100%;
             max-width: 500px;
-            width: 90%;
             border: 1px solid var(--accent-color);
             box-shadow: 0 0 20px var(--accent-color);
             position: relative;
+            margin: auto;
         }
 
         .modal-skin-container {
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            max-height: 300px;
+            aspect-ratio: 1/1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -339,23 +346,32 @@
         }
 
         .modal-skin {
-            height: 100%;
-            width: auto;
+            width: 100%;
+            height: auto;
+            max-height: 100%;
             image-rendering: pixelated;
         }
 
         .modal-username {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
             color: var(--accent-color);
             margin: 1rem 0;
+            word-break: break-word;
         }
 
         .modal-links {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.75rem;
             margin-top: 1.5rem;
+        }
+
+        @media (min-width: 480px) {
+            .modal-links {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
 
         .modal-link {
@@ -368,12 +384,9 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-        }
-
-        .modal-link:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
+            font-size: clamp(0.8rem, 3vw, 1rem);
         }
 
         .modal-link img {
@@ -384,12 +397,19 @@
 
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 10px;
+            right: 10px;
             color: var(--text-color);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            background: rgba(30, 30, 30, 0.7);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .close-modal:hover {

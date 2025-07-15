@@ -400,12 +400,12 @@
         
         <!-- Desktop Navigation -->
         <nav class="nav-desktop">
-            <a href="#" class="nav-link" onclick="navigateTo('index.html')">Home</a>
-            <a href="#" class="nav-link" onclick="navigateTo('socials.html')">Socials</a>
-            <a href="#" class="nav-link" onclick="navigateTo('art.html')">Art</a>
-            <a href="#" class="nav-link" onclick="navigateTo('download.html')">Downloads</a>
-            <a href="#" class="nav-link" onclick="navigateTo('donate.html')">Donate</a>
-            <a href="#" class="nav-link" onclick="navigateTo('contact.html')">Contact</a>
+            <a href="#" class="nav-link" onclick="navigateTo('index')">Home</a>
+            <a href="#" class="nav-link" onclick="navigateTo('socials')">Socials</a>
+            <a href="#" class="nav-link" onclick="navigateTo('art')">Art</a>
+            <a href="#" class="nav-link" onclick="navigateTo('download')">Downloads</a>
+            <a href="#" class="nav-link" onclick="navigateTo('donate')">Donate</a>
+            <a href="#" class="nav-link" onclick="navigateTo('contact')">Contact</a>
         </nav>
         
         <!-- Mobile Navigation Button -->
@@ -418,12 +418,12 @@
             <div class="logo">Menu</div>
             <button class="close-btn" onclick="toggleMobileMenu()">×</button>
         </div>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('index.html')">Home</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('socials.html')">Socials</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('art.html')">Art</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('download.html')">Downloads</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('donate.html')">Donate</a>
-        <a href="#" class="mobile-nav-link" onclick="navigateTo('contact.html')">Contact</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('index')">Home</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('socials')">Socials</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('art')">Art</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('download')">Downloads</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('donate')">Donate</a>
+        <a href="#" class="mobile-nav-link" onclick="navigateTo('contact')">Contact</a>
     </div>
     
     <div class="overlay" id="overlay" onclick="toggleMobileMenu()"></div>
@@ -540,8 +540,8 @@
         function navigateTo(url) {
             // In a real implementation, this would change the window location
             // For this demo, we'll just log it
-            console.log("Navigating to: " + url);
-            // window.location.href = url; // Uncomment this in your actual implementation
+            //console.log("Navigating to: " + url);
+            window.location.href = url; // Uncomment this in your actual implementation
         }
         
         // Mobile menu toggle

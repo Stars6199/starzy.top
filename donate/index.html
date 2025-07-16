@@ -15,6 +15,7 @@
             --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
             --transition-speed: 0.3s;
+            --yellow: #ffff00;
         }
 
         * {
@@ -32,34 +33,40 @@
             flex-direction: column;
         }
 
-        /* Header Styles */
+        /* Header/Navigation - Updated to match portfolio */
         header {
-            background-color: var(--bg-darker);
-            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            position: sticky;
+            padding: 1.5rem 2rem;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
+            background-color: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
-        .logo {
+        .home-btn {
             color: var(--accent-color);
-            font-size: 1.5rem;
             font-weight: bold;
+            font-size: 1.2rem;
             text-decoration: none;
-            transition: all var(--transition-speed) ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
         }
 
-        .logo:hover {
-            text-shadow: 0 0 10px var(--accent-color);
+        .home-btn:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         .nav-desktop {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         @media (max-width: 768px) {
@@ -75,115 +82,54 @@
         @media (max-width: 768px) {
             .nav-mobile {
                 display: block;
+                position: relative;
             }
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 150px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.show {
+            display: flex;
         }
 
         .nav-link {
             color: var(--text-primary);
             text-decoration: none;
-            font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 4px;
-            transition: all var(--transition-speed) ease;
-            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: all var(--transition-speed) ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-        .active {
-            color: var(--accent-color);
-        }
-
-        /* Mobile Menu */
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-btn {
-                display: block;
-            }
-        }
-
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 70%;
-            height: 100vh;
-            background-color: var(--bg-darker);
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .close-btn {
-            align-self: flex-end;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .mobile-nav-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: all var(--transition-speed) ease;
-        }
-
-        .mobile-nav-link:hover {
             background-color: rgba(0, 255, 255, 0.1);
             color: var(--accent-color);
         }
 
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-        }
-
-        .overlay.active {
-            display: block;
+        .active {
+            color: var(--accent-color);
         }
 
         /* Main Content */
@@ -191,7 +137,7 @@
             flex: 1;
             padding: 2rem;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 7rem auto 0;
             width: 100%;
         }
 
@@ -420,35 +366,76 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
+
+        /* Glow Effects from portfolio */
+        .glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0) 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-1 {
+            top: 20%;
+            left: 10%;
+            animation: float-glow 8s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            bottom: 15%;
+            right: 10%;
+            animation: float-glow 10s ease-in-out infinite 2s;
+        }
+
+        @keyframes float-glow {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(20px, 20px);
+            }
+            50% {
+                transform: translate(0, 40px);
+            }
+            75% {
+                transform: translate(-20px, 20px);
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Glow Effects -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <!-- Header - Updated to match portfolio -->
     <header>
-        <a href="/" class="logo" onclick="navigateTo('/')">Home</a>
+        <a href="/" class="home-btn" onclick="navigateTo('/')">Home</a>
         
         <!-- Desktop Navigation -->
         <nav class="nav-desktop">
-            <a href="/socials" class="nav-link">Socials</a>
+            <a href="/socials" class="nav-link" onclick="navigateTo('/socials')">Socials</a>
             <a href="/art" class="nav-link" onclick="navigateTo('/art')">Art</a>
             <a href="/download" class="nav-link" onclick="navigateTo('/download')">Download</a>
             <a href="/donate" class="nav-link active" onclick="navigateTo('/donate')">Donate</a>
             <a href="/contact" class="nav-link" onclick="navigateTo('/contact')">Contact</a>
         </nav>
         
-        <!-- Mobile Navigation Button -->
-        <button class="menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <!-- Mobile Navigation -->
+        <div class="nav-mobile">
+            <button class="nav-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="/socials" class="nav-link" onclick="navigateTo('/socials')">Socials</a>
+                <a href="/art" class="nav-link" onclick="navigateTo('/art')">Art</a>
+                <a href="/download" class="nav-link" onclick="navigateTo('/download')">Download</a>
+                <a href="/donate" class="nav-link" onclick="navigateTo('/donate')">Donate</a>
+                <a href="/contact" class="nav-link" onclick="navigateTo('/contact')">Contact</a>
+            </div>
+        </div>
     </header>
-    
-    <!-- Mobile Menu -->
-    <div class="overlay" id="overlay"></div>
-    <div class="mobile-menu" id="mobileMenu">
-        <button class="close-btn" onclick="toggleMobileMenu()">×</button>
-        <a href="/socials" class="mobile-nav-link">Socials</a>
-        <a href="/art" class="mobile-nav-link" onclick="navigateTo('/art')">Art</a>
-        <a href="/download" class="mobile-nav-link" onclick="navigateTo('/download')">Download</a>
-        <a href="/donate" class="mobile-nav-link" onclick="navigateTo('/donate')">Donate</a>
-        <a href="/contact" class="mobile-nav-link" onclick="navigateTo('/contact')">Contact</a>
-    </div>
     
     <main>
         <section class="welcome-section">
@@ -544,22 +531,28 @@
     <script>
         // Mobile menu toggle
         function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('overlay');
-            
-            mobileMenu.classList.toggle('active');
-            overlay.classList.toggle('active');
-            
-            // Disable scroll when menu is open
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            document.getElementById('mobileMenu').classList.toggle('show');
         }
-        
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navBtn = document.querySelector('.nav-btn');
+            
+            if (mobileMenu.classList.contains('show') && 
+                e.target !== mobileMenu && 
+                !mobileMenu.contains(e.target) && 
+                e.target !== navBtn) {
+                mobileMenu.classList.remove('show');
+            }
+        });
+
         // Navigation function
         function navigateTo(path) {
             // In a real implementation, this would change the page
             // For this example, we'll just log it
-            // console.log(`Navigating to: ${path`);
-            window.location.href = `${page}`;
+            console.log(`Navigating to: ${path}`);
+            // window.location.href = path;
             return false; // Prevent default anchor behavior
         }
         
@@ -577,9 +570,18 @@
                 console.error('Failed to copy text: ', err);
             });
         }
-        
-        // Close mobile menu when clicking overlay
-        document.getElementById('overlay').addEventListener('click', toggleMobileMenu);
+
+        // Mouse follower glow effect
+        document.addEventListener('mousemove', function(e) {
+            const glow1 = document.querySelector('.glow-1');
+            const glow2 = document.querySelector('.glow-2');
+            
+            // Only update if not on mobile (where mouse events might not work well)
+            if (window.innerWidth > 768) {
+                glow1.style.transform = `translate(${e.clientX * 0.05}px, ${e.clientY * 0.05}px)`;
+                glow2.style.transform = `translate(${e.clientX * -0.03}px, ${e.clientY * -0.03}px)`;
+            }
+        });
     </script>
 </body>
 </html>

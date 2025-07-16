@@ -11,6 +11,7 @@
             --accent-color: #00ffff;
             --card-bg: #1e1e1e;
             --hover-color: #00cccc;
+            --yellow: #ffff00;
         }
 
         * {
@@ -28,36 +29,43 @@
             display: flex;
             flex-direction: column;
             touch-action: manipulation;
+            padding-top: 80px; /* Added for fixed header */
         }
 
+        /* Header/Navigation */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 2rem;
-            background-color: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background-color: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+        .home-btn {
             color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
             text-decoration: none;
             transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
         }
 
-        .logo:hover {
-            text-shadow: 0 0 10px var(--accent-color);
+        .home-btn:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         .nav-desktop {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         @media (max-width: 768px) {
@@ -73,90 +81,50 @@
         @media (max-width: 768px) {
             .nav-mobile {
                 display: block;
+                position: relative;
             }
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 150px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.show {
+            display: flex;
         }
 
         .nav-link {
             color: var(--text-color);
             text-decoration: none;
-            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
             transition: all 0.3s ease;
-            position: relative;
-            padding: 0.5rem 0;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
+            background-color: rgba(0, 255, 255, 0.1);
             color: var(--accent-color);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 21px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-        }
-
-        .hamburger-line {
-            width: 100%;
-            height: 3px;
-            background-color: var(--text-color);
-            transition: all 0.3s ease;
-        }
-
-        .hamburger.active .hamburger-line:nth-child(1) {
-            transform: translateY(9px) rotate(45deg);
-        }
-
-        .hamburger.active .hamburger-line:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active .hamburger-line:nth-child(3) {
-            transform: translateY(-9px) rotate(-45deg);
-        }
-
-        .mobile-menu {
-            position: fixed;
-            top: 80px;
-            right: -100%;
-            width: 70%;
-            height: calc(100vh - 80px);
-            background-color: var(--card-bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem 0;
-            gap: 1.5rem;
-            transition: right 0.3s ease;
-            z-index: 99;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .mobile-menu.active {
-            right: 0;
         }
 
         main {
@@ -444,24 +412,14 @@
         .minecraft-card:nth-child(even):hover {
             animation: float 3s ease-in-out infinite reverse;
         }
-
-        /* Glow effect for header */
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            box-shadow: 0 0 10px var(--accent-color);
-        }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <a href="/" class="logo" onclick="event.preventDefault(); window.location.href='/'">Home</a>
-
+        <a href="/" class="home-btn" onclick="event.preventDefault(); window.location.href='/'">Home</a>
+        
+        <!-- Desktop Navigation -->
         <nav class="nav-desktop">
             <a href="/socials" class="nav-link" onclick="event.preventDefault(); window.location.href='/socials'">Socials</a>
             <a href="/art" class="nav-link" onclick="event.preventDefault(); window.location.href='/art'">Art</a>
@@ -469,19 +427,16 @@
             <a href="/donate" class="nav-link" onclick="event.preventDefault(); window.location.href='/donate'">Donate</a>
             <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'">Contact</a>
         </nav>
-
+        
+        <!-- Mobile Navigation -->
         <div class="nav-mobile">
-            <div class="hamburger" onclick="toggleMenu()">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </div>
+            <button class="nav-btn" onclick="toggleMobileMenu()">☰</button>
             <div class="mobile-menu" id="mobileMenu">
-                <a href="/socials" class="nav-link" onclick="event.preventDefault(); window.location.href='/socials'; toggleMenu()">Socials</a>
-                <a href="/art" class="nav-link" onclick="event.preventDefault(); window.location.href='/art'; toggleMenu()">Art</a>
-                <a href="/download" class="nav-link" onclick="event.preventDefault(); window.location.href='/download'; toggleMenu()">Download</a>
-                <a href="/donate" class="nav-link" onclick="event.preventDefault(); window.location.href='/donate'; toggleMenu()">Donate</a>
-                <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'; toggleMenu()">Contact</a>
+                <a href="/socials" class="nav-link" onclick="event.preventDefault(); window.location.href='/socials'; toggleMobileMenu()">Socials</a>
+                <a href="/art" class="nav-link" onclick="event.preventDefault(); window.location.href='/art'; toggleMobileMenu()">Art</a>
+                <a href="/download" class="nav-link" onclick="event.preventDefault(); window.location.href='/download'; toggleMobileMenu()">Download</a>
+                <a href="/donate" class="nav-link" onclick="event.preventDefault(); window.location.href='/donate'; toggleMobileMenu()">Donate</a>
+                <a href="/contact" class="nav-link" onclick="event.preventDefault(); window.location.href='/contact'; toggleMobileMenu()">Contact</a>
             </div>
         </div>
     </header>
@@ -664,22 +619,21 @@
     </footer>
 
     <script>
-        function toggleMenu() {
-            const hamburger = document.querySelector('.hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('show');
         }
 
         // Close mobile menu when clicking outside
         document.addEventListener('click', function(event) {
-            const hamburger = document.querySelector('.hamburger');
             const mobileMenu = document.getElementById('mobileMenu');
-
-            if (!event.target.closest('.nav-mobile') && mobileMenu.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
+            const navBtn = document.querySelector('.nav-btn');
+            
+            if (mobileMenu.classList.contains('show') && 
+                event.target !== mobileMenu && 
+                !mobileMenu.contains(event.target) && 
+                event.target !== navBtn) {
+                mobileMenu.classList.remove('show');
             }
         });
 

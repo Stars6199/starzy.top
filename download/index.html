@@ -247,12 +247,20 @@
             justify-content: center;
             background-color: #333;
             padding: 1rem;
+            height: 180px; /* Fixed height for consistency */
+        }
+
+        .skin-preview-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
 
         .skin-preview img {
-            width: 100%;
-            max-width: 200px;
+            width: 80px; /* Fixed width for Minecraft skin preview */
+            height: auto;
             image-rendering: pixelated;
+            object-fit: contain;
         }
 
         .skin-info {
@@ -390,44 +398,52 @@
             <div class="skins-grid">
                 <div class="skin-card">
                     <div class="skin-preview">
-                        <img src="/Assets/Skins/StarsFront.png" alt="Skin Preview Front">
-                        <img src="/Assets/Skins/StarsBack.png" alt="Skin Preview Back">
+                        <div class="skin-preview-container">
+                            <img src="/Assets/Skins/StarsFront.png" alt="Stars Skin Front">
+                            <img src="/Assets/Skins/StarsBack.png" alt="Stars Skin Back">
+                        </div>
                     </div>
                     <div class="skin-info">
-                        <a href="#" class="skin-name" download="CyberNinja.png">Stars</a>
+                        <a href="/Assets/Skins/StarsFront.png" class="skin-name" download="Stars.png">Stars</a>
                         <span class="skin-creator">Created by creqpe</span>
                     </div>
                 </div>
                 
                 <div class="skin-card">
                     <div class="skin-preview">
-                        <img src="/Assets/Skins/StarsSakuraFront.png" alt="Skin Preview Front">
-                        <img src="/Assets/Skins/StarsSakuraBack.png" alt="Skin Preview Back">
+                        <div class="skin-preview-container">
+                            <img src="/Assets/Skins/StarsSakuraFront.png" alt="Stars Cherry Skin Front">
+                            <img src="/Assets/Skins/StarsSakuraBack.png" alt="Stars Cherry Skin Back">
+                        </div>
                     </div>
                     <div class="skin-info">
-                        <a href="#" class="skin-name" download="SteampunkAdventurer.png">Stars Cherry</a>
+                        <a href="/Assets/Skins/StarsSakuraFront.png" class="skin-name" download="StarsCherry.png">Stars Cherry</a>
                         <span class="skin-creator">Created by creqpe</span>
                     </div>
                 </div>
                 
                 <div class="skin-card">
                     <div class="skin-preview">
-                        <img src="/Assets/Skins/StarsWinterFront.png" alt="Skin Preview Front">
-                        <img src="/Assets/Skins/StarsWinterBack.png" alt="Skin Preview Back">
+                        <div class="skin-preview-container">
+                            <img src="/Assets/Skins/StarsWinterFront.png" alt="Stars Winter Skin Front">
+                            <img src="/Assets/Skins/StarsWinterBack.png" alt="Stars Winter Skin Back">
+                        </div>
                     </div>
                     <div class="skin-info">
-                        <a href="#" class="skin-name" download="NetherKnight.png">Stars Winter</a>
+                        <a href="/Assets/Skins/StarsWinterFront.png" class="skin-name" download="StarsWinter.png">Stars Winter</a>
                         <span class="skin-creator">Created by creqpe</span>
                     </div>
                 </div>
                 
                 <div class="skin-card">
                     <div class="skin-preview">
-                        <img src="/Assets/Skins/StarsOldFront.png" alt="Skin Preview Front">
-                        <img src="/Assets/Skins/StarsOldBack.png" alt="Skin Preview Back">
+                        <div class="skin-preview-container">
+                            <img src="/Assets/Skins/StarsOldFront.png" alt="Stars Concept Skin Front">
+                            <img src="/Assets/Skins/StarsOldBack.png" alt="Stars Concept Skin Back">
+                        </div>
                     </div>
                     <div class="skin-info">
-                        <a href="#" class="skin-name" download="OceanMage.png">Stars (Concept)</a>
+                        <a href="/Assets/Skins/StarsOldFront.png" class="skin-name" download="StarsConcept.png">Stars (Concept)</a>
                         <span class="skin-creator">Created by CyanWolf</span>
                     </div>
                 </div>
@@ -477,7 +493,7 @@
         });
 
         // Simulate download for demo purposes
-        document.querySelectorAll('.download-btn, .skin-name').forEach(btn => {
+        document.querySelectorAll('.download-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 if (this.classList.contains('not-available')) {
                     e.preventDefault();

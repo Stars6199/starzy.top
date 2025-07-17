@@ -193,6 +193,7 @@
             display: flex;
             gap: 2rem;
             margin-top: 2rem;
+            align-items: center;
         }
 
         @media (max-width: 768px) {
@@ -217,20 +218,37 @@
             border-color: rgba(0, 255, 255, 0.3);
         }
 
-        .contact-form {
+        .email-picture-container {
             flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: var(--card-bg);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
             border: 1px solid rgba(0, 255, 255, 0.1);
+            height: 100%;
         }
 
-        .contact-form:hover {
+        .email-picture-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 255, 255, 0.1);
             border-color: rgba(0, 255, 255, 0.3);
+        }
+
+        .email-picture {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            transition: var(--transition);
+            filter: grayscale(30%) contrast(110%);
+        }
+
+        .email-picture-container:hover .email-picture {
+            filter: grayscale(0%) contrast(120%);
+            transform: scale(1.02);
         }
 
         h1 {
@@ -278,6 +296,8 @@
             transition: var(--transition);
             display: inline-block;
             position: relative;
+            font-size: 1.2rem;
+            font-weight: bold;
         }
 
         .email-link:hover {
@@ -297,59 +317,6 @@
 
         .email-link:hover::after {
             width: 100%;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: var(--bg-darker);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 5px;
-            color: var(--text-primary);
-            transition: var(--transition);
-        }
-
-        input:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .submit-btn {
-            background-color: var(--accent);
-            color: var(--bg-darker);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
         }
 
         /* Animation Effects */
@@ -434,7 +401,7 @@
     <main>
         <h1 class="floating">Get In Touch</h1>
         <p style="color: var(--text-secondary); max-width: 600px; line-height: 1.6;">
-            Have a question or want to work together? Feel free to reach out through the contact form or directly via email.
+            Have a question or want to work together? Feel free to reach out directly via email.
         </p>
         
         <div class="contact-container">
@@ -442,12 +409,12 @@
                 <h2>Contact Information</h2>
                 
                 <div class="info-item">
-                    <h3>Message Us</h3>
-                    <p>We're here to answer any questions you may have about our services or projects. Reach out to us and we'll respond as soon as we can.</p>
+                    <h3>Email Us</h3>
+                    <p>We're here to answer any questions you may have. Reach out to us via email and we'll respond as soon as we can.</p>
                 </div>
                 
                 <div class="info-item">
-                    <h3>Email</h3>
+                    <h3>Email Address</h3>
                     <p>
                         <a href="mailto:your@email.com" class="email-link">your@email.com</a>
                     </p>
@@ -455,36 +422,13 @@
                 
                 <div class="info-item">
                     <h3>Follow Us</h3>
-                    <p>Stay updated with our latest work and announcements through our social media channels.</p>
+                    <p>Stay updated with our latest work through our social media channels.</p>
                 </div>
             </div>
             
-            <div class="contact-form">
-                <h2>Send Us a Message</h2>
-                
-                <form>
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+            <div class="email-picture-container">
+                <!-- Replace with your actual email image -->
+                <img src="https://images.unsplash.com/photo-1545696968-1a5245650b36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Email Illustration" class="email-picture">
             </div>
         </div>
     </main>
@@ -534,23 +478,21 @@
             });
         });
         
-        // Form submission
-        const form = document.querySelector('form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Message sent! (This is a demo)');
-            form.reset();
-        });
-        
         // Cool hover effect for contact sections
-        const contactSections = document.querySelectorAll('.contact-info, .contact-form');
+        const contactSections = document.querySelectorAll('.contact-info, .email-picture-container');
         contactSections.forEach(section => {
             section.addEventListener('mouseenter', () => {
-                section.querySelector('h2').classList.add('glow');
+                const heading = section.querySelector('h2');
+                if (heading) {
+                    heading.classList.add('glow');
+                }
             });
             
             section.addEventListener('mouseleave', () => {
-                section.querySelector('h2').classList.remove('glow');
+                const heading = section.querySelector('h2');
+                if (heading) {
+                    heading.classList.remove('glow');
+                }
             });
         });
     </script>

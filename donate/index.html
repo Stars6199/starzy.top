@@ -16,6 +16,8 @@
             --card-hover: #2a2a2a;
             --transition-speed: 0.3s;
             --yellow: #ffff00;
+            --pink: #ff5e9a;
+            --blue: #29abe2;
         }
 
         * {
@@ -331,6 +333,126 @@
             opacity: 1;
         }
 
+        /* Platform Donation Section */
+        .platform-section {
+            margin: 3rem 0;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .platform-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.1);
+        }
+
+        .platform-card.ko-fi {
+            border: 1px solid rgba(255, 94, 154, 0.3);
+        }
+
+        .platform-card.ko-fi:hover {
+            background-color: rgba(255, 94, 154, 0.05);
+            border-color: var(--pink);
+        }
+
+        .platform-card.sociabuzz {
+            border: 1px solid rgba(41, 171, 226, 0.3);
+        }
+
+        .platform-card.sociabuzz:hover {
+            background-color: rgba(41, 171, 226, 0.05);
+            border-color: var(--blue);
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .platform-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+        }
+
+        .platform-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .platform-name.ko-fi {
+            color: var(--pink);
+        }
+
+        .platform-name.sociabuzz {
+            color: var(--blue);
+        }
+
+        .platform-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .donate-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+            margin-top: 0.5rem;
+        }
+
+        .donate-btn.ko-fi {
+            background-color: var(--pink);
+            color: white;
+            border: 1px solid var(--pink);
+        }
+
+        .donate-btn.ko-fi:hover {
+            background-color: transparent;
+            color: var(--pink);
+            box-shadow: 0 0 15px rgba(255, 94, 154, 0.3);
+        }
+
+        .donate-btn.sociabuzz {
+            background-color: var(--blue);
+            color: white;
+            border: 1px solid var(--blue);
+        }
+
+        .donate-btn.sociabuzz:hover {
+            background-color: transparent;
+            color: var(--blue);
+            box-shadow: 0 0 15px rgba(41, 171, 226, 0.3);
+        }
+
         /* Coming Soon Section */
         .coming-soon {
             margin: 3rem 0;
@@ -448,6 +570,38 @@
             <p class="alternative-donate">
                 Wanna donate with another method? <a href="/contact" class="contact-link" onclick="navigateTo('/contact')">Contact me!</a>
             </p>
+        </section>
+        
+        <!-- Platform Donations Section -->
+        <section class="platform-section">
+            <h2 class="section-title">Platform Donations</h2>
+            <div class="platform-grid">
+                <!-- Ko-fi -->
+                <div class="platform-card ko-fi">
+                    <div class="platform-header">
+                        <img src="https://storage.ko-fi.com/cdn/brandasset/kofi_s_logo_nolabel.png" alt="Ko-fi" class="platform-logo">
+                        <h3 class="platform-name ko-fi">Ko-fi</h3>
+                    </div>
+                    <p class="platform-description">
+                        Support me with a one-time donation or monthly membership on Ko-fi. 
+                        You can also leave a message with your donation!
+                    </p>
+                    <a href="https://ko-fi.com/gemintang" target="_blank" class="donate-btn ko-fi">Donate via Ko-fi</a>
+                </div>
+                
+                <!-- Sociabuzz -->
+                <div class="platform-card sociabuzz">
+                    <div class="platform-header">
+                        <img src="https://www.sociabuzz.com/static/media/sociabuzz-logo.1d1e9a5f.svg" alt="Sociabuzz" class="platform-logo">
+                        <h3 class="platform-name sociabuzz">Sociabuzz</h3>
+                    </div>
+                    <p class="platform-description">
+                        Support my work through Sociabuzz, a platform for creators. 
+                        You can send tips or become a supporter with exclusive benefits.
+                    </p>
+                    <a href="https://sociabuzz.com/starry/tribe" target="_blank" class="donate-btn sociabuzz">Support on Sociabuzz</a>
+                </div>
+            </div>
         </section>
         
         <section class="crypto-section">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate</title>
+    <title>Minecraft Downloads</title>
     <style>
         :root {
             --bg-dark: #121212;
@@ -15,7 +15,6 @@
             --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
             --transition-speed: 0.3s;
-            --yellow: #ffff00;
         }
 
         * {
@@ -33,7 +32,7 @@
             flex-direction: column;
         }
 
-        /* Header/Navigation - Updated to match portfolio */
+        /* Header - Updated to match donate page */
         header {
             display: flex;
             justify-content: space-between;
@@ -152,63 +151,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 {
+        .welcome-message {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--accent-color);
             text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
         }
 
-        .welcome-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .alternative-donate {
-            margin: 2rem 0;
-            font-size: 1.1rem;
-        }
-
-        .contact-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: bold;
-            transition: all var(--transition-speed) ease;
-            position: relative;
-        }
-
-        .contact-link:hover {
-            text-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .contact-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--accent-color);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform var(--transition-speed) ease;
-        }
-
-        .contact-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* Crypto Section */
-        .crypto-section {
-            margin: 3rem 0;
-        }
-
         .section-title {
             font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            margin: 2rem 0 1.5rem;
             color: var(--accent-color);
             position: relative;
             display: inline-block;
@@ -224,114 +176,136 @@
             background: linear-gradient(90deg, var(--accent-color), transparent);
         }
 
-        .crypto-grid {
+        .section-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Event Table */
+        .event-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 3rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .event-table th, .event-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .event-table th {
+            background-color: rgba(0, 255, 255, 0.1);
+            color: var(--accent-color);
+        }
+
+        .event-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .event-table tr:hover {
+            background-color: var(--card-hover);
+        }
+
+        .download-btn {
+            background-color: var(--accent-color);
+            color: var(--bg-darker);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .download-btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.3);
+        }
+
+        .not-available {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Skins Section */
+        .skins-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        @media (max-width: 768px) {
-            .crypto-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .crypto-card {
+        .skin-card {
             background-color: var(--card-bg);
             border-radius: 10px;
-            padding: 1.5rem;
-            transition: all var(--transition-speed) ease;
+            overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all var(--transition-speed) ease;
             border: 1px solid rgba(0, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        .crypto-card:hover {
+        .skin-card:hover {
             transform: translateY(-5px);
             background-color: var(--card-hover);
             box-shadow: 0 8px 25px rgba(0, 255, 255, 0.1);
             border-color: rgba(0, 255, 255, 0.3);
         }
 
-        .crypto-header {
+        .skin-preview {
             display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            width: 100%;
             justify-content: center;
+            background-color: #333;
+            padding: 1.5rem;
+            height: 220px;
         }
 
-        .crypto-logo {
-            width: 40px;
-            height: 40px;
-            margin-right: 1rem;
+        .skin-preview-container {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            height: 100%;
         }
 
-        .crypto-name {
-            font-size: 1.3rem;
-            font-weight: bold;
+        .skin-preview img {
+            width: 120px;
+            height: auto;
+            image-rendering: pixelated;
+            object-fit: contain;
         }
 
-        .qr-code {
-            width: 150px;
-            height: 150px;
-            margin: 1rem 0;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 5px;
-            padding: 5px;
-            background: white;
-        }
-
-        .address-container {
-            width: 100%;
+        .skin-info {
+            padding: 1.2rem;
             text-align: center;
-            margin-top: 1rem;
         }
 
-        .address-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .address {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: rgba(0, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            word-break: break-all;
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            position: relative;
-            border: 1px solid rgba(0, 255, 255, 0.2);
-        }
-
-        .address:hover {
-            background-color: rgba(0, 255, 255, 0.2);
+        .skin-name {
+            display: block;
             color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+            font-size: 1.1rem;
         }
 
-        .copy-notification {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--accent-dark);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .skin-name:hover {
+            text-shadow: 0 0 8px var(--accent-color);
         }
 
-        .address.copied .copy-notification {
-            opacity: 1;
+        .skin-creator {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
-        /* Coming Soon Section */
+        /* Coming Soon Section - Updated to match donate page */
         .coming-soon {
             margin: 3rem 0;
             text-align: center;
@@ -341,14 +315,17 @@
             border: 1px dashed rgba(0, 255, 255, 0.3);
         }
 
+        .coming-soon-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
         .coming-soon-text {
             font-size: 1.2rem;
             color: var(--text-secondary);
             font-style: italic;
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
@@ -362,12 +339,11 @@
             background-color: var(--bg-darker);
             padding: 1.5rem;
             text-align: center;
-            margin-top: 2rem;
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
-        /* Glow Effects from portfolio */
+        /* Glow Effects */
         .glow {
             position: fixed;
             width: 200px;
@@ -411,7 +387,7 @@
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
 
-    <!-- Header - Updated to match portfolio -->
+    <!-- Header - Updated to match donate page -->
     <header>
         <a href="/" class="home-btn" onclick="navigateTo('/')">Home</a>
         
@@ -419,8 +395,8 @@
         <nav class="nav-desktop">
             <a href="/socials" class="nav-link" onclick="navigateTo('/socials')">Socials</a>
             <a href="/art" class="nav-link" onclick="navigateTo('/art')">Art</a>
-            <a href="/download" class="nav-link" onclick="navigateTo('/download')">Download</a>
-            <a href="/donate" class="nav-link active" onclick="navigateTo('/donate')">Donate</a>
+            <a href="/download" class="nav-link active" onclick="navigateTo('/download')">Download</a>
+            <a href="/donate" class="nav-link" onclick="navigateTo('/donate')">Donate</a>
             <a href="/contact" class="nav-link" onclick="navigateTo('/contact')">Contact</a>
         </nav>
         
@@ -430,104 +406,121 @@
             <div class="mobile-menu" id="mobileMenu">
                 <a href="/socials" class="nav-link" onclick="navigateTo('/socials')">Socials</a>
                 <a href="/art" class="nav-link" onclick="navigateTo('/art')">Art</a>
-                <a href="/download" class="nav-link" onclick="navigateTo('/download')">Download</a>
+                <a href="/download" class="nav-link active" onclick="navigateTo('/download')">Download</a>
                 <a href="/donate" class="nav-link" onclick="navigateTo('/donate')">Donate</a>
                 <a href="/contact" class="nav-link" onclick="navigateTo('/contact')">Contact</a>
             </div>
         </div>
     </header>
-    
+
     <main>
         <section class="welcome-section">
-            <h1>Support My Work</h1>
-            <p class="welcome-text">
-                Thank you for considering to support my work! Your donations help me continue creating and improving my projects. 
-                Every contribution, no matter how small, is greatly appreciated and goes directly towards development and maintenance.
-                (and yeah, i need pay for the domain).
-            </p>
-            <p class="alternative-donate">
-                Wanna donate with another method? <a href="/contact" class="contact-link" onclick="navigateTo('/contact')">Contact me!</a>
-            </p>
+            <h1 class="welcome-message">Welcome to My Minecraft Downloads!</h1>
+            <p class="section-subtitle">Find all the resources, worlds, and skins from my Minecraft adventures here.</p>
         </section>
-        
-        <section class="crypto-section">
-            <h2 class="section-title">Crypto Donations</h2>
-            <div class="crypto-grid">
-                <!-- Bitcoin -->
-                <div class="crypto-card">
-                    <div class="crypto-header">
-                        <img src="/Assets/CryptoLogo/Bitcoin.png" alt="Bitcoin" class="crypto-logo">
-                        <h3 class="crypto-name">Bitcoin</h3>
-                    </div>
-                    <img src="/Assets/CryptoQR/Bitcoin.jpg" alt="Bitcoin QR Code" class="qr-code">
-                    <div class="address-container">
-                        <p class="address-label">Wallet Address:</p>
-                        <div class="address" onclick="copyToClipboard(this, 'bc1qjwpgex0fuwfn7sr0j2fe7anvx66fap2v20sjcf')">
-                            <span class="copy-notification">Copied!</span>
-                            bc1qjwpgex0fuwfn7sr0j2fe7anvx66fap2v20sjcf
+
+        <section class="events-section">
+            <h2 class="section-title">Server Events</h2>
+            <p class="section-subtitle">Wanna download resources and worlds from Minecraft server events? I gotchu bro!</p>
+            
+            <table class="event-table">
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Resource Pack</th>
+                        <th>World</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Halloween Special 2023</td>
+                        <td><button class="download-btn">Download</button></td>
+                        <td><button class="download-btn">Download</button></td>
+                    </tr>
+                    <tr>
+                        <td>Winter Festival</td>
+                        <td><button class="download-btn">Download</button></td>
+                        <td class="not-available">Not Available</td>
+                    </tr>
+                    <tr>
+                        <td>Summer Adventure</td>
+                        <td class="not-available">Not Available</td>
+                        <td><button class="download-btn">Download</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="skins-section">
+            <h2 class="section-title">Skins</h2>
+            <p class="section-subtitle">Click the skin name to download!</p>
+            
+            <div class="skins-grid">
+                <div class="skin-card">
+                    <div class="skin-preview">
+                        <div class="skin-preview-container">
+                            <img src="/Assets/Skins/StarsFront.png" alt="Stars Skin Front">
+                            <img src="/Assets/Skins/StarsBack.png" alt="Stars Skin Back">
                         </div>
+                    </div>
+                    <div class="skin-info">
+                        <a href="/Assets/Skins/StarsFront.png" class="skin-name" download="Stars.png">Stars</a>
+                        <span class="skin-creator">Created by creqpe</span>
                     </div>
                 </div>
                 
-                <!-- Ethereum -->
-                <div class="crypto-card">
-                    <div class="crypto-header">
-                        <img src="/Assets/CryptoLogo/Ethereum.png" alt="Ethereum" class="crypto-logo">
-                        <h3 class="crypto-name">Ethereum</h3>
-                    </div>
-                    <img src="/Assets/CryptoQR/Ethereum.jpg" alt="Ethereum QR Code" class="qr-code">
-                    <div class="address-container">
-                        <p class="address-label">Wallet Address:</p>
-                        <div class="address" onclick="copyToClipboard(this, '0xD29e33Dea83c1130De7eaEb8b383D2340499775E')">
-                            <span class="copy-notification">Copied!</span>
-                            0xD29e33Dea83c1130De7eaEb8b383D2340499775E
+                <div class="skin-card">
+                    <div class="skin-preview">
+                        <div class="skin-preview-container">
+                            <img src="/Assets/Skins/StarsSakuraFront.png" alt="Stars Cherry Skin Front">
+                            <img src="/Assets/Skins/StarsSakuraBack.png" alt="Stars Cherry Skin Back">
                         </div>
+                    </div>
+                    <div class="skin-info">
+                        <a href="/Assets/Skins/StarsSakuraFront.png" class="skin-name" download="StarsCherry.png">Stars Cherry</a>
+                        <span class="skin-creator">Created by creqpe</span>
                     </div>
                 </div>
                 
-                <!-- Litecoin -->
-                <div class="crypto-card">
-                    <div class="crypto-header">
-                        <img src="/Assets/CryptoLogo/Litecoin.png" alt="Litecoin" class="crypto-logo">
-                        <h3 class="crypto-name">Litecoin</h3>
-                    </div>
-                    <img src="/Assets/CryptoQR/Litecoin.jpg" alt="Litecoin QR Code" class="qr-code">
-                    <div class="address-container">
-                        <p class="address-label">Wallet Address:</p>
-                        <div class="address" onclick="copyToClipboard(this, 'LhixMifGZFawYoKAhUpSSphZCRYX95icxE')">
-                            <span class="copy-notification">Copied!</span>
-                            LhixMifGZFawYoKAhUpSSphZCRYX95icxE
+                <div class="skin-card">
+                    <div class="skin-preview">
+                        <div class="skin-preview-container">
+                            <img src="/Assets/Skins/StarsWinterFront.png" alt="Stars Winter Skin Front">
+                            <img src="/Assets/Skins/StarsWinterBack.png" alt="Stars Winter Skin Back">
                         </div>
+                    </div>
+                    <div class="skin-info">
+                        <a href="/Assets/Skins/StarsWinterFront.png" class="skin-name" download="StarsWinter.png">Stars Winter</a>
+                        <span class="skin-creator">Created by creqpe</span>
                     </div>
                 </div>
                 
-                <!-- Solana -->
-                <div class="crypto-card">
-                    <div class="crypto-header">
-                        <img src="/Assets/CryptoLogo/Solana.png" alt="Solana" class="crypto-logo">
-                        <h3 class="crypto-name">Solana</h3>
-                    </div>
-                    <img src="/Assets/CryptoQR/Solana.jpg" alt="Solana QR Code" class="qr-code">
-                    <div class="address-container">
-                        <p class="address-label">Wallet Address:</p>
-                        <div class="address" onclick="copyToClipboard(this, 'FoN4uUhi7cT5NEWDNCkgsAwhFaXzqn33SEENHpRGfEPX')">
-                            <span class="copy-notification">Copied!</span>
-                            FoN4uUhi7cT5NEWDNCkgsAwhFaXzqn33SEENHpRGfEPX
+                <div class="skin-card">
+                    <div class="skin-preview">
+                        <div class="skin-preview-container">
+                            <img src="/Assets/Skins/StarsOldFront.png" alt="Stars Concept Skin Front">
+                            <img src="/Assets/Skins/StarsOldBack.png" alt="Stars Concept Skin Back">
                         </div>
+                    </div>
+                    <div class="skin-info">
+                        <a href="/Assets/Skins/StarsOldFront.png" class="skin-name" download="StarsConcept.png">Stars (Concept)</a>
+                        <span class="skin-creator">Created by CyanWolf</span>
                     </div>
                 </div>
             </div>
         </section>
-        
+
+        <!-- Coming Soon Section - Updated to match donate page -->
         <section class="coming-soon">
-            <p class="coming-soon-text pulse">More donation methods coming soon! Stay tuned for updates.</p>
+            <div class="coming-soon-icon">✨</div>
+            <p class="coming-soon-text">There will be cool stuff available for download soon! Stay tuned!</p>
         </section>
     </main>
-    
+
     <footer>
         <p>&copy; 2025 Stars. All rights reserved.</p>
     </footer>
-    
+
     <script>
         // Mobile menu toggle
         function toggleMobileMenu() {
@@ -555,21 +548,18 @@
             // window.location.href = path;
             return false; // Prevent default anchor behavior
         }
-        
-        // Copy to clipboard function
-        function copyToClipboard(element, text) {
-            navigator.clipboard.writeText(text).then(() => {
-                // Show copied notification
-                element.classList.add('copied');
-                
-                // Remove the class after animation completes
-                setTimeout(() => {
-                    element.classList.remove('copied');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
+
+        // Simulate download for demo purposes
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.classList.contains('not-available')) {
+                    e.preventDefault();
+                    return;
+                }
+                alert('Download would start here! In a real implementation, this would download the file.');
+                e.preventDefault();
             });
-        }
+        });
 
         // Mouse follower glow effect
         document.addEventListener('mousemove', function(e) {

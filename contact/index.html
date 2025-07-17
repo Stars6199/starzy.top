@@ -9,10 +9,10 @@
             --bg-dark: #121212;
             --bg-darker: #0a0a0a;
             --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
+            --text-secondary: #b0b0b0;
             --accent: #00ffff;
             --accent-dark: #008b8b;
-            --transition: all 0.3s ease;
+            --transition-speed: 0.3s;
         }
 
         * {
@@ -26,49 +26,33 @@
             background-color: var(--bg-dark);
             color: var(--text-primary);
             min-height: 100vh;
-            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header Styles */
         header {
+            background-color: var(--bg-darker);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
-            background-color: var(--bg-darker);
-            position: fixed;
-            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .home-btn {
-            color: var(--text-primary);
-            text-decoration: none;
+        .logo {
+            font-size: 1.5rem;
             font-weight: bold;
-            font-size: 1.2rem;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .home-btn:hover {
             color: var(--accent);
+            text-decoration: none;
+            transition: color var(--transition-speed);
         }
 
-        .home-btn::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: var(--transition);
-        }
-
-        .home-btn:hover::after {
-            width: 100%;
+        .logo:hover {
+            color: var(--text-primary);
         }
 
         .nav-desktop {
@@ -93,11 +77,10 @@
         }
 
         .nav-link {
-            color: var(--text-primary);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem 0;
+            transition: all var(--transition-speed);
             position: relative;
         }
 
@@ -108,12 +91,12 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
             background-color: var(--accent);
-            transition: var(--transition);
+            transition: width var(--transition-speed);
         }
 
         .nav-link:hover::after {
@@ -121,43 +104,43 @@
         }
 
         /* Mobile Menu */
-        .hamburger {
-            display: none;
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
             cursor: pointer;
-            width: 30px;
-            height: 20px;
+            display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 5px;
+            padding: 5px;
         }
 
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-        }
-
-        .hamburger-line {
-            width: 100%;
+        .menu-line {
+            width: 25px;
             height: 3px;
             background-color: var(--text-primary);
-            border-radius: 3px;
-            transition: var(--transition);
+            transition: all var(--transition-speed);
+        }
+
+        .menu-btn:hover .menu-line {
+            background-color: var(--accent);
         }
 
         .mobile-menu {
             position: fixed;
-            top: 80px;
-            right: -300px;
-            width: 250px;
+            top: 70px;
+            right: -100%;
             background-color: var(--bg-darker);
-            padding: 1.5rem;
+            width: 200px;
+            padding: 1rem;
             border-radius: 0 0 0 10px;
             box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-            z-index: 99;
+            transition: right 0.3s ease;
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            z-index: 99;
         }
 
         .mobile-menu.active {
@@ -166,85 +149,43 @@
 
         /* Main Content */
         main {
-            padding: 8rem 2rem 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .contact-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 3rem;
-            justify-content: center;
-        }
-
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-            background-color: var(--bg-darker);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .contact-form:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.1);
-        }
-
-        .contact-image {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .email-icon {
+            max-width: 1000px;
             width: 100%;
-            max-width: 300px;
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
-            animation: float 4s ease-in-out infinite;
+            background-color: var(--bg-darker);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        .contact-container:hover {
+            transform: translateY(-5px);
         }
 
-        .social-links {
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        .contact-message {
+            flex: 1;
+            padding: 3rem;
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--bg-dark);
-            display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            transition: var(--transition);
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.2rem;
         }
 
-        .social-link:hover {
-            background-color: var(--accent);
-            color: var(--bg-dark);
-            transform: scale(1.1);
-        }
-
-        h1 {
+        .contact-message h1 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
             color: var(--accent);
@@ -252,235 +193,178 @@
             display: inline-block;
         }
 
-        h1::after {
+        .contact-message h1::after {
             content: '';
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 50%;
+            width: 50px;
             height: 3px;
             background-color: var(--accent);
-            border-radius: 3px;
         }
 
-        p {
+        .contact-message p {
+            font-size: 1.1rem;
             line-height: 1.6;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             color: var(--text-secondary);
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        .social-links {
+            display: flex;
+            gap: 1rem;
         }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .social-link {
             color: var(--text-primary);
+            font-size: 1.5rem;
+            transition: color var(--transition-speed), transform var(--transition-speed);
         }
 
-        input, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: var(--bg-dark);
-            border: 1px solid #333;
-            border-radius: 5px;
-            color: var(--text-primary);
-            transition: var(--transition);
+        .social-link:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
         }
 
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
+        .contact-image {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 139, 139, 0.2));
+            position: relative;
+            overflow: hidden;
         }
 
-        textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background-color: var(--accent);
-            color: var(--bg-dark);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-        }
-
-        /* Glow effect */
-        .glow-effect {
+        .contact-image::before {
+            content: '';
             position: absolute;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 255, 0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            animation: pulse 6s infinite alternate;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s infinite linear;
+            z-index: 1;
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 0.8; }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
-        .glow-1 {
-            top: 20%;
-            left: 10%;
+        .email-icon {
+            width: 200px;
+            height: 200px;
+            z-index: 2;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+            transition: transform 0.5s ease;
         }
 
-        .glow-2 {
-            bottom: 15%;
-            right: 10%;
+        .contact-image:hover .email-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        @media (max-width: 768px) {
+            .contact-message, .contact-image {
+                padding: 2rem;
+            }
+            
+            .contact-message h1 {
+                font-size: 2rem;
+            }
+            
+            .email-icon {
+                width: 150px;
+                height: 150px;
+            }
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 1rem;
             background-color: var(--bg-darker);
-            margin-top: 3rem;
             color: var(--text-secondary);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            main {
-                padding: 6rem 1rem 2rem;
-            }
-            
-            .contact-form, .contact-image {
-                min-width: 100%;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header with Navigation -->
     <header>
-        <a href="/" class="home-btn">Home</a>
+        <a href="/" class="logo" onclick="navigate(event, '/')">HOME</a>
         
-        <!-- Desktop Navigation -->
         <nav class="nav-desktop">
-            <a href="https://twitter.com" class="nav-link" target="_blank">Socials</a>
-            <a href="/art" class="nav-link">Art</a>
-            <a href="/download" class="nav-link">Download</a>
-            <a href="/donate" class="nav-link">Donate</a>
-            <a href="/contact" class="nav-link">Contact</a>
+            <a href="#" class="nav-link" onclick="navigate(event, '/socials')">Socials</a>
+            <a href="#" class="nav-link" onclick="navigate(event, '/art')">Art</a>
+            <a href="#" class="nav-link" onclick="navigate(event, '/download')">Download</a>
+            <a href="#" class="nav-link" onclick="navigate(event, '/donate')">Donate</a>
+            <a href="#" class="nav-link" onclick="navigate(event, '/contact')">Contact</a>
         </nav>
         
-        <!-- Mobile Navigation -->
         <div class="nav-mobile">
-            <div class="hamburger" id="hamburger">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </div>
-            
+            <button class="menu-btn" onclick="toggleMenu()">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
             <div class="mobile-menu" id="mobileMenu">
-                <a href="https://twitter.com" class="nav-link" target="_blank">Socials</a>
-                <a href="/art" class="nav-link">Art</a>
-                <a href="/download" class="nav-link">Download</a>
-                <a href="/donate" class="nav-link">Donate</a>
-                <a href="/contact" class="nav-link">Contact</a>
+                <a href="#" class="nav-link" onclick="navigate(event, '/socials')">Socials</a>
+                <a href="#" class="nav-link" onclick="navigate(event, '/art')">Art</a>
+                <a href="#" class="nav-link" onclick="navigate(event, '/download')">Download</a>
+                <a href="#" class="nav-link" onclick="navigate(event, '/donate')">Donate</a>
+                <a href="#" class="nav-link" onclick="navigate(event, '/contact')">Contact</a>
             </div>
         </div>
     </header>
     
-    <!-- Main Content -->
     <main>
-        <!-- Glow Effects -->
-        <div class="glow-effect glow-1"></div>
-        <div class="glow-effect glow-2"></div>
-        
         <div class="contact-container">
-            <div class="contact-form">
+            <div class="contact-message">
                 <h1>Get In Touch</h1>
-                <p>Have a project in mind or want to collaborate? Feel free to reach out to me directly via email or connect through my social media profiles.</p>
-                
-                <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+                <p>Email me directly or connect through my social media profiles. I'm always open to new collaborations, projects, or just a friendly chat!</p>
                 
                 <div class="social-links">
-                    <a href="https://twitter.com" class="social-link" target="_blank">𝕏</a>
-                    <a href="https://instagram.com" class="social-link" target="_blank">📷</a>
-                    <a href="https://github.com" class="social-link" target="_blank">⌨️</a>
-                    <a href="https://linkedin.com" class="social-link" target="_blank">🔗</a>
+                    <a href="#" class="social-link" onclick="navigate(event, '/twitter')">Twitter</a>
+                    <a href="#" class="social-link" onclick="navigate(event, '/instagram')">Instagram</a>
+                    <a href="#" class="social-link" onclick="navigate(event, '/github')">GitHub</a>
+                    <a href="#" class="social-link" onclick="navigate(event, '/linkedin')">LinkedIn</a>
                 </div>
             </div>
             
             <div class="contact-image">
-                <img src="https://cdn-icons-png.flaticon.com/512/3178/3178158.png" alt="Email Icon" class="email-icon">
+                <svg class="email-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
             </div>
         </div>
     </main>
     
     <footer>
-        <p>&copy; 2023 Your Name. All rights reserved.</p>
+        &copy; 2023 Your Name. All rights reserved.
     </footer>
-    
+
     <script>
-        // Mobile menu toggle
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
+        function navigate(event, path) {
+            event.preventDefault();
+            // In a real implementation, this would navigate to the path
+            console.log(`Navigating to ${path}`);
+            // window.location.href = path;
             
-            // Animate hamburger to X
-            hamburger.classList.toggle('active');
-        });
+            // For demo purposes, just show an alert
+            alert(`This would navigate to: ${path}`);
+        }
         
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && e.target !== hamburger) {
-                mobileMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
     </script>
 </body>
 </html>

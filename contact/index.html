@@ -218,7 +218,7 @@
             border-color: rgba(0, 255, 255, 0.3);
         }
 
-        .email-picture-container {
+        .email-image {
             flex: 1;
             display: flex;
             justify-content: center;
@@ -232,21 +232,21 @@
             height: 100%;
         }
 
-        .email-picture-container:hover {
+        .email-image:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 255, 255, 0.1);
             border-color: rgba(0, 255, 255, 0.3);
         }
 
-        .email-picture {
+        .email-image img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
-            transition: var(--transition);
             filter: grayscale(30%) contrast(110%);
+            transition: var(--transition);
         }
 
-        .email-picture-container:hover .email-picture {
+        .email-image:hover img {
             filter: grayscale(0%) contrast(120%);
             transform: scale(1.02);
         }
@@ -401,7 +401,7 @@
     <main>
         <h1 class="floating">Get In Touch</h1>
         <p style="color: var(--text-secondary); max-width: 600px; line-height: 1.6;">
-            Have a question or want to work together? Feel free to reach out directly via email.
+            Have a question or want to work together? Feel free to reach out through the contact form or directly via email.
         </p>
         
         <div class="contact-container">
@@ -409,12 +409,12 @@
                 <h2>Contact Information</h2>
                 
                 <div class="info-item">
-                    <h3>Email Us</h3>
-                    <p>We're here to answer any questions you may have. Reach out to us via email and we'll respond as soon as we can.</p>
+                    <h3>Message Us</h3>
+                    <p>We're here to answer any questions you may have about our services or projects. Reach out to us and we'll respond as soon as we can.</p>
                 </div>
                 
                 <div class="info-item">
-                    <h3>Email Address</h3>
+                    <h3>Email</h3>
                     <p>
                         <a href="mailto:your@email.com" class="email-link">your@email.com</a>
                     </p>
@@ -422,13 +422,13 @@
                 
                 <div class="info-item">
                     <h3>Follow Us</h3>
-                    <p>Stay updated with our latest work through our social media channels.</p>
+                    <p>Stay updated with our latest work and announcements through our social media channels.</p>
                 </div>
             </div>
             
-            <div class="email-picture-container">
+            <div class="email-image">
                 <!-- Replace with your actual email image -->
-                <img src="https://images.unsplash.com/photo-1545696968-1a5245650b36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Email Illustration" class="email-picture">
+                <img src="https://via.placeholder.com/500x350/1e1e1e/00ffff?text=Email+Illustration" alt="Email Illustration">
             </div>
         </div>
     </main>
@@ -479,7 +479,7 @@
         });
         
         // Cool hover effect for contact sections
-        const contactSections = document.querySelectorAll('.contact-info, .email-picture-container');
+        const contactSections = document.querySelectorAll('.contact-info, .email-image');
         contactSections.forEach(section => {
             section.addEventListener('mouseenter', () => {
                 const heading = section.querySelector('h2');

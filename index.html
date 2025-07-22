@@ -221,7 +221,7 @@
         }
 
         /* About Section */
-        .about-section, .hobbies-section, .experience-section {
+        .about-section, .hobbies-section, .experience-section, .webring-section {
             background-color: var(--card-bg);
             padding: 2rem;
             border-radius: 12px;
@@ -231,7 +231,7 @@
             border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
-        .about-section:hover, .hobbies-section:hover, .experience-section:hover {
+        .about-section:hover, .hobbies-section:hover, .experience-section:hover, .webring-section:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 255, 255, 0.1);
         }
@@ -319,6 +319,36 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Webring Section */
+        .webring-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .webring-banner {
+            display: block;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            height: 100%;
+        }
+
+        .webring-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+            border-color: var(--accent-color);
+        }
+
+        .webring-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         /* Glow Effects */
         .glow {
             position: fixed;
@@ -384,6 +414,10 @@
             .splash-text {
                 font-size: 0.7rem;
             }
+
+            .webring-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
         }
     </style>
 </head>
@@ -396,7 +430,7 @@
     <header>
         <a href="#" class="home-btn">Home</a>
         
-        <!-- Desktop Navig3ation -->
+        <!-- Desktop Navigation -->
         <nav class="nav-desktop">
             <a href="#" class="nav-link" onclick="navigateTo('socials')">Socials</a>
             <a href="#" class="nav-link" onclick="navigateTo('art')">Art</a>
@@ -457,7 +491,7 @@
             <h2 class="section-title">My Experience</h2>
             <ul class="experience-list">
                 <li class="experience-item">
-                    <h3 class="experience-title">Admin FMM Discord Server</h3>
+                    <h3 class="experience-title">Admin at r/FMM Reborn Discord Server</h3>
                     <p class="experience-date">2024 - Present</p>
                     <p>Moderate and helping people in server</p>
                 </li>
@@ -465,12 +499,33 @@
                     <h3 class="experience-title">???</h3>
                     <p class="experience-date">??? - ???</p>
                     <p>???</p>
+                </li>
             </ul>
+        </section>
+
+        <!-- Webring Section -->
+        <section class="webring-section">
+            <h2 class="section-title">Webring</h2>
+            <p>Check out these cool websites from my friends:</p>
+            <div class="webring-container">
+                <a href="https://example.com" class="webring-banner" target="_blank" rel="noopener noreferrer">
+                    <img src="https://via.placeholder.com/120x60?text=Example+Site" alt="Example Site">
+                </a>
+                <a href="https://example.org" class="webring-banner" target="_blank" rel="noopener noreferrer">
+                    <img src="https://via.placeholder.com/120x60?text=Another+Site" alt="Another Site">
+                </a>
+                <a href="https://example.net" class="webring-banner" target="_blank" rel="noopener noreferrer">
+                    <img src="https://via.placeholder.com/120x60?text=Cool+Site" alt="Cool Site">
+                </a>
+                <a href="https://example.edu" class="webring-banner" target="_blank" rel="noopener noreferrer">
+                    <img src="https://via.placeholder.com/120x60?text=Friend's+Site" alt="Friend's Site">
+                </a>
+            </div>
         </section>
     </main>
 
     <footer>
-        &copy; 2025 starzy.top. All rights reserved.
+        &copy; 2025 Stars. All rights reserved.
     </footer>
 
     <script>
